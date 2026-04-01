@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京玩乐之声 — 文档中心</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --red: #c8490a;
+    --green: #1a5c3a;
+    --blue: #1a3d6e;
+    --amber: #b07830;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .header { background: var(--ink); padding: 48px 24px 40px; text-align: center; }
+  .header-brand { font-size: 11px; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+  .header-title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 300; color: #f5f3ee; margin-bottom: 8px; }
+  .header-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+  /* BODY */
+  .wrap { max-width: 680px; margin: 0 auto; padding: 32px 16px 60px; }
+
+  /* GROUP */
+  .group { margin-bottom: 32px; }
+  .group-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--ink3); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 0.5px solid var(--rule); }
+
+  /* DOC CARD */
+  .doc-card { background: #fff; border: 0.5px solid var(--rule); border-radius: 12px; padding: 16px 18px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; transition: border-color .15s, background .15s; -webkit-tap-highlight-color: transparent; }
+  .doc-card:active { background: var(--bg2); }
+  .doc-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; font-family: 'Noto Serif SC', serif; flex-shrink: 0; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .doc-desc { font-size: 12px; color: var(--ink3); line-height: 1.5; }
+  .doc-arrow { color: var(--ink3); font-size: 16px; flex-shrink: 0; }
+
+  /* COLOR VARIANTS */
+  .ic-red { background: rgba(200,73,10,0.1); color: var(--red); }
+  .ic-blue { background: rgba(26,61,110,0.1); color: var(--blue); }
+  .ic-green { background: rgba(26,92,58,0.1); color: var(--green); }
+  .ic-amber { background: rgba(176,120,48,0.1); color: var(--amber); }
+  .ic-gray { background: var(--bg2); color: var(--ink3); }
+
+  /* FOOTER */
+  .footer { text-align: center; font-size: 11px; color: var(--ink3); padding: 20px 16px 40px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">北京玩乐之声文化传媒有限公司</div>
+  <div class="header-title">内部文档中心</div>
+  <div class="header-desc">点击文档直接阅读 · 仅供内部使用</div>
+</div>
+
+<div class="wrap">
+
+  <div class="group">
+    <div class="group-label">商业方案</div>
+
+    <a class="doc-card" href="听见看见_整体方案.html">
+      <div class="doc-icon ic-red">案</div>
+      <div class="doc-info">
+        <div class="doc-title">整体商业方案</div>
+        <div class="doc-desc">六大业务板块 · 三年阶段规划 · 核心商业逻辑</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <a class="doc-card" href="听见看见_保守财务规划.html">
+      <div class="doc-icon ic-amber">财</div>
+      <div class="doc-info">
+        <div class="doc-title">保守版三年财务规划</div>
+        <div class="doc-desc">逐年收支明细 · 现金流预警 · 启动资金需求</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <a class="doc-card" href="听见看见_五大板块策略.html">
+      <div class="doc-icon ic-blue">策</div>
+      <div class="doc-info">
+        <div class="doc-title">五大板块配套策略</div>
+        <div class="doc-desc">录音制作 · 内容宣传 · 直播带货 · 演出定制 · 全国巡演</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="group-label">团队管理</div>
+
+    <a class="doc-card" href="core_team_config.html">
+      <div class="doc-icon ic-green">团</div>
+      <div class="doc-info">
+        <div class="doc-title">核心团队配置方案</div>
+        <div class="doc-desc">六大角色定义 · 招募标准 · 薪酬结构</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <a class="doc-card" href="听见看见_团队激励协议.html">
+      <div class="doc-icon ic-green">激</div>
+      <div class="doc-info">
+        <div class="doc-title">团队激励机制协议</div>
+        <div class="doc-desc">积分制分成 · 里程碑奖金 · 虚拟分红权 · 签署页</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="group-label">执行标准</div>
+
+    <a class="doc-card" href="玩乐之声_30人现场SOP.html">
+      <div class="doc-icon ic-red">场</div>
+      <div class="doc-info">
+        <div class="doc-title">30人现场标准执行流程</div>
+        <div class="doc-desc">演出前7天到演出后72小时 · 可勾选清单 · 应急预案</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <a class="doc-card" href="玩乐之声_录制交付标准.html">
+      <div class="doc-icon ic-blue">录</div>
+      <div class="doc-info">
+        <div class="doc-title">付费录制交付标准</div>
+        <div class="doc-desc">交付物清单 · 格式规范 · 时间承诺 · 合同条款</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="group">
+    <div class="group-label">对外销售</div>
+
+    <a class="doc-card" href="玩乐之声_服务说明与报价表.html">
+      <div class="doc-icon ic-amber">报</div>
+      <div class="doc-info">
+        <div class="doc-title">服务说明书 + 报价表</div>
+        <div class="doc-desc">一页服务说明 · 分套餐报价 · 可直接发给客户</div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">北京玩乐之声文化传媒有限公司 · 内部文件请勿外传</div>
+
+</body>
+</html>

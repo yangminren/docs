@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩乐之声 — 付费录制交付标准</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --bg3: #e8e5de;
+    --red: #c8490a;
+    --amber: #b07830;
+    --green: #1a5c3a;
+    --blue: #1a3d6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; background: var(--bg); color: var(--ink); font-size: 13px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .doc-header { background: var(--ink); padding: 48px 60px 40px; color: #f5f3ee; }
+  .header-top { display: flex; justify-content: space-between; margin-bottom: 24px; }
+  .header-brand { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+  .header-badges { display: flex; gap: 8px; }
+  .header-badge { font-size: 10px; padding: 3px 10px; border: 0.5px solid rgba(255,255,255,0.2); border-radius: 2px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
+  .header-title { font-family: 'Noto Serif SC', serif; font-size: 34px; font-weight: 300; line-height: 1.2; margin-bottom: 10px; }
+  .header-desc { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.7; margin-bottom: 24px; }
+  .header-tabs { display: flex; gap: 0; border: 0.5px solid rgba(255,255,255,0.15); border-radius: 6px; overflow: hidden; width: fit-content; }
+  .h-tab { padding: 10px 20px; font-size: 12px; color: rgba(255,255,255,0.5); border-right: 0.5px solid rgba(255,255,255,0.15); }
+  .h-tab:last-child { border-right: none; }
+  .h-tab strong { display: block; font-size: 15px; font-family: 'Noto Serif SC', serif; font-weight: 300; color: #fff; }
+
+  /* NAV */
+  .page-nav { background: var(--bg2); border-bottom: 1px solid var(--rule); padding: 0 60px; display: flex; gap: 0; overflow-x: auto; }
+  .nav-a { padding: 13px 18px; font-size: 12px; color: var(--ink3); white-space: nowrap; border-bottom: 2px solid transparent; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .nav-a:hover { color: var(--ink); }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* BODY */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 60px; }
+
+  /* SECTION */
+  .section { margin-bottom: 52px; }
+  .section-header { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); margin-bottom: 24px; }
+  .section-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .section-title { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 300; }
+  .section-badge { margin-left: auto; font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 500; }
+  .badge-contract { background: rgba(26,61,110,0.1); color: var(--blue); }
+  .badge-internal { background: rgba(26,92,58,0.1); color: var(--green); }
+  .badge-both { background: rgba(200,73,10,0.1); color: var(--red); }
+
+  h3 { font-size: 14px; font-weight: 500; margin: 24px 0 10px; }
+  h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--ink3); margin: 18px 0 8px; }
+  p { color: var(--ink2); margin-bottom: 10px; font-size: 13px; }
+
+  /* PACKAGE CARDS */
+  .pkg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .pkg-card { background: #fff; border: 0.5px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .pkg-card.featured { border-color: var(--red); }
+  .pkg-header { padding: 14px 16px; border-bottom: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+  .pkg-header.featured { background: rgba(200,73,10,0.04); }
+  .pkg-name { font-size: 14px; font-weight: 500; }
+  .pkg-price { font-family: 'Noto Serif SC', serif; font-size: 16px; color: var(--red); }
+  .pkg-body { padding: 14px 16px; }
+  .pkg-item { display: flex; gap: 8px; padding: 5px 0; border-bottom: 0.5px solid var(--rule); font-size: 12px; color: var(--ink2); }
+  .pkg-item:last-child { border-bottom: none; }
+  .pkg-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ink3); margin-top: 6px; flex-shrink: 0; }
+  .pkg-dot.green { background: var(--green); }
+  .pkg-item-text { flex: 1; line-height: 1.5; }
+  .pkg-item-spec { font-size: 10px; color: var(--ink3); margin-top: 1px; }
+
+  /* DELIVERABLE TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0 20px; }
+  thead th { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink3); padding: 7px 12px; background: var(--bg2); border-bottom: 1px solid var(--bg3); text-align: left; }
+  tbody td { padding: 9px 12px; border-bottom: 0.5px solid var(--rule); color: var(--ink2); vertical-align: top; line-height: 1.6; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.bold { font-weight: 500; color: var(--ink); }
+  td.mono { font-family: monospace; font-size: 11px; background: var(--bg2); border-radius: 3px; padding: 2px 6px; white-space: nowrap; }
+  .total-row td { background: var(--bg2); font-weight: 500; color: var(--ink); }
+
+  /* TIMELINE */
+  .delivery-timeline { margin: 16px 0; }
+  .dt-item { display: flex; gap: 16px; padding-bottom: 20px; position: relative; }
+  .dt-item::before { content: ''; position: absolute; left: 14px; top: 28px; bottom: 0; width: 0.5px; background: var(--rule); }
+  .dt-item:last-child::before { display: none; }
+  .dt-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .dt-content { flex: 1; }
+  .dt-day { font-size: 11px; font-weight: 500; color: var(--ink3); letter-spacing: 0.06em; margin-bottom: 3px; }
+  .dt-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .dt-detail { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+  .dt-tags { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+  .dt-tag { font-size: 10px; padding: 1px 7px; border-radius: 3px; background: var(--bg2); color: var(--ink3); }
+  .dt-tag.owner { background: rgba(26,61,110,0.08); color: var(--blue); }
+  .dt-tag.warn { background: rgba(200,73,10,0.08); color: var(--red); }
+
+  /* CONTRACT CLAUSE BOX */
+  .clause-box { background: #fff; border: 0.5px solid var(--blue); border-radius: 8px; overflow: hidden; margin: 16px 0; }
+  .clause-box-header { background: rgba(26,61,110,0.06); padding: 10px 16px; border-bottom: 0.5px solid rgba(26,61,110,0.15); display: flex; align-items: center; gap: 8px; }
+  .clause-box-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; color: var(--blue); }
+  .clause-box-note { font-size: 10px; color: var(--ink3); margin-left: auto; }
+  .clause-box-body { padding: 16px; }
+  .clause-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 0.5px solid var(--rule); }
+  .clause-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .clause-num { font-size: 11px; font-weight: 500; color: var(--blue); margin-bottom: 4px; }
+  .clause-text { font-size: 12px; color: var(--ink2); line-height: 1.7; }
+  .clause-text strong { color: var(--ink); }
+
+  /* CALLOUT */
+  .callout { border-left: 3px solid var(--amber); padding: 12px 16px; background: rgba(176,120,48,0.05); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 12px; color: var(--ink2); line-height: 1.7; }
+  .callout.red { border-color: var(--red); background: rgba(200,73,10,0.04); }
+  .callout.green { border-color: var(--green); background: rgba(26,92,58,0.04); }
+  .callout.blue { border-color: var(--blue); background: rgba(26,61,110,0.04); }
+
+  /* FORMAT SPEC */
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .spec-card { background: #fff; border: 0.5px solid var(--rule); border-radius: 8px; padding: 14px 16px; }
+  .spec-card-title { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; gap: 6px; }
+  .spec-type { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 400; }
+  .spec-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 0.5px solid var(--rule); font-size: 12px; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-label { color: var(--ink3); }
+  .spec-val { font-family: monospace; font-size: 11px; color: var(--ink); background: var(--bg2); padding: 1px 6px; border-radius: 3px; }
+
+  /* REVISION RULES */
+  .rev-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+  .rev-table th { font-size: 10px; letter-spacing: 0.06em; color: var(--ink3); padding: 7px 12px; background: var(--bg2); border-bottom: 1px solid var(--bg3); text-align: left; font-weight: 500; }
+  .rev-table td { padding: 9px 12px; border-bottom: 0.5px solid var(--rule); color: var(--ink2); vertical-align: top; }
+  .rev-table tr:last-child td { border-bottom: none; }
+
+  /* NAMING */
+  .naming-box { background: var(--bg2); border-radius: 6px; padding: 14px 18px; font-family: monospace; font-size: 12px; color: var(--ink); line-height: 2; margin: 10px 0; }
+  .naming-comment { color: var(--ink3); font-family: 'Noto Sans SC', sans-serif; font-size: 11px; }
+
+  /* FOOTER */
+  .doc-footer { max-width: 900px; margin: 0 auto; padding: 20px 60px 48px; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); }
+
+  @media(max-width:640px) {
+    .doc-header { padding: 32px 20px; }
+    .page-nav { padding: 0 20px; }
+    .wrap { padding: 32px 20px; }
+    .pkg-grid, .spec-grid { grid-template-columns: 1fr; }
+    .doc-footer { padding: 20px; flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="header-top">
+    <div class="header-brand">北京玩乐之声文化传媒有限公司</div>
+    <div class="header-badges">
+      <div class="header-badge">合同附件 + 内部流程</div>
+      <div class="header-badge">V1.0</div>
+    </div>
+  </div>
+  <div class="header-title">付费录制<br>交付标准文件</div>
+  <div class="header-desc">包含三个部分：交付物清单（写入合同）、格式技术规范（内部执行）、交付时间承诺（写入合同）。合同附件版可直接复制进乐队合作协议。</div>
+  <div class="header-tabs">
+    <div class="h-tab"><strong>Part A</strong>交付物清单</div>
+    <div class="h-tab"><strong>Part B</strong>格式规范</div>
+    <div class="h-tab"><strong>Part C</strong>时间承诺</div>
+    <div class="h-tab"><strong>Part D</strong>合同条款</div>
+    <div class="h-tab"><strong>Part E</strong>内部流程</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="page-nav">
+  <a class="nav-a" href="#parta"><span class="nav-dot" style="background:var(--red)"></span>交付物清单</a>
+  <a class="nav-a" href="#partb"><span class="nav-dot" style="background:var(--blue)"></span>格式规范</a>
+  <a class="nav-a" href="#partc"><span class="nav-dot" style="background:var(--amber)"></span>时间承诺</a>
+  <a class="nav-a" href="#partd"><span class="nav-dot" style="background:var(--green)"></span>合同条款</a>
+  <a class="nav-a" href="#parte"><span class="nav-dot" style="background:var(--ink3)"></span>内部执行流程</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- PART A: 交付物清单 -->
+  <div id="parta" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(200,73,10,0.1);color:var(--red);">A</div>
+      <div class="section-title">交付物清单</div>
+      <div class="section-badge badge-both">合同附件 + 内部执行</div>
+    </div>
+
+    <p>根据合作套餐不同，交付物有所差异。合同签署时在对应套餐打勾，交付清单随合同附件送达客户。</p>
+
+    <div class="pkg-grid">
+      <!-- 全套 -->
+      <div class="pkg-card featured">
+        <div class="pkg-header featured">
+          <div class="pkg-name">全套制作</div>
+          <div class="pkg-price">25,000–60,000元</div>
+        </div>
+        <div class="pkg-body">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:8px;letter-spacing:0.06em;">视频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">完整演出剪辑版（15-30分钟）<div class="pkg-item-spec">4K / MOV / H.265 / 色彩校正</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">抖音/视频号竖版切片（3-5条）<div class="pkg-item-spec">9:16 / 60秒内 / 字幕叠加</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">B站/YouTube横版精剪（1条）<div class="pkg-item-spec">16:9 / 5-15分钟精华版</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">封面图（3张精修）<div class="pkg-item-spec">JPG 4K分辨率 色彩统一</div></div></div>
+          <div style="font-size:10px;color:var(--ink3);margin:10px 0 8px;letter-spacing:0.06em;">音频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">混音成品（WAV 高清）<div class="pkg-item-spec">WAV / 48kHz / 32bit / 各曲目独立文件</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">流媒体版本（MP3）<div class="pkg-item-spec">MP3 / 320kbps / 含ID3标签</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">母带处理成品（可选）<div class="pkg-item-spec">WAV / 44.1kHz / 24bit / 适合发行</div></div></div>
+          <div style="font-size:10px;color:var(--ink3);margin:10px 0 8px;letter-spacing:0.06em;">推广交付物</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">全平台同步上传（代操作）<div class="pkg-item-spec">抖音/B站/小红书/视频号</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">发布文案撰写<div class="pkg-item-spec">每条平台适配版本</div></div></div>
+        </div>
+      </div>
+
+      <!-- 视频专辑 -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-name">视频专辑</div>
+          <div class="pkg-price">15,000–40,000元</div>
+        </div>
+        <div class="pkg-body">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:8px;letter-spacing:0.06em;">视频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">完整演出剪辑版（15-30分钟）<div class="pkg-item-spec">4K / MOV / H.265 / 色彩校正</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">竖版切片（2-3条）<div class="pkg-item-spec">9:16 / 60秒内</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">封面图（2张精修）<div class="pkg-item-spec">JPG 4K分辨率</div></div></div>
+          <div style="font-size:10px;color:var(--ink3);margin:10px 0 8px;letter-spacing:0.06em;">音频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot"></div><div class="pkg-item-text" style="color:var(--ink3);">不含独立音频交付<div class="pkg-item-spec">视频内嵌音频，非独立音频文件</div></div></div>
+        </div>
+      </div>
+
+      <!-- 录音专辑 -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-name">录音专辑</div>
+          <div class="pkg-price">8,000–25,000元</div>
+        </div>
+        <div class="pkg-body">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:8px;letter-spacing:0.06em;">音频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">混音成品（WAV 高清）<div class="pkg-item-spec">WAV / 48kHz / 32bit / 各曲独立</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">流媒体版本（MP3）<div class="pkg-item-spec">MP3 / 320kbps / 含ID3标签</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">分轨原始录音（可选加购）<div class="pkg-item-spec">各乐器/人声独立分轨 WAV</div></div></div>
+          <div style="font-size:10px;color:var(--ink3);margin:10px 0 8px;letter-spacing:0.06em;">视频交付物</div>
+          <div class="pkg-item"><div class="pkg-dot"></div><div class="pkg-item-text" style="color:var(--ink3);">不含视频交付<div class="pkg-item-spec">如需视频请选视频专辑或全套</div></div></div>
+        </div>
+      </div>
+
+      <!-- 单曲 -->
+      <div class="pkg-card">
+        <div class="pkg-header">
+          <div class="pkg-name">单曲制作</div>
+          <div class="pkg-price">5,000–15,000元</div>
+        </div>
+        <div class="pkg-body">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:8px;letter-spacing:0.06em;">可选交付物（合同注明）</div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">混音成品 WAV × 1首<div class="pkg-item-spec">WAV / 48kHz / 24bit</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot green"></div><div class="pkg-item-text">流媒体 MP3 × 1首<div class="pkg-item-spec">MP3 / 320kbps</div></div></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><div class="pkg-item-text">单曲视频 × 1条（加购）<div class="pkg-item-spec">竖版或横版，+3,000-8,000元</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <strong>交付物确认单：</strong>合同签署时，附件《交付物确认单》须由乐队签字确认，明确本次制作的具体交付物清单、数量和规格。交付时按此清单逐项核对，双方签字确认交付完成。
+    </div>
+  </div>
+
+  <!-- PART B: 格式规范 -->
+  <div id="partb" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(26,61,110,0.1);color:var(--blue);">B</div>
+      <div class="section-title">格式技术规范</div>
+      <div class="section-badge badge-internal">内部执行标准</div>
+    </div>
+
+    <p>以下为制作总监和视频导演执行时的强制技术规范，不达标的文件不得交付。</p>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-card-title">
+          视频规范
+          <span class="spec-type" style="background:rgba(200,73,10,0.1);color:var(--red);">VIDEO</span>
+        </div>
+        <div class="spec-row"><span class="spec-label">分辨率</span><span class="spec-val">3840×2160 (4K)</span></div>
+        <div class="spec-row"><span class="spec-label">帧率</span><span class="spec-val">24fps / 25fps</span></div>
+        <div class="spec-row"><span class="spec-label">编码</span><span class="spec-val">H.265 / ProRes 422</span></div>
+        <div class="spec-row"><span class="spec-label">容器格式</span><span class="spec-val">MOV / MP4</span></div>
+        <div class="spec-row"><span class="spec-label">色彩空间</span><span class="spec-val">Rec.709</span></div>
+        <div class="spec-row"><span class="spec-label">比特率</span><span class="spec-val">≥80Mbps</span></div>
+        <div class="spec-row"><span class="spec-label">竖版尺寸</span><span class="spec-val">1080×1920 (9:16)</span></div>
+        <div class="spec-row"><span class="spec-label">字幕嵌入</span><span class="spec-val">SRT / 硬字幕可选</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-title">
+          音频规范（交付文件）
+          <span class="spec-type" style="background:rgba(26,61,110,0.1);color:var(--blue);">AUDIO</span>
+        </div>
+        <div class="spec-row"><span class="spec-label">母文件格式</span><span class="spec-val">WAV / AIFF</span></div>
+        <div class="spec-row"><span class="spec-label">采样率</span><span class="spec-val">48kHz（录音） / 44.1kHz（发行）</span></div>
+        <div class="spec-row"><span class="spec-label">位深度</span><span class="spec-val">32bit（录音） / 24bit（交付）</span></div>
+        <div class="spec-row"><span class="spec-label">响度标准</span><span class="spec-val">-14 LUFS（流媒体）</span></div>
+        <div class="spec-row"><span class="spec-label">峰值限制</span><span class="spec-val">True Peak ≤ -1dBTP</span></div>
+        <div class="spec-row"><span class="spec-label">MP3比特率</span><span class="spec-val">320kbps（CBR）</span></div>
+        <div class="spec-row"><span class="spec-label">ID3标签</span><span class="spec-val">曲名/艺人/专辑/年份</span></div>
+        <div class="spec-row"><span class="spec-label">声道</span><span class="spec-val">Stereo 2.0</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-title">
+          录音工程规范
+          <span class="spec-type" style="background:rgba(26,92,58,0.1);color:var(--green);">SESSION</span>
+        </div>
+        <div class="spec-row"><span class="spec-label">DAW</span><span class="spec-val">Pro Tools / Logic Pro</span></div>
+        <div class="spec-row"><span class="spec-label">工程命名</span><span class="spec-val">YYYYMMDD_乐队名_曲目</span></div>
+        <div class="spec-row"><span class="spec-label">录音电平</span><span class="spec-val">Peak ≤ -6dBFS</span></div>
+        <div class="spec-row"><span class="spec-label">分轨命名</span><span class="spec-val">乐器名_编号（如Kick_01）</span></div>
+        <div class="spec-row"><span class="spec-label">工程备份</span><span class="spec-val">双盘备份（演出当晚完成）</span></div>
+        <div class="spec-row"><span class="spec-label">保留时长</span><span class="spec-val">原始录音保留≥1年</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-title">
+          文件命名规范
+          <span class="spec-type" style="background:rgba(176,120,48,0.1);color:var(--amber);">NAMING</span>
+        </div>
+        <div class="naming-box">
+          <span style="color:var(--red);">20260315</span>_<span style="color:var(--blue);">乐队名</span>_<span style="color:var(--green);">曲目名</span>_<span style="color:var(--amber);">版本</span><br>
+          <span class="naming-comment">日期　　　乐队　　　曲目　　　版本标识</span><br><br>
+          版本标识：<br>
+          <span style="color:var(--green);">MASTER</span> = 交付成品<br>
+          <span style="color:var(--amber);">MIX_v1/v2</span> = 混音版本<br>
+          <span style="color:var(--blue);">STEM</span> = 分轨文件<br>
+          <span style="color:var(--ink3);">RAW</span> = 原始录音
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <strong>质量红线：</strong>以下情况必须返工，不得交付给客户：①音频有削波失真；②视频有明显曝光问题；③响度未达流媒体标准；④文件命名不规范；⑤视频与音频不同步（误差超过2帧）。
+    </div>
+  </div>
+
+  <!-- PART C: 时间承诺 -->
+  <div id="partc" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(176,120,48,0.1);color:var(--amber);">C</div>
+      <div class="section-title">交付时间承诺</div>
+      <div class="section-badge badge-both">写入合同 + 内部目标</div>
+    </div>
+
+    <p>以下为向客户承诺的最长交付时间（写入合同），同时也是内部执行的时间目标。内部目标比合同承诺提前2-3天，留出修改缓冲。</p>
+
+    <table>
+      <thead>
+        <tr><th>交付阶段</th><th>内容</th><th>内部完成目标</th><th>合同承诺时限</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">素材备份</td>
+          <td>录音文件+视频素材双盘备份，命名规范整理</td>
+          <td>演出当晚</td>
+          <td>演出后24小时</td>
+        </tr>
+        <tr>
+          <td class="bold">粗剪预览</td>
+          <td>视频粗剪（未调色/未混音），供客户确认内容方向</td>
+          <td>演出后5天</td>
+          <td>演出后7个工作日</td>
+        </tr>
+        <tr>
+          <td class="bold">混音初稿</td>
+          <td>各曲目混音初稿，可播放审听，未母带处理</td>
+          <td>演出后7天</td>
+          <td>演出后10个工作日</td>
+        </tr>
+        <tr>
+          <td class="bold">精剪初稿</td>
+          <td>视频精剪（含调色），配合混音初稿同步交付</td>
+          <td>演出后10天</td>
+          <td>演出后14个工作日</td>
+        </tr>
+        <tr>
+          <td class="bold">修改反馈</td>
+          <td>客户看初稿后提出修改意见，期限</td>
+          <td>—</td>
+          <td>收到初稿后5个工作日内</td>
+        </tr>
+        <tr>
+          <td class="bold">修改完成</td>
+          <td>根据客户意见完成修改（含免费修改次数内）</td>
+          <td>收到反馈后3天</td>
+          <td>收到反馈后5个工作日</td>
+        </tr>
+        <tr>
+          <td class="bold">最终交付</td>
+          <td>全套成品文件交付（按格式规范），完成交付确认</td>
+          <td>演出后20天</td>
+          <td>演出后30个自然日</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>修改次数规则</h3>
+    <table class="rev-table">
+      <thead>
+        <tr><th>套餐</th><th>视频免费修改次数</th><th>音频免费修改次数</th><th>超出收费</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="bold">全套制作</td><td>3次</td><td>2次</td><td>视频 500元/次 · 音频 300元/次</td></tr>
+        <tr><td class="bold">视频专辑</td><td>2次</td><td>—</td><td>视频 500元/次</td></tr>
+        <tr><td class="bold">录音专辑</td><td>—</td><td>2次</td><td>音频 300元/次</td></tr>
+        <tr><td class="bold">单曲制作</td><td>1次</td><td>1次</td><td>各 300元/次</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>修改定义说明：</strong>「一次修改」指客户提交一份修改意见清单，我方据此完成所有修改并重新交付。分多次提交意见按多次计算。方向性改变（如推翻已确认的整体风格）不在免费修改范围内，另行报价。
+    </div>
+
+    <div class="delivery-timeline">
+      <div class="dt-item">
+        <div class="dt-dot" style="background:var(--bg3);color:var(--ink3);">D0</div>
+        <div class="dt-content">
+          <div class="dt-day">演出当日</div>
+          <div class="dt-title">录音+视频素材全部备份完成</div>
+          <div class="dt-tags"><span class="dt-tag owner">制作总监</span><span class="dt-tag owner">视频导演</span><span class="dt-tag warn">当晚必须完成</span></div>
+        </div>
+      </div>
+      <div class="dt-item">
+        <div class="dt-dot" style="background:rgba(200,73,10,0.15);color:var(--red);">D7</div>
+        <div class="dt-content">
+          <div class="dt-day">演出后 7 个工作日</div>
+          <div class="dt-title">视频粗剪发给客户确认方向</div>
+          <div class="dt-detail">粗剪不需调色，重点确认：哪些段落需要保留/删减，有无明显不满意的镜头。避免精剪后再改方向。</div>
+          <div class="dt-tags"><span class="dt-tag owner">视频导演</span></div>
+        </div>
+      </div>
+      <div class="dt-item">
+        <div class="dt-dot" style="background:rgba(176,120,48,0.2);color:var(--amber);">D14</div>
+        <div class="dt-content">
+          <div class="dt-day">演出后 14 个工作日</div>
+          <div class="dt-title">精剪初稿 + 混音初稿同步交付</div>
+          <div class="dt-detail">两者同时交付，客户可一次性提出视频和音频的修改意见，避免多次往返。</div>
+          <div class="dt-tags"><span class="dt-tag owner">制作总监</span><span class="dt-tag owner">视频导演</span></div>
+        </div>
+      </div>
+      <div class="dt-item">
+        <div class="dt-dot" style="background:rgba(26,92,58,0.2);color:var(--green);">D30</div>
+        <div class="dt-content">
+          <div class="dt-day">演出后 30 个自然日内</div>
+          <div class="dt-title">最终成品全套交付，双方签字确认</div>
+          <div class="dt-detail">通过网盘（百度网盘/阿里云盘）交付全套文件，发送《交付确认单》，客户签字确认后本次合作正式结案。</div>
+          <div class="dt-tags"><span class="dt-tag owner">统筹 PM</span><span class="dt-tag warn">交付前核对清单逐项检查</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART D: 合同条款 -->
+  <div id="partd" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(26,92,58,0.1);color:var(--green);">D</div>
+      <div class="section-title">合同条款（直接复制使用）</div>
+      <div class="section-badge badge-contract">写入乐队合作协议</div>
+    </div>
+
+    <p>以下条款可直接复制进《乐队合作协议》第三条「制作服务内容」之后，作为附加条款使用。</p>
+
+    <div class="clause-box">
+      <div class="clause-box-header">
+        <div class="clause-box-label">合同附加条款 · 交付标准</div>
+        <div class="clause-box-note">可直接复制进合同</div>
+      </div>
+      <div class="clause-box-body">
+        <div class="clause-item">
+          <div class="clause-num">交付条款 1 · 交付物范围</div>
+          <div class="clause-text">本次制作的具体交付物清单见附件《交付物确认单》，经双方签字确认后作为本协议的组成部分。甲方仅对确认单内列明的交付物负责，确认单之外的内容不在本次交付范围内。</div>
+        </div>
+        <div class="clause-item">
+          <div class="clause-num">交付条款 2 · 交付时间</div>
+          <div class="clause-text">甲方承诺在录制完成后 <strong>30个自然日内</strong>完成全部交付物的最终交付。具体里程碑时间节点：① 粗剪/混音初稿：录制后7个工作日内；② 精剪初稿+混音初稿：录制后14个工作日内；③ 最终成品：录制后30个自然日内。若因乙方反馈延迟（超过收到初稿后5个工作日）导致交付延期，顺延时间不计入甲方违约期。</div>
+        </div>
+        <div class="clause-item">
+          <div class="clause-num">交付条款 3 · 修改次数与收费</div>
+          <div class="clause-text">本次合作包含免费修改次数：视频 <strong>___次</strong>，音频 <strong>___次</strong>（按套餐标准填写）。超出免费次数的修改，视频每次收费500元，音频每次收费300元，须在修改前确认并预付费用。「一次修改」指乙方提交一份完整的修改意见清单，甲方据此完成所有修改。分多次提交意见按多次计算。</div>
+        </div>
+        <div class="clause-item">
+          <div class="clause-num">交付条款 4 · 交付方式</div>
+          <div class="clause-text">甲方通过网络云盘（百度网盘/阿里云盘）向乙方交付所有文件，并发送《交付确认单》。乙方须在收到文件后 <strong>5个工作日内</strong> 签署《交付确认单》并返回，逾期视为验收通过。签署完成后，本次制作服务正式结案。</div>
+        </div>
+        <div class="clause-item">
+          <div class="clause-num">交付条款 5 · 格式标准</div>
+          <div class="clause-text">甲方交付的文件须符合以下基本格式要求：视频成品为4K分辨率（3840×2160）、H.265编码；音频成品为WAV格式（48kHz/24bit）及MP3格式（320kbps）。如乙方有特殊格式需求，须在合同签署时注明，否则按上述标准交付。</div>
+        </div>
+        <div class="clause-item">
+          <div class="clause-num">交付条款 6 · 延迟交付违约责任</div>
+          <div class="clause-text">若甲方未在约定时间内完成交付（扣除乙方反馈延迟时间），每延误 <strong>7个自然日</strong>，甲方向乙方减免服务费用的 <strong>5%</strong>，最高减免总费用的 <strong>20%</strong>。超过60日仍未完成交付的，乙方有权要求退还已付款项的50%。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART E: 内部流程 -->
+  <div id="parte" class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(138,136,128,0.15);color:var(--ink3);">E</div>
+      <div class="section-title">内部执行流程</div>
+      <div class="section-badge badge-internal">团队内部使用</div>
+    </div>
+
+    <h3>项目启动（合同签署后）</h3>
+    <table>
+      <thead><tr><th>动作</th><th>责任人</th><th>时限</th><th>输出物</th></tr></thead>
+      <tbody>
+        <tr><td>建立项目文件夹（按命名规范）</td><td class="bold">制作总监</td><td>合同签署当天</td><td>项目文件夹</td></tr>
+        <tr><td>填写《交付物确认单》发客户签字</td><td class="bold">统筹 PM</td><td>合同签署后1天</td><td>已签确认单</td></tr>
+        <tr><td>制定本项目时间表（含里程碑节点）</td><td class="bold">统筹 PM</td><td>合同签署后2天</td><td>项目时间表</td></tr>
+        <tr><td>录制前与乐队确认技术需求</td><td class="bold">制作总监</td><td>录制前7天</td><td>技术需求单</td></tr>
+      </tbody>
+    </table>
+
+    <h3>后期制作流程</h3>
+    <table>
+      <thead><tr><th>阶段</th><th>具体工作</th><th>责任人</th><th>内部截止</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">素材整理</td><td>录音文件整理分类 / 视频素材拼板记录 / 双盘备份确认</td><td>制作总监 + 视频导演</td><td>演出当晚</td></tr>
+        <tr><td class="bold">粗剪</td><td>视频时间线搭建，筛选可用段落，无需调色</td><td>视频导演</td><td>D+5天</td></tr>
+        <tr><td class="bold">混音初稿</td><td>分轨平衡 → EQ → 压缩 → 效果 → 响度初调</td><td>制作总监</td><td>D+7天</td></tr>
+        <tr><td class="bold">客户粗剪确认</td><td>发送粗剪给客户，等待反馈（客户5个工作日内回复）</td><td>统筹 PM</td><td>D+7天发出</td></tr>
+        <tr><td class="bold">精剪</td><td>按粗剪确认意见精剪 + 调色 + 字幕（如需）</td><td>视频导演</td><td>D+12天</td></tr>
+        <tr><td class="bold">混音终稿</td><td>根据精剪画面优化音频节奏，母带处理，响度标准化</td><td>制作总监</td><td>D+12天</td></tr>
+        <tr><td class="bold">内部质检</td><td>按格式规范逐项核查，填写《质检清单》，不合格退回</td><td>统筹 PM</td><td>D+14天</td></tr>
+        <tr><td class="bold">初稿交付</td><td>打包上传云盘，发送下载链接+《交付确认单》</td><td>统筹 PM</td><td>D+14天</td></tr>
+        <tr><td class="bold">修改</td><td>收到客户反馈后执行修改（在免费次数内）</td><td>制作总监 / 视频导演</td><td>收到后5天内</td></tr>
+        <tr><td class="bold">终稿交付</td><td>全套成品文件交付，收取签字确认单，项目归档</td><td>统筹 PM</td><td>D+30天内</td></tr>
+      </tbody>
+    </table>
+
+    <h3>项目归档规范</h3>
+    <div class="callout blue">
+      每个项目交付完成后，统筹 PM 须将以下文件归档至项目文件夹：①已签合同及交付物确认单；②已签交付确认单；③原始录音（保留至少1年）；④成品文件（永久保留）；⑤客户反馈记录；⑥项目复盘简报（1-2段，记录本次执行亮点和问题）。
+    </div>
+
+    <h3>质检清单（交付前逐项核对）</h3>
+    <table>
+      <thead><tr><th>检查项</th><th>视频</th><th>音频</th><th>确认人</th></tr></thead>
+      <tbody>
+        <tr><td>分辨率/采样率符合规范</td><td>□ 4K 3840×2160</td><td>□ WAV 48kHz/24bit</td><td>___</td></tr>
+        <tr><td>时长与曲目数量核对</td><td>□ 与清单一致</td><td>□ 与清单一致</td><td>___</td></tr>
+        <tr><td>无质量缺陷</td><td>□ 无曝光/对焦问题</td><td>□ 无削波/噪声</td><td>___</td></tr>
+        <tr><td>响度/编码标准</td><td>□ H.265编码</td><td>□ -14 LUFS / Peak ≤-1dBTP</td><td>___</td></tr>
+        <tr><td>文件命名规范</td><td>□ 符合命名规则</td><td>□ 符合命名规则</td><td>___</td></tr>
+        <tr><td>音视频同步</td><td colspan="2">□ 误差不超过2帧</td><td>___</td></tr>
+        <tr><td>ID3标签（音频）</td><td>—</td><td>□ 曲名/艺人/年份完整</td><td>___</td></tr>
+        <tr><td>MP3版本</td><td>—</td><td>□ 320kbps CBR</td><td>___</td></tr>
+        <tr class="total-row"><td colspan="3">质检通过，可以交付</td><td>___（统筹签字）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <div>北京玩乐之声文化传媒有限公司 · 付费录制交付标准 V1.0</div>
+  <div>内部文件 · 合同附件版可直接使用</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京玩乐之声 — 服务说明书 & 报价表</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --rule: rgba(0,0,0,0.09);
+    --red: #c8490a;
+    --gold: #b07830;
+    --green: #1a5c3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+    background: #e8e5de;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PAGE SHELL ── */
+  .page {
+    width: 794px;
+    min-height: 1123px;
+    margin: 40px auto;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── PAGE 1: SERVICE DESCRIPTION ── */
+  .p1-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--ink);
+  }
+  .p1-header {
+    padding: 48px 56px 36px 62px;
+    border-bottom: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .p1-brand { }
+  .p1-brand-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .p1-brand-sub {
+    font-size: 11px;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+  }
+  .p1-doc-type {
+    text-align: right;
+  }
+  .p1-doc-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink3);
+    margin-bottom: 4px;
+  }
+  .p1-doc-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .p1-hero {
+    background: var(--ink);
+    padding: 32px 56px 28px 62px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .p1-hero-text { }
+  .p1-hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #f5f3ee;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .p1-hero-title em { color: var(--red); font-style: normal; }
+  .p1-hero-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 380px;
+  }
+  .p1-hero-stats {
+    display: flex;
+    gap: 28px;
+    flex-shrink: 0;
+  }
+  .p1-stat-val {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .p1-stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  .p1-body { padding: 28px 56px 28px 62px; }
+
+  .p1-section { margin-bottom: 24px; }
+  .p1-section-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  /* SERVICE BLOCKS */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .svc-card {
+    border: 0.5px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 14px 12px;
+  }
+  .svc-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink3);
+    font-family: 'Noto Serif SC', serif;
+  }
+  .svc-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .svc-desc {
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.65;
+  }
+  .svc-card.featured {
+    border-color: var(--red);
+    background: rgba(200,73,10,0.03);
+  }
+  .svc-card.featured .svc-icon {
+    background: rgba(200,73,10,0.1);
+    color: var(--red);
+  }
+
+  /* ADVANTAGE ROW */
+  .adv-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .adv-cell {
+    padding: 12px 14px;
+    border-right: 0.5px solid var(--rule);
+  }
+  .adv-cell:last-child { border-right: none; }
+  .adv-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--red);
+    margin-bottom: 2px;
+  }
+  .adv-label {
+    font-size: 11px;
+    color: var(--ink2);
+    line-height: 1.5;
+  }
+
+  /* PROCESS FLOW */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    flex-wrap: nowrap;
+  }
+  .flow-step {
+    flex: 1;
+    padding: 10px 8px;
+    background: var(--bg2);
+    border-radius: 4px;
+    text-align: center;
+  }
+  .flow-step-num { font-size: 9px; color: var(--ink3); margin-bottom: 2px; }
+  .flow-step-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .flow-step.accent { background: var(--ink); }
+  .flow-step.accent .flow-step-name { color: #fff; }
+  .flow-step.accent .flow-step-num { color: rgba(255,255,255,0.4); }
+  .flow-arrow { font-size: 12px; color: var(--ink3); flex-shrink: 0; }
+
+  /* CLIENT TYPES */
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .client-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 0.5px solid var(--rule);
+    border-radius: 5px;
+  }
+  .client-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink3);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .client-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
+  .client-desc { font-size: 11px; color: var(--ink3); line-height: 1.5; }
+
+  /* FOOTER P1 */
+  .p1-footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 14px 56px 14px 62px;
+    border-top: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+  }
+  .p1-footer-left { font-size: 10px; color: var(--ink3); }
+  .p1-footer-right { font-size: 10px; color: var(--ink3); }
+  .p1-footer-contact {
+    display: flex;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--ink2);
+  }
+
+  /* ══════════════════════════════════
+     PAGE 2: PRICE LIST
+  ══════════════════════════════════ */
+  .p2-header {
+    background: var(--ink);
+    padding: 40px 56px 32px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .p2-header-left { }
+  .p2-header-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .p2-header-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #f5f3ee;
+  }
+  .p2-header-right {
+    text-align: right;
+  }
+  .p2-header-brand {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .p2-header-date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .p2-body { padding: 32px 56px; }
+
+  .p2-section { margin-bottom: 32px; }
+  .p2-section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .p2-section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .p2-section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .p2-section-note {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink3);
+  }
+
+  /* PRICE TABLE */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .price-table thead th {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink3);
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--bg2);
+    background: var(--bg2);
+    text-align: left;
+  }
+  .price-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 0.5px solid var(--rule);
+    color: var(--ink2);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .price-table tbody tr:last-child td { border-bottom: none; }
+  .price-table tbody tr:hover td { background: var(--bg2); }
+  .price-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--red);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .price-recommend {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    background: rgba(200,73,10,0.1);
+    color: var(--red);
+    border-radius: 3px;
+    font-weight: 500;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+  .td-name { font-weight: 500; color: var(--ink); }
+  .td-include { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+
+  /* MONTHLY PACKAGE */
+  .monthly-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .monthly-card {
+    border: 0.5px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px;
+    text-align: center;
+  }
+  .monthly-card.popular {
+    border-color: var(--red);
+    background: rgba(200,73,10,0.03);
+    position: relative;
+  }
+  .popular-tag {
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    background: var(--red);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 0 0 4px 4px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .monthly-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .monthly-price {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--red);
+    margin-bottom: 2px;
+  }
+  .monthly-unit { font-size: 10px; color: var(--ink3); margin-bottom: 8px; }
+  .monthly-includes { font-size: 10px; color: var(--ink3); line-height: 1.7; text-align: left; }
+
+  /* ADDON TABLE */
+  .addon-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .addon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    border: 0.5px solid var(--rule);
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .addon-name { color: var(--ink2); }
+  .addon-price { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+  /* NOTE BOX */
+  .p2-note {
+    background: var(--bg2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.7;
+  }
+  .p2-note strong { color: var(--ink2); }
+
+  /* FOOTER P2 */
+  .p2-footer {
+    border-top: 0.5px solid var(--rule);
+    padding: 16px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .p2-footer-contact {
+    display: flex;
+    gap: 24px;
+    font-size: 11px;
+    color: var(--ink3);
+  }
+  .p2-footer-contact strong { color: var(--ink2); }
+  .p2-footer-stamp {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--red);
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    opacity: 0.5;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ PAGE 1: SERVICE DESCRIPTION ════════════════════ -->
+<div class="page">
+  <div class="p1-accent"></div>
+
+  <div class="p1-header">
+    <div class="p1-brand">
+      <div class="p1-brand-name">北京玩乐之声文化传媒有限公司</div>
+      <div class="p1-brand-sub">沉浸式现场音乐空间 · 全链路内容演出服务</div>
+    </div>
+    <div class="p1-doc-type">
+      <div class="p1-doc-label">文件类型</div>
+      <div class="p1-doc-title">服务说明书</div>
+    </div>
+  </div>
+
+  <div class="p1-hero">
+    <div class="p1-hero-text">
+      <div class="p1-hero-title">我们不只做演出<br>我们做<em>可以传播的内容事件</em></div>
+      <div class="p1-hero-desc">专业录音棚级现场 + 多机位视频制作 + 全渠道内容宣发。让每一场演出都留下值得传播的内容资产。</div>
+    </div>
+    <div class="p1-hero-stats">
+      <div>
+        <div class="p1-stat-val">100㎡</div>
+        <div class="p1-stat-label">专业录音棚空间</div>
+      </div>
+      <div>
+        <div class="p1-stat-val">30人</div>
+        <div class="p1-stat-label">沉浸式现场规格</div>
+      </div>
+      <div>
+        <div class="p1-stat-val">4K</div>
+        <div class="p1-stat-label">多机位拍摄</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-body">
+
+    <div class="p1-section">
+      <div class="p1-section-title">核心服务</div>
+      <div class="svc-grid">
+        <div class="svc-card featured">
+          <div class="svc-icon">演</div>
+          <div class="svc-name">演出定制服务</div>
+          <div class="svc-desc">为企业、政府、品牌方提供完整的演出内容解决方案——从乐队匹配、现场制作到演出后的内容产出，一站式交付。</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">录</div>
+          <div class="svc-name">录音录像制作</div>
+          <div class="svc-desc">录音棚级声学环境下的专业录制，视频专辑+录音专辑+全渠道推广，为独立乐队提供完整的内容制作服务。</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">驻</div>
+          <div class="svc-name">酒吧驻场服务</div>
+          <div class="svc-desc">为精品酒吧、餐厅、商业空间提供稳定的驻场演出合作，匹配调性契合的优质乐队，按月长期合作。</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">直</div>
+          <div class="svc-name">直播内容服务</div>
+          <div class="svc-desc">沉浸式现场同步直播，抖音/B站/视频号多平台覆盖，将线下30人现场的品质内容传递给更大范围的受众。</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">品</div>
+          <div class="svc-name">品牌内容合作</div>
+          <div class="svc-desc">为品牌定制音乐场景内容，包括内容植入、品牌冠名专场、定制私享场，让品牌与高品质音乐场景深度结合。</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">巡</div>
+          <div class="svc-name">全国巡演策划</div>
+          <div class="svc-desc">整合全国Live House资源，为旗下乐队策划执行全国巡演，从城市选择、场地对接到内容全程产出。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p1-section">
+      <div class="p1-section-title">我们的差异化优势</div>
+      <div class="adv-row">
+        <div class="adv-cell">
+          <div class="adv-num">录音棚级</div>
+          <div class="adv-label">声学环境<br>每个位置都是最佳聆听位</div>
+        </div>
+        <div class="adv-cell">
+          <div class="adv-num">一站式</div>
+          <div class="adv-label">演出+拍摄+剪辑+推广<br>全链路服务，无需多方协调</div>
+        </div>
+        <div class="adv-cell">
+          <div class="adv-num">资源池</div>
+          <div class="adv-label">签约合作乐队持续增长<br>各风格均可快速匹配</div>
+        </div>
+        <div class="adv-cell">
+          <div class="adv-num">内容留存</div>
+          <div class="adv-label">每场演出均产出可传播内容<br>活动价值延续至演出后</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p1-section">
+      <div class="p1-section-title">服务流程</div>
+      <div class="flow-row">
+        <div class="flow-step accent">
+          <div class="flow-step-num">01</div>
+          <div class="flow-step-name">需求沟通</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-step-num">02</div>
+          <div class="flow-step-name">方案定制</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-step-num">03</div>
+          <div class="flow-step-name">乐队匹配</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-step-num">04</div>
+          <div class="flow-step-name">合同签署</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-step-num">05</div>
+          <div class="flow-step-name">现场执行</div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-step-num">06</div>
+          <div class="flow-step-name">内容交付</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p1-section">
+      <div class="p1-section-title">适合的客户</div>
+      <div class="client-grid">
+        <div class="client-item">
+          <div class="client-dot"></div>
+          <div>
+            <div class="client-name">企业 · 年会 / 品牌活动</div>
+            <div class="client-desc">希望告别KTV式表演，用有品质的现场音乐提升活动调性，并留下可传播的内容素材</div>
+          </div>
+        </div>
+        <div class="client-item">
+          <div class="client-dot"></div>
+          <div>
+            <div class="client-name">精品酒吧 / 餐厅 / 商业空间</div>
+            <div class="client-desc">需要与品牌调性匹配的稳定驻场演出合作方，希望演出同时为场地产出内容物料</div>
+          </div>
+        </div>
+        <div class="client-item">
+          <div class="client-dot"></div>
+          <div>
+            <div class="client-name">政府 / 文化机构</div>
+            <div class="client-desc">文化活动、城市音乐节、公共演出，需要有资质、有品质、有内容产出能力的承办方</div>
+          </div>
+        </div>
+        <div class="client-item">
+          <div class="client-dot"></div>
+          <div>
+            <div class="client-name">品牌方 / 市场部</div>
+            <div class="client-desc">希望通过音乐场景与目标受众建立情感连接，定制专属的品牌音乐内容事件</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p1-footer">
+    <div class="p1-footer-left">北京玩乐之声文化传媒有限公司 · 内部报价文件</div>
+    <div class="p1-footer-contact">
+      <span>联系人：_______________</span>
+      <span>电话：_______________</span>
+      <span>邮箱：_______________</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════ PAGE 2: PRICE LIST ════════════════════ -->
+<div class="page">
+
+  <div class="p2-header">
+    <div class="p2-header-left">
+      <div class="p2-header-label">北京玩乐之声文化传媒有限公司</div>
+      <div class="p2-header-title">服务报价表</div>
+    </div>
+    <div class="p2-header-right">
+      <div class="p2-header-brand">报价有效期：30天</div>
+      <div class="p2-header-date">报价日期：_______年_______月_______日</div>
+      <div class="p2-header-date" style="margin-top:4px;">报价编号：QT-_____________</div>
+    </div>
+  </div>
+
+  <div class="p2-body">
+
+    <!-- 演出定制服务 -->
+    <div class="p2-section">
+      <div class="p2-section-header">
+        <div class="p2-section-dot" style="background:var(--red);"></div>
+        <div class="p2-section-title">演出定制服务</div>
+        <div class="p2-section-note">单次演出 · 含内容产出</div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th style="width:160px;">服务类型</th>
+            <th>包含内容</th>
+            <th style="width:80px;text-align:right;">报价（元）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="td-name">企业年会 / 品牌活动</div>
+            </td>
+            <td>
+              <div>乐队匹配 + 现场演出 + 专业音响 + 多机位拍摄 + 精剪视频交付</div>
+            </td>
+            <td class="price-num">30,000–100,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-name">政府 / 文化活动</div>
+            </td>
+            <td>
+              <div>全套演出服务 + 活动内容记录 + 宣传物料制作</div>
+            </td>
+            <td class="price-num">50,000–150,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-name">品牌内容专场 <span class="price-recommend">推荐</span></div>
+            </td>
+            <td>
+              <div>演出+内容+传播一体化方案，含演出前预热内容 + 演出中专业拍摄 + 演出后传播素材</div>
+            </td>
+            <td class="price-num">30,000–80,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-name">品牌私享场</div>
+            </td>
+            <td>
+              <div>30人以内沉浸专场 + 定制化体验设计 + 完整内容留存</div>
+            </td>
+            <td class="price-num">50,000–100,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td-name">Live House / 音乐节合作</div>
+            </td>
+            <td>
+              <div>乐队资源供应 + 演出统筹，按演出费佣金结算</div>
+            </td>
+            <td class="price-num">演出费 15–25%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 驻场服务 -->
+    <div class="p2-section">
+      <div class="p2-section-header">
+        <div class="p2-section-dot" style="background:var(--gold);"></div>
+        <div class="p2-section-title">酒吧 / 商业空间驻场服务</div>
+        <div class="p2-section-note">月度长期合作</div>
+      </div>
+      <div class="monthly-grid">
+        <div class="monthly-card">
+          <div class="monthly-name">基础驻场</div>
+          <div class="monthly-price">8,000</div>
+          <div class="monthly-unit">元 / 月</div>
+          <div class="monthly-includes">
+            · 每月4场演出<br>
+            · 乐队匹配与协调<br>
+            · 基础宣传物料
+          </div>
+        </div>
+        <div class="monthly-card popular">
+          <div class="popular-tag">最受欢迎</div>
+          <div class="monthly-name">标准驻场</div>
+          <div class="monthly-price">12,000</div>
+          <div class="monthly-unit">元 / 月</div>
+          <div class="monthly-includes">
+            · 每月6-8场演出<br>
+            · 乐队匹配与协调<br>
+            · 每场精剪短视频 1 条<br>
+            · 场地宣传物料设计
+          </div>
+        </div>
+        <div class="monthly-card">
+          <div class="monthly-name">深度合作</div>
+          <div class="monthly-price">18,000</div>
+          <div class="monthly-unit">元 / 月起</div>
+          <div class="monthly-includes">
+            · 场次不限<br>
+            · 专属内容运营支持<br>
+            · 直播联合运营<br>
+            · 品牌内容植入资源
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 录音录像制作 -->
+    <div class="p2-section">
+      <div class="p2-section-header">
+        <div class="p2-section-dot" style="background:var(--green);"></div>
+        <div class="p2-section-title">录音录像制作服务</div>
+        <div class="p2-section-note">独立乐队 / 音乐人</div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th style="width:160px;">套餐</th>
+            <th>包含内容</th>
+            <th style="width:80px;text-align:right;">报价（元）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="td-name">全套制作 <span class="price-recommend">推荐</span></div></td>
+            <td>视频专辑 + 录音专辑 + 全渠道推广（抖音/B站/小红书/视频号）</td>
+            <td class="price-num">25,000–60,000</td>
+          </tr>
+          <tr>
+            <td><div class="td-name">视频专辑</div></td>
+            <td>多机位现场拍摄 + 后期剪辑 + 调色 + 封面设计（4-6首）</td>
+            <td class="price-num">15,000–40,000</td>
+          </tr>
+          <tr>
+            <td><div class="td-name">录音专辑</div></td>
+            <td>多轨录音 + 混音 + 母带处理（4-6首）</td>
+            <td class="price-num">8,000–25,000</td>
+          </tr>
+          <tr>
+            <td><div class="td-name">单曲制作</div></td>
+            <td>单曲录音或拍摄，适合首次合作体验</td>
+            <td class="price-num">5,000–15,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 增值服务 -->
+    <div class="p2-section">
+      <div class="p2-section-header">
+        <div class="p2-section-dot" style="background:var(--ink3);"></div>
+        <div class="p2-section-title">增值服务</div>
+        <div class="p2-section-note">可单独选购</div>
+      </div>
+      <div class="addon-row">
+        <div class="addon-item">
+          <div class="addon-name">现场摄影（精修50张）</div>
+          <div class="addon-price">2,000–5,000</div>
+        </div>
+        <div class="addon-item">
+          <div class="addon-name">直播技术支持（单场）</div>
+          <div class="addon-price">3,000–8,000</div>
+        </div>
+        <div class="addon-item">
+          <div class="addon-name">演出宣传物料设计</div>
+          <div class="addon-price">1,500–4,000</div>
+        </div>
+        <div class="addon-item">
+          <div class="addon-name">巡演策划执行（单城市）</div>
+          <div class="addon-price">8,000–20,000</div>
+        </div>
+        <div class="addon-item">
+          <div class="addon-name">内容推广（平台投放）</div>
+          <div class="addon-price">另报</div>
+        </div>
+        <div class="addon-item">
+          <div class="addon-name">乐队长期经纪服务</div>
+          <div class="addon-price">面谈</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p2-note">
+      <strong>报价说明：</strong>以上价格均为含税参考报价（人民币），最终报价以双方确认的服务方案为准。<br>
+      <strong>付款方式：</strong>签约时支付30%定金，演出/交付前支付尾款，银行转账至公司对公账户。<br>
+      <strong>发票类型：</strong>增值税普通发票或专用发票，税率6%，可开具文化服务/技术服务类目。<br>
+      <strong>折扣政策：</strong>年框合同（年服务费超10万元）享9折优惠；转介绍新客户享首单9.5折。
+    </div>
+
+  </div>
+
+  <div class="p2-footer">
+    <div class="p2-footer-contact">
+      <div><strong>联系人</strong><br>_______________</div>
+      <div><strong>电话</strong><br>_______________</div>
+      <div><strong>邮箱</strong><br>_______________</div>
+      <div><strong>地址</strong><br>北京市_______________</div>
+    </div>
+    <div class="p2-footer-stamp">北京<br>玩乐之声<br>盖章处</div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩乐之声 — 30人现场标准执行流程 SOP</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --bg3: #e8e5de;
+    --red: #c8490a;
+    --amber: #b07830;
+    --green: #1a5c3a;
+    --blue: #1a3d6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; background: var(--bg); color: var(--ink); font-size: 13px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .doc-header { background: var(--ink); color: #f5f3ee; padding: 48px 60px 40px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+  .header-brand { font-size: 12px; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+  .header-badges { display: flex; gap: 8px; }
+  .header-badge { font-size: 10px; padding: 3px 10px; border: 0.5px solid rgba(255,255,255,0.2); border-radius: 2px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
+  .header-title { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 300; line-height: 1.15; margin-bottom: 12px; }
+  .header-desc { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.7; margin-bottom: 24px; }
+  .header-stats { display: flex; gap: 0; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; width: fit-content; }
+  .h-stat { padding: 10px 20px; border-right: 0.5px solid rgba(255,255,255,0.1); }
+  .h-stat:last-child { border-right: none; }
+  .h-stat-val { font-size: 16px; font-family: 'Noto Serif SC', serif; font-weight: 300; color: #fff; }
+  .h-stat-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+
+  /* TIMELINE NAV */
+  .timeline-nav { background: var(--bg2); border-bottom: 1px solid var(--rule); padding: 0 60px; display: flex; gap: 0; overflow-x: auto; }
+  .tn-item { padding: 14px 20px; font-size: 12px; color: var(--ink3); white-space: nowrap; border-bottom: 2px solid transparent; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 7px; }
+  .tn-item:hover { color: var(--ink); }
+  .tn-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* BODY */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 60px; }
+
+  /* PHASE SECTION */
+  .phase { margin-bottom: 52px; }
+  .phase-banner { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-radius: 8px; margin-bottom: 24px; }
+  .phase-num { font-family: 'Noto Serif SC', serif; font-size: 32px; font-weight: 300; opacity: 0.25; line-height: 1; flex-shrink: 0; width: 40px; }
+  .phase-info { flex: 1; }
+  .phase-label { font-size: 10px; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 3px; }
+  .phase-title { font-size: 17px; font-weight: 500; }
+  .phase-time { font-size: 12px; opacity: 0.65; margin-top: 2px; }
+  .phase-owner { font-size: 11px; padding: 3px 10px; border-radius: 3px; background: rgba(255,255,255,0.2); white-space: nowrap; }
+
+  /* TASK LIST */
+  .task-list { display: flex; flex-direction: column; gap: 6px; }
+  .task-item { background: #fff; border: 0.5px solid var(--rule); border-radius: 8px; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .task-check { width: 20px; height: 20px; border: 1.5px solid var(--rule); border-radius: 4px; flex-shrink: 0; margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+  .task-check.done { background: var(--green); border-color: var(--green); }
+  .task-check.done::after { content: ''; width: 5px; height: 9px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg) translateY(-1px); display: block; }
+  .task-body { flex: 1; }
+  .task-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .task-title.done-text { text-decoration: line-through; color: var(--ink3); }
+  .task-detail { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+  .task-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .task-tag { font-size: 10px; padding: 1px 7px; border-radius: 3px; background: var(--bg2); color: var(--ink3); }
+  .task-tag.owner { background: rgba(26,61,110,0.08); color: var(--blue); }
+  .task-tag.warn { background: rgba(200,73,10,0.08); color: var(--red); }
+  .task-tag.tip { background: rgba(26,92,58,0.08); color: var(--green); }
+
+  /* CALLOUT */
+  .callout { border-left: 3px solid var(--amber); padding: 12px 16px; background: rgba(176,120,48,0.05); border-radius: 0 6px 6px 0; margin: 12px 0 16px; font-size: 12px; color: var(--ink2); line-height: 1.7; }
+  .callout.red { border-color: var(--red); background: rgba(200,73,10,0.04); }
+  .callout.green { border-color: var(--green); background: rgba(26,92,58,0.04); }
+
+  /* ROLE TABLE */
+  .role-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 16px 0; }
+  .role-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink3); padding: 7px 12px; background: var(--bg2); border-bottom: 1px solid var(--bg3); text-align: left; }
+  .role-table td { padding: 9px 12px; border-bottom: 0.5px solid var(--rule); color: var(--ink2); vertical-align: top; }
+  .role-table tr:last-child td { border-bottom: none; }
+  td.bold { font-weight: 500; color: var(--ink); }
+
+  /* EMERGENCY */
+  .emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .emg-card { background: #fff; border: 0.5px solid var(--rule); border-radius: 7px; padding: 14px 16px; }
+  .emg-scenario { font-size: 11px; font-weight: 500; color: var(--red); margin-bottom: 6px; letter-spacing: 0.04em; }
+  .emg-action { font-size: 12px; color: var(--ink2); line-height: 1.7; }
+
+  /* CHECKLIST SUMMARY */
+  .summary-bar { background: var(--ink); color: #f5f3ee; padding: 16px 24px; border-radius: 8px; margin: 8px 0 24px; display: flex; justify-content: space-between; align-items: center; }
+  .sb-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .sb-progress { display: flex; align-items: center; gap: 10px; }
+  .sb-bar { width: 120px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+  .sb-fill { height: 100%; border-radius: 2px; background: #4ade80; transition: width .3s; }
+  .sb-count { font-size: 12px; color: rgba(255,255,255,0.7); min-width: 60px; text-align: right; }
+
+  /* FOOTER */
+  .doc-footer { max-width: 900px; margin: 0 auto; padding: 20px 60px 48px; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); }
+
+  @media(max-width:640px) {
+    .doc-header { padding: 32px 20px; }
+    .timeline-nav { padding: 0 20px; }
+    .wrap { padding: 32px 20px; }
+    .emergency-grid { grid-template-columns: 1fr; }
+    .doc-footer { padding: 20px; flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="header-top">
+    <div class="header-brand">北京玩乐之声文化传媒有限公司</div>
+    <div class="header-badges">
+      <div class="header-badge">内部文件</div>
+      <div class="header-badge">V1.0</div>
+    </div>
+  </div>
+  <div class="header-title">30人现场<br>标准执行流程</div>
+  <div class="header-desc">从演出前7天到演出后72小时，每个环节的责任人、动作清单和注意事项。每场演出前打印一份，逐项勾选执行。</div>
+  <div class="header-stats">
+    <div class="h-stat"><div class="h-stat-val">7天</div><div class="h-stat-label">提前准备周期</div></div>
+    <div class="h-stat"><div class="h-stat-val">6个阶段</div><div class="h-stat-label">标准执行流程</div></div>
+    <div class="h-stat"><div class="h-stat-val">30人</div><div class="h-stat-label">现场上限</div></div>
+    <div class="h-stat"><div class="h-stat-val">72h</div><div class="h-stat-label">演出后跟进</div></div>
+  </div>
+</div>
+
+<!-- TIMELINE NAV -->
+<nav class="timeline-nav">
+  <a class="tn-item" href="#p1"><span class="tn-dot" style="background:#8a8880"></span>演出前7天</a>
+  <a class="tn-item" href="#p2"><span class="tn-dot" style="background:#b07830"></span>演出前3天</a>
+  <a class="tn-item" href="#p3"><span class="tn-dot" style="background:#c8490a"></span>演出当天</a>
+  <a class="tn-item" href="#p4"><span class="tn-dot" style="background:#1a3d6e"></span>调音彩排</a>
+  <a class="tn-item" href="#p5"><span class="tn-dot" style="background:#1a5c3a"></span>演出进行</a>
+  <a class="tn-item" href="#p6"><span class="tn-dot" style="background:#4a4844"></span>演出结束后</a>
+  <a class="tn-item" href="#roles"><span class="tn-dot" style="background:#1a1814"></span>角色分工</a>
+  <a class="tn-item" href="#emergency"><span class="tn-dot" style="background:#c8490a"></span>应急预案</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- 角色说明 -->
+  <div id="roles" class="phase" style="margin-bottom:36px;">
+    <div class="callout">
+      <strong>执行角色说明（每场演出前确认人员到位）</strong><br>
+      统筹（PM）· 制作总监（音响）· 视频导演（拍摄）· 灯光师 · 现场统筹（协调）· 内容运营（宣发）
+    </div>
+    <table class="role-table">
+      <thead><tr><th>角色</th><th>当天职责</th><th>到场时间</th><th>本场负责人</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">统筹（PM）</td><td>全局协调、时间把控、甲方/观众沟通、突发处理</td><td>演出前3小时</td><td>___________</td></tr>
+        <tr><td class="bold">制作总监</td><td>音响设备调试、录音系统搭建、现场混音、录音监控</td><td>演出前3小时</td><td>___________</td></tr>
+        <tr><td class="bold">视频导演</td><td>机位布置、拍摄方案执行、实时监控画面质量</td><td>演出前2小时</td><td>___________</td></tr>
+        <tr><td class="bold">灯光师</td><td>灯光安装调试、演出中灯光配合</td><td>演出前2小时</td><td>___________</td></tr>
+        <tr><td class="bold">现场统筹</td><td>乐队接待、观众引导、物资准备、现场秩序</td><td>演出前1小时</td><td>___________</td></tr>
+        <tr><td class="bold">内容运营</td><td>演出前预热发布、演出中实时内容、演出后素材整理</td><td>演出前30分钟</td><td>___________</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div id="p1" class="phase">
+    <div class="phase-banner" style="background:rgba(138,136,128,0.08);border:0.5px solid rgba(138,136,128,0.2);">
+      <div class="phase-num" style="color:var(--ink3);">01</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--ink3);">PHASE 01</div>
+        <div class="phase-title">演出前 7 天 · 确认与准备</div>
+        <div class="phase-time" style="color:var(--ink3);">演出日期倒计时 7 天内完成</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(138,136,128,0.15);color:var(--ink3);">责任人：统筹 PM</div>
+    </div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">确认演出乐队与曲目清单</div>
+          <div class="task-detail">与乐队确认演出曲目（至少4首）、演出时长（建议45-60分钟）、乐器编制、特殊设备需求</div>
+          <div class="task-meta"><span class="task-tag owner">统筹</span><span class="task-tag">发微信/电话确认</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">发送观众邀请与票务</div>
+          <div class="task-detail">确认30个名额分配：公开售票席 + 嘉宾/甲方邀约席（建议至少5席留给目标甲方）。通过大麦/秀动或私域社群发起，截止时间为演出前48小时</div>
+          <div class="task-meta"><span class="task-tag owner">内容运营</span><span class="task-tag warn">30人上限严格控制</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">发布演出预热内容</div>
+          <div class="task-detail">抖音/小红书/视频号发布预热短视频或图文，包含：乐队介绍、演出时间地点、购票/报名方式。要求乐队同步在自己账号转发</div>
+          <div class="task-meta"><span class="task-tag owner">内容运营</span><span class="task-tag tip">带话题标签</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">确认拍摄方案与机位设计</div>
+          <div class="task-detail">视频导演根据乐队编制确定机位数量（建议3-5机位）：固定主机位 + 手持移动机位 + 特写机位。确认录音与拍摄的协调方案，避免设备冲突</div>
+          <div class="task-meta"><span class="task-tag owner">视频导演</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">设备检查与备品准备</div>
+          <div class="task-detail">制作总监检查：录音设备、调音台、话筒（含备用）、耳机、线材、DAW系统。视频导演检查：摄像机电池/存储卡、三脚架/稳定器、监视器。发现损坏立即处理</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监 + 视频导演</span><span class="task-tag warn">备用电池必须充满</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">确认灯光方案</div>
+          <div class="task-detail">灯光师根据本场演出风格（安静内省 / 活跃律动）调整灯光预设方案，确认灯光不影响摄影机曝光（避免过曝或频闪问题）</div>
+          <div class="task-meta"><span class="task-tag owner">灯光师</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div id="p2" class="phase">
+    <div class="phase-banner" style="background:rgba(176,120,48,0.06);border:0.5px solid rgba(176,120,48,0.2);">
+      <div class="phase-num" style="color:var(--amber);">02</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--amber);">PHASE 02</div>
+        <div class="phase-title">演出前 3 天 · 确认与跟进</div>
+        <div class="phase-time" style="color:var(--amber);">演出日期倒计时 3 天</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(176,120,48,0.12);color:var(--amber);">责任人：统筹 PM</div>
+    </div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">观众名单确认并建群</div>
+          <div class="task-detail">整理最终入场名单（30人），建立本场观众微信群。群内提前告知：入场时间、地址、停车、着装建议（可选）、不可拍摄/录像的提醒（如适用）</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span><span class="task-tag warn">超额报名需候补管理</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">乐队到场时间与技术需求二次确认</div>
+          <div class="task-detail">与乐队再次确认：到场时间（演出前3小时）、乐器自带清单、演出服/形象要求、是否需要返送监听、有无特殊Rider要求</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">场地布置检查</div>
+          <div class="task-detail">确认观众席位布置（围绕乐手方案）、座椅数量（≤30）、动线是否顺畅、紧急通道是否畅通、空调/通风是否正常</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">邀约甲方最终确认</div>
+          <div class="task-detail">对本场邀约的5席目标甲方逐一电话/微信确认到场。若有临时无法到场的，立即补位替换，不要让席位空着</div>
+          <div class="task-meta"><span class="task-tag owner">商务 / 统筹</span><span class="task-tag warn">甲方席位必须坐满</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">物资采购</div>
+          <div class="task-detail">确认现场所需物资：饮水（观众人手一瓶）、现场物料（节目单/乐队介绍卡片）、名片、备用电池、延长线，统筹采购到位</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div id="p3" class="phase">
+    <div class="phase-banner" style="background:rgba(200,73,10,0.06);border:0.5px solid rgba(200,73,10,0.2);">
+      <div class="phase-num" style="color:var(--red);">03</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--red);">PHASE 03</div>
+        <div class="phase-title">演出当天 · 场地准备</div>
+        <div class="phase-time" style="color:var(--red);">演出开始前 3 小时</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(200,73,10,0.1);color:var(--red);">责任人：制作总监 + 统筹</div>
+    </div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">场地开门与基础检查</div>
+          <div class="task-detail">统筹最早到场，开门通风，检查空调温度（建议22-24°C）、照明、卫生间、消防设备状态</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span><span class="task-tag">演出前 3h 到场</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">录音系统搭建与测试</div>
+          <div class="task-detail">制作总监完成：接线 → 调音台通道检查 → DAW工程文件建立（以演出日期命名）→ 录音电平测试 → 备份存储介质准备（至少2块硬盘）</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监</span><span class="task-tag warn">必须双盘备份</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">拍摄设备架设</div>
+          <div class="task-detail">视频导演完成：各机位三脚架架设 → 对焦测试 → 白平衡统一设置 → 存储卡格式化（确认已备份上次素材）→ 监视器连接测试</div>
+          <div class="task-meta"><span class="task-tag owner">视频导演</span><span class="task-tag warn">存储卡清空前确认备份</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">灯光系统调试</div>
+          <div class="task-detail">灯光师完成所有灯位调试，与视频导演沟通确认灯光方向不产生摄影机眩光。预设演出各段灯光场景（开场/演奏中/安静段/高潮段）</div>
+          <div class="task-meta"><span class="task-tag owner">灯光师</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">观众席布置</div>
+          <div class="task-detail">现场统筹完成：座椅按方案摆放（围绕乐手）→ 每个座位放置节目单/乐队介绍 → 入场引导标识 → 饮水准备 → 手机提示牌（请勿录像/请静音）</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">乐队接待到场</div>
+          <div class="task-detail">现场统筹迎接乐队，引导乐器进场路线（避免与观众动线冲突），安排乐队休息区，提供饮水，告知当天流程时间表</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div id="p4" class="phase">
+    <div class="phase-banner" style="background:rgba(26,61,110,0.05);border:0.5px solid rgba(26,61,110,0.2);">
+      <div class="phase-num" style="color:var(--blue);">04</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--blue);">PHASE 04</div>
+        <div class="phase-title">调音彩排阶段</div>
+        <div class="phase-time" style="color:var(--blue);">演出前 2 小时 · 严格保障</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(26,61,110,0.08);color:var(--blue);">责任人：制作总监</div>
+    </div>
+    <div class="callout">调音时间是品质的核心保障，任何情况下不得压缩至1小时以下。若乐队迟到导致调音不足，须告知乐队对演出质量可能产生影响，并记录在案。</div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">乐器摆位确认</div>
+          <div class="task-detail">制作总监与视频导演共同确认乐器摆位，确保：① 话筒/乐器在录音拾音最佳位置；② 所有乐手在摄影机视角内；③ 线材走线整洁不遮挡拍摄</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监 + 视频导演</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">分轨调音与电平设置</div>
+          <div class="task-detail">各乐器/人声分轨逐一测试 → 设置录音电平（保留6dB余量，避免削波）→ 监听返送调整（每位乐手确认自己的耳返/监听音量）</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监</span><span class="task-tag warn">Peak不超过-6dBFS</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">试录一段检查</div>
+          <div class="task-detail">乐队演奏一首完整曲目，制作总监回放检查录音质量，视频导演检查各机位画面，灯光师微调。发现问题立即处理，不留到演出时</div>
+          <div class="task-meta"><span class="task-tag owner">全体技术人员</span><span class="task-tag tip">这是最后的检查机会</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">演出流程与曲目顺序确认</div>
+          <div class="task-detail">统筹与乐队确认：开场顺序 → 曲目顺序 → 有无曲目间互动/介绍 → 安可环节安排 → 结束时间预估 → 拍摄特殊需求（如走位/站位变化）</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">开始录音（Pre-Roll）</div>
+          <div class="task-detail">演出前30分钟正式开始录音，打板记录（场次名称+日期+Take号），之后保持录音不停止直到演出完全结束。宁可多录，不要遗漏</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监</span><span class="task-tag warn">录音一旦开始不要暂停</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div id="p5" class="phase">
+    <div class="phase-banner" style="background:rgba(26,92,58,0.05);border:0.5px solid rgba(26,92,58,0.2);">
+      <div class="phase-num" style="color:var(--green);">05</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--green);">PHASE 05</div>
+        <div class="phase-title">演出进行中</div>
+        <div class="phase-time" style="color:var(--green);">开场至演出结束</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(26,92,58,0.08);color:var(--green);">责任人：统筹 PM 全局把控</div>
+    </div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">观众入场引导（开场前30分钟）</div>
+          <div class="task-detail">现场统筹在门口核验名单（微信确认/纸质名单），引导观众就座。告知：请关闭手机铃声、不可使用闪光灯拍照、尊重演出氛围。甲方嘉宾优先引导至最佳位置</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span><span class="task-tag warn">迟到观众谢绝入场（演出开始后）</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">内容运营实时发布</div>
+          <div class="task-detail">内容运营在演出开始后15分钟内，发布"演出开始"实时内容（抖音/视频号直播或短视频），配合观众群实时互动。注意：不要在关键安静段发布会震动提示的内容</div>
+          <div class="task-meta"><span class="task-tag owner">内容运营</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">录音持续监控</div>
+          <div class="task-detail">制作总监全程监控录音电平，关注：有无削波（红灯）、有无杂音/噪声、存储空间是否充足。发现问题立即静默处理，不要影响演出</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">多机位拍摄执行</div>
+          <div class="task-detail">视频导演统筹各机位：主机位固定拍全景，移动机位寻找最佳情绪镜头，特写机位捕捉手部/表情细节。每首曲目至少保证一次全景 + 一次近景切换</div>
+          <div class="task-meta"><span class="task-tag owner">视频导演</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">时间把控</div>
+          <div class="task-detail">统筹在后台关注演出时长，若超时10分钟，给乐队发送手势信号（非言语）提示时间。正常演出时长45-60分钟，安可1首，总时长不超过75分钟</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">演出结束后录音延续</div>
+          <div class="task-detail">演出最后一首曲目结束后，录音继续保持至少5分钟（捕捉掌声、现场氛围），然后制作总监正式停止录音并打结束板记录</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div id="p6" class="phase">
+    <div class="phase-banner" style="background:rgba(74,72,68,0.06);border:0.5px solid rgba(74,72,68,0.2);">
+      <div class="phase-num" style="color:var(--ink2);">06</div>
+      <div class="phase-info">
+        <div class="phase-label" style="color:var(--ink2);">PHASE 06</div>
+        <div class="phase-title">演出结束后 · 收尾与跟进</div>
+        <div class="phase-time" style="color:var(--ink2);">演出结束当晚 + 后续 72 小时</div>
+      </div>
+      <div class="phase-owner" style="background:rgba(74,72,68,0.1);color:var(--ink2);">责任人：统筹 + 各岗位</div>
+    </div>
+    <div class="task-list">
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">素材即时备份（当晚完成）</div>
+          <div class="task-detail">制作总监：录音文件备份至两块硬盘，命名规则：「YYYYMMDD_乐队名_场次」。视频导演：所有存储卡素材备份至移动硬盘，原卡保留至剪辑完成后再格式化</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监 + 视频导演</span><span class="task-tag warn">当晚必须完成，不可拖延</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">乐队送场与感谢</div>
+          <div class="task-detail">协助乐队搬运乐器，统筹当面感谢并告知后续制作时间节点（几天内出初剪/混音）。提醒乐队在自己社媒账号发布演出感谢内容并@我们账号</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">现场收尾与场地恢复</div>
+          <div class="task-detail">所有设备归位，线材整理收纳，桌椅恢复，垃圾清理，关闭空调/照明，锁门。检查有无观众遗忘物品（如有联系归还）</div>
+          <div class="task-meta"><span class="task-tag owner">现场统筹</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">演出当晚发布高光内容（24小时内）</div>
+          <div class="task-detail">内容运营从当晚素材中快速剪辑1-2条30-60秒高光视频，次日上午发布至抖音/视频号/小红书。趁观众热度最高时发布效果最好</div>
+          <div class="task-meta"><span class="task-tag owner">内容运营 + 视频导演</span><span class="task-tag tip">24小时内发布效果最佳</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">甲方嘉宾跟进（48小时内）</div>
+          <div class="task-detail">统筹或商务对本场邀约的目标甲方逐一发送：① 感谢参与的消息；② 1-2条演出精彩视频；③ 服务说明书（如对方有合作意向）。不要超过48小时，趁热打铁</div>
+          <div class="task-meta"><span class="task-tag owner">商务 / 统筹</span><span class="task-tag warn">48小时内必须跟进</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">完整版内容交付（7天内）</div>
+          <div class="task-detail">视频导演完成完整剪辑版（15-30分钟演出精华版），制作总监完成混音初稿。发送给乐队审核，确认后上传至B站/私有云存储，归档本场内容资产</div>
+          <div class="task-meta"><span class="task-tag owner">制作总监 + 视频导演</span></div>
+        </div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)">
+        <div class="task-check"></div>
+        <div class="task-body">
+          <div class="task-title">本场复盘记录</div>
+          <div class="task-detail">统筹填写《演出复盘表》：观众反馈、技术问题记录、流程改进建议、甲方跟进状态、本场积分贡献初稿。复盘表归档至内部文件夹</div>
+          <div class="task-meta"><span class="task-tag owner">统筹 PM</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY -->
+  <div id="emergency" class="phase">
+    <div style="font-size:13px;font-weight:500;color:var(--red);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:8px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></div>
+      应急预案 · 常见突发情况处理
+    </div>
+    <div class="emergency-grid">
+      <div class="emg-card">
+        <div class="emg-scenario">乐队成员临时缺席</div>
+        <div class="emg-action">
+          立即联系备用乐手（维护至少3名可随时联系的备用乐手）。若无法补位，评估是否可以减员演出（如鼓手缺席是否可无鼓进行）。最差情况提前1小时告知观众并道歉，提供下次优先购票权。
+        </div>
+      </div>
+      <div class="emg-card">
+        <div class="emg-scenario">设备故障（录音/摄像）</div>
+        <div class="emg-action">
+          录音设备故障：切换备用录音设备（提前准备手机录音作为应急保底），告知乐队稍作等待。摄像设备故障：其余机位继续拍摄，故障机位重启处理，演出不因此暂停。
+        </div>
+      </div>
+      <div class="emg-card">
+        <div class="emg-scenario">停电 / 断电</div>
+        <div class="emg-action">
+          统筹立即联系场地物业处理。若短时间无法恢复，宣布短暂暂停，保持现场秩序，告知观众预计等待时间。超过20分钟无法恢复，启动演出取消应急方案（退票/改期）。
+        </div>
+      </div>
+      <div class="emg-card">
+        <div class="emg-scenario">观众超员 / 无票入场</div>
+        <div class="emg-action">
+          门口严格核验名单，30人满员后谢绝入场，无论关系远近。可安排候补观众在门口等待，如有人提前离场则补位。任何情况下不突破30人上限（安全及品质双重考虑）。
+        </div>
+      </div>
+      <div class="emg-card">
+        <div class="emg-scenario">观众突发不适</div>
+        <div class="emg-action">
+          立即引导至休息区，提供饮水，评估症状严重程度。若需要就医立即拨打120，统筹全程陪同，不要让伤者单独等待。演出继续，不要打断，但统筹不参与演出后续工作直到妥善处理。
+        </div>
+      </div>
+      <div class="emg-card">
+        <div class="emg-scenario">乐队临时要求变更曲目</div>
+        <div class="emg-action">
+          调音后要求变更：小幅调整（换1-2首）可接受，重新快速调试相关通道。大幅变更（超过一半曲目）须告知可能影响录音质量并记录在案，不承担相应质量责任。
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red" style="margin-top:20px;">
+      <strong>紧急联系人（每场演出前填写）：</strong><br>
+      场地物业：_____________  · 制作总监手机：_____________  · 统筹手机：_____________  · 备用乐手：_____________
+    </div>
+  </div>
+
+  <!-- 进度计算器 -->
+  <div class="summary-bar">
+    <div class="sb-label">本场演出完成进度</div>
+    <div class="sb-progress">
+      <div class="sb-bar"><div class="sb-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="sb-count" id="prog-count">0 / 0 项</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <div>北京玩乐之声文化传媒有限公司 · 30人现场标准执行流程 SOP V1.0</div>
+  <div>内部文件 · 每场演出前打印使用</div>
+</div>
+
+<script>
+function toggleTask(item) {
+  const check = item.querySelector('.task-check');
+  const title = item.querySelector('.task-title');
+  check.classList.toggle('done');
+  title.classList.toggle('done-text');
+  updateProgress();
+}
+function updateProgress() {
+  const all = document.querySelectorAll('.task-check');
+  const done = document.querySelectorAll('.task-check.done');
+  const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-count').textContent = done.length + ' / ' + all.length + ' 项';
+}
+updateProgress();
+</script>
+</body>
+</html>

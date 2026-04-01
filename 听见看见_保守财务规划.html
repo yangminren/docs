@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>听见·看见 — 保守财务规划</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --bg3: #e8e5de;
+    --red: #c8490a;
+    --green: #1a5c3a;
+    --amber: #b07830;
+    --blue: #1a3d6e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; background: var(--bg); color: var(--ink); font-size: 13px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 60px 40px; }
+
+  /* Header */
+  .doc-header { border-bottom: 1px solid var(--ink); padding-bottom: 24px; margin-bottom: 48px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .doc-title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 300; line-height: 1.2; }
+  .doc-title em { color: var(--red); font-style: normal; }
+  .doc-meta { text-align: right; font-size: 11px; color: var(--ink3); line-height: 1.8; }
+
+  /* Premise box */
+  .premise { background: #fff; border: 0.5px solid var(--rule); border-left: 3px solid var(--red); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 40px; }
+  .premise-title { font-size: 11px; letter-spacing: 0.1em; color: var(--red); margin-bottom: 8px; }
+  .premise ul { padding-left: 16px; color: var(--ink2); font-size: 13px; line-height: 2; }
+
+  /* Section */
+  .section { margin-bottom: 56px; }
+  .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .section-num { font-size: 11px; color: var(--ink3); letter-spacing: 0.08em; min-width: 20px; }
+  .section-line { flex: 1; height: 0.5px; background: var(--rule); }
+  .section-label { font-size: 11px; letter-spacing: 0.08em; color: var(--ink3); }
+  h2 { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 300; margin-bottom: 16px; }
+
+  /* SUMMARY CARDS */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 0.5px solid var(--rule); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
+  .sum-cell { background: #fff; padding: 16px 14px; }
+  .sum-cell.dim { background: var(--bg2); }
+  .sum-label { font-size: 10px; color: var(--ink3); letter-spacing: 0.06em; margin-bottom: 6px; }
+  .sum-val { font-size: 20px; font-family: 'Noto Serif SC', serif; font-weight: 300; color: var(--ink); }
+  .sum-val.loss { color: var(--red); }
+  .sum-val.profit { color: var(--green); }
+  .sum-note { font-size: 10px; color: var(--ink3); margin-top: 3px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0 24px; }
+  thead th { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink3); padding: 8px 10px; border-bottom: 1px solid var(--bg3); background: var(--bg2); text-align: left; }
+  tbody td { padding: 9px 10px; border-bottom: 0.5px solid var(--rule); color: var(--ink2); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  .total-row td { font-weight: 500; color: var(--ink); background: var(--bg2); border-top: 1px solid var(--bg3); }
+  .cost-row td { background: #fff8f5; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.accent { color: var(--red); font-weight: 500; }
+  td.green { color: var(--green); font-weight: 500; }
+  td.amber { color: var(--amber); }
+
+  /* YEAR BLOCK */
+  .year-block { background: #fff; border: 0.5px solid var(--rule); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+  .year-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 0.5px solid var(--rule); background: var(--bg2); }
+  .year-name { font-size: 14px; font-weight: 500; }
+  .year-summary { display: flex; gap: 24px; }
+  .ys-item { text-align: right; }
+  .ys-label { font-size: 10px; color: var(--ink3); }
+  .ys-val { font-size: 16px; font-family: 'Noto Serif SC', serif; font-weight: 300; }
+  .year-body { padding: 0 20px 16px; }
+
+  /* PHASE BAR */
+  .phase-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; margin: 16px 0 8px; }
+  .phase-cell { height: 6px; border-radius: 2px; background: var(--bg3); }
+  .phase-cell.active { background: var(--red); opacity: 0.6; }
+  .phase-cell.grow { background: var(--amber); opacity: 0.7; }
+  .phase-cell.run { background: var(--green); opacity: 0.7; }
+  .phase-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink3); margin-bottom: 20px; }
+
+  /* CALLOUT */
+  .callout { border-left: 2px solid var(--amber); padding: 12px 16px; background: rgba(176,120,48,0.05); border-radius: 0 6px 6px 0; margin: 16px 0; font-size: 13px; color: var(--ink2); line-height: 1.7; }
+  .callout.red { border-color: var(--red); background: rgba(200,73,10,0.04); }
+  .callout.green { border-color: var(--green); background: rgba(26,92,58,0.04); }
+
+  /* COMPARISON */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .compare-card { padding: 16px 18px; border: 0.5px solid var(--rule); border-radius: 8px; background: #fff; }
+  .compare-card.old { opacity: 0.6; }
+  .compare-tag { font-size: 10px; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .compare-tag.old-tag { color: var(--ink3); }
+  .compare-tag.new-tag { color: var(--green); }
+  .compare-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid var(--rule); font-size: 13px; }
+  .compare-item:last-child { border-bottom: none; font-weight: 500; }
+  .compare-item span:last-child { font-variant-numeric: tabular-nums; }
+
+  /* BAR CHART */
+  .bar-chart { margin: 20px 0; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bar-label { width: 90px; font-size: 12px; color: var(--ink2); flex-shrink: 0; text-align: right; }
+  .bar-track { flex: 1; height: 22px; background: var(--bg2); border-radius: 3px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 3px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 500; transition: width 0.3s; }
+  .bar-fill.y1 { background: rgba(200,73,10,0.25); color: var(--red); }
+  .bar-fill.y2 { background: rgba(176,120,48,0.3); color: var(--amber); }
+  .bar-fill.y3 { background: rgba(26,92,58,0.3); color: var(--green); }
+  .bar-num { width: 50px; font-size: 12px; color: var(--ink3); flex-shrink: 0; }
+
+  /* MONTHLY RAMP */
+  .ramp-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; margin: 12px 0; }
+  .ramp-col { display: flex; flex-direction: column; gap: 3px; }
+  .ramp-cell { height: 14px; border-radius: 2px; background: var(--bg3); font-size: 0; }
+  .ramp-cell.on { background: rgba(200,73,10,0.5); }
+  .ramp-cell.partial { background: rgba(200,73,10,0.25); }
+  .ramp-months { display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; }
+  .ramp-month { font-size: 9px; color: var(--ink3); text-align: center; }
+
+  /* RISK TABLE */
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .risk-table td { padding: 10px 12px; border-bottom: 0.5px solid var(--rule); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FCEBEB; color: #A32D2D; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .risk-mid  { background: #FAEEDA; color: #854F0B; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .risk-low  { background: #E1F5EE; color: #0F6E56; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+
+  /* FOOTER */
+  .doc-footer { margin-top: 60px; padding-top: 20px; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); }
+
+  @media(max-width:640px){
+    .wrap{padding:32px 16px;}
+    .doc-header{flex-direction:column;align-items:flex-start;gap:8px;}
+    .doc-meta{text-align:left;}
+    .summary-row{grid-template-columns:1fr 1fr;}
+    .compare-grid{grid-template-columns:1fr;}
+    .year-summary{gap:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div>
+      <div style="font-size:11px;letter-spacing:0.1em;color:var(--ink3);margin-bottom:6px;">听见·看见 沉浸式现场音乐空间</div>
+      <div class="doc-title">三年财务规划<br><em>保守版本</em></div>
+    </div>
+    <div class="doc-meta">
+      内部文件<br>
+      版本：保守测算<br>
+      2026
+    </div>
+  </div>
+
+  <!-- Premise -->
+  <div class="premise">
+    <div class="premise-title">保守测算前提</div>
+    <ul>
+      <li>第1-2个月为装修/筹备期，几乎无收入</li>
+      <li>冷启动期流量和客户增速按行业实际下限估算，不假设"内容自然爆发"</li>
+      <li>第一年演出服务以酒吧驻场为主，单次大单极少</li>
+      <li>付费录制前3个月为零，之后缓慢增长</li>
+      <li>视频号与其他平台同步计入内容/直播收入，不单独放大</li>
+      <li>全国巡演列入第三年下半年，收入从保守估算</li>
+      <li>人力成本从第10个月起按实际发薪计算</li>
+    </ul>
+  </div>
+
+  <!-- 三年总览 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div class="section-line"></div>
+      <span class="section-label">三年总览</span>
+    </div>
+    <h2>保守预测总量</h2>
+
+    <div class="summary-row">
+      <div class="sum-cell dim">
+        <div class="sum-label">三年总收入</div>
+        <div class="sum-val">394万</div>
+        <div class="sum-note">原方案1,060万</div>
+      </div>
+      <div class="sum-cell">
+        <div class="sum-label">三年净利润</div>
+        <div class="sum-val profit">约67万</div>
+        <div class="sum-note">原方案535万</div>
+      </div>
+      <div class="sum-cell">
+        <div class="sum-label">合作乐队</div>
+        <div class="sum-val">约100支</div>
+        <div class="sum-note">原方案150支</div>
+      </div>
+      <div class="sum-cell">
+        <div class="sum-label">版权库</div>
+        <div class="sum-val">约80首</div>
+        <div class="sum-note">录音邻接权</div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      原方案与保守版本差距巨大，核心原因只有两个：<strong>①原方案低估了冷启动难度</strong>——第一年收入假设为117万，实际很可能只有50万左右；<strong>②原方案低估了人力成本</strong>——第二三年团队薪酬是最大的成本压力。保守版本不是悲观，是不让意外压垮现金流的底线。
+    </div>
+
+    <!-- 收入对比 -->
+    <h3 style="margin:24px 0 12px;font-size:14px;font-weight:500;">收入对比</h3>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">第一年</div>
+        <div class="bar-track">
+          <div class="bar-fill y1" style="width:23%;">50万</div>
+        </div>
+        <div class="bar-num" style="color:var(--red);">50万</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">第二年</div>
+        <div class="bar-track">
+          <div class="bar-fill y2" style="width:62%;">131万</div>
+        </div>
+        <div class="bar-num" style="color:var(--amber);">131万</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">第三年</div>
+        <div class="bar-track">
+          <div class="bar-fill y3" style="width:100%;">213万</div>
+        </div>
+        <div class="bar-num" style="color:var(--green);">213万</div>
+      </div>
+    </div>
+
+    <!-- 原方案 vs 保守版 -->
+    <div class="compare-grid">
+      <div class="compare-card old">
+        <div class="compare-tag old-tag">原方案（乐观）</div>
+        <div class="compare-item"><span>第一年</span><span>117万</span></div>
+        <div class="compare-item"><span>第二年</span><span>321万</span></div>
+        <div class="compare-item"><span>第三年</span><span>622万</span></div>
+        <div class="compare-item"><span>三年净利润</span><span>535万</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-tag new-tag">保守版本（本文）</div>
+        <div class="compare-item"><span>第一年</span><span style="color:var(--red);">50万</span></div>
+        <div class="compare-item"><span>第二年</span><span style="color:var(--amber);">131万</span></div>
+        <div class="compare-item"><span>第三年</span><span style="color:var(--green);">213万</span></div>
+        <div class="compare-item"><span>三年净利润</span><span style="color:var(--green);">约67万</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第一年 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div class="section-line"></div>
+      <span class="section-label">第一年详细</span>
+    </div>
+    <h2>第一年 · 冷启动</h2>
+    <p style="color:var(--ink2);margin-bottom:20px;">前两个月几乎无收入，主要靠酒吧驻场建立现金流基本盘，付费录制和演出服务缓慢启动。</p>
+
+    <!-- 月度启动节奏 -->
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">各收入线启动节奏（深色=全力运转，浅色=刚启动）</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:5px 8px;background:var(--bg2);border-bottom:0.5px solid var(--rule);width:100px;">收入线</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">1月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">2月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">3月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">4月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">5月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">6月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">7月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">8月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">9月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">10月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">11月</th>
+            <th style="padding:3px 4px;background:var(--bg2);border-bottom:0.5px solid var(--rule);text-align:center;">12月</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:5px 8px;border-bottom:0.5px solid var(--rule);">30人现场</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.15);">△</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.25);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.3);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.35);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.4);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.4);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.45);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.5);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.5);">●</td>
+            <td style="text-align:center;background:rgba(200,73,10,0.5);">●</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border-bottom:0.5px solid var(--rule);">酒吧驻场</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.2);">△</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.3);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.35);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+            <td style="text-align:center;background:rgba(176,120,48,0.4);">●</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border-bottom:0.5px solid var(--rule);">付费录制</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.15);">△</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.2);">△</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.25);">●</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.3);">●</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.3);">●</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.35);">●</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.35);">●</td>
+            <td style="text-align:center;background:rgba(26,61,110,0.4);">●</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border-bottom:0.5px solid var(--rule);">单次演出服务</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.15);">△</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.2);">△</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.25);">●</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.3);">●</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.3);">●</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.35);">●</td>
+            <td style="text-align:center;background:rgba(26,92,58,0.4);">●</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border-bottom:0.5px solid var(--rule);">直播节目</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;padding:4px;">—</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.15);">△</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.15);">△</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.2);">△</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.2);">△</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.25);">●</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.25);">●</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.3);">●</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.3);">●</td>
+            <td style="text-align:center;background:rgba(90,90,90,0.3);">●</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:10px;color:var(--ink3);margin-top:4px;">△ = 试运行/低收入 &nbsp;●= 稳定产出</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>收入项</th>
+          <th>量/规模</th>
+          <th>单价/月费</th>
+          <th class="num">年收入</th>
+          <th class="num">占比</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>30人现场票务</td>
+          <td>24场 × 平均20人</td>
+          <td>299元/人</td>
+          <td class="num">144,000</td>
+          <td class="num">29%</td>
+        </tr>
+        <tr>
+          <td>酒吧驻场</td>
+          <td>平均1.5家 × 9个月</td>
+          <td>8,000元/家/月</td>
+          <td class="num">108,000</td>
+          <td class="num">22%</td>
+        </tr>
+        <tr>
+          <td>付费录音录像</td>
+          <td>8单（下半年启动）</td>
+          <td>均价12,000元</td>
+          <td class="num">96,000</td>
+          <td class="num">19%</td>
+        </tr>
+        <tr>
+          <td>单次演出服务</td>
+          <td>5单（6月后启动）</td>
+          <td>均价18,000元</td>
+          <td class="num">90,000</td>
+          <td class="num">18%</td>
+        </tr>
+        <tr>
+          <td>品牌合作</td>
+          <td>2单（小额试水）</td>
+          <td>均价8,000元</td>
+          <td class="num">16,000</td>
+          <td class="num">3%</td>
+        </tr>
+        <tr>
+          <td>直播/内容/视频号</td>
+          <td>第4月起 · 初期极低</td>
+          <td>—</td>
+          <td class="num">8,000</td>
+          <td class="num">2%</td>
+        </tr>
+        <tr>
+          <td>版权</td>
+          <td>积累期，不计入</td>
+          <td>—</td>
+          <td class="num">500</td>
+          <td class="num">&lt;1%</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="3"><strong>收入合计</strong></td>
+          <td class="num"><strong>462,500</strong></td>
+          <td class="num"><strong>≈50万</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr><th>成本项</th><th>说明</th><th class="num">金额</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cost-row"><td>固定成本</td><td>场租+水电+设备+杂项 × 12个月</td><td class="num">360,000</td></tr>
+        <tr class="cost-row"><td>现场变动成本</td><td>24场 × 1,200元/场</td><td class="num">28,800</td></tr>
+        <tr class="cost-row"><td>演出执行成本</td><td>5单 × 5,000元（乐队+外协）</td><td class="num">25,000</td></tr>
+        <tr class="cost-row"><td>人力（Q4）</td><td>第10-12月 × 3月 × 20,000元<br><span style="font-size:11px;color:var(--ink3);">仅商务+运营2人基础保底，其余分成</span></td><td class="num">60,000</td></tr>
+        <tr class="cost-row"><td>初始投入（一次性）</td><td>声学+灯光+装修</td><td class="num">80,000</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>成本合计</strong></td><td class="num"><strong>553,800</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+      <div style="padding:14px 16px;background:#fff;border:0.5px solid var(--rule);border-radius:8px;">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px;">第一年净利润（含初始投入）</div>
+        <div style="font-size:24px;font-family:'Noto Serif SC',serif;font-weight:300;color:var(--red);">-91,300</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:4px;">亏损约9万，主要来自8万初始投入</div>
+      </div>
+      <div style="padding:14px 16px;background:#fff;border:0.5px solid var(--rule);border-radius:8px;">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px;">经营性利润（剔除初始投入）</div>
+        <div style="font-size:24px;font-family:'Noto Serif SC',serif;font-weight:300;color:var(--amber);">-11,300</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:4px;">接近盈亏平衡，团队0薪是关键支撑</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      第一年最重要的不是利润，而是：<strong>签下2家以上酒吧驻场</strong>（现金流基本盘）、<strong>完成5单以上付费录制</strong>（口碑样本）、<strong>直播节目稳定开播</strong>（内容资产积累）。这三件事做到，第二年才能真正起飞。
+    </div>
+  </div>
+
+  <!-- 第二年 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div class="section-line"></div>
+      <span class="section-label">第二年详细</span>
+    </div>
+    <h2>第二年 · 跑模式</h2>
+    <p style="color:var(--ink2);margin-bottom:20px;">团队全年正式领薪，是最大的成本压力。演出服务和录制单量开始稳定增长，目标是覆盖人力成本并开始盈利。</p>
+
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>量/规模</th><th>单价</th><th class="num">年收入</th><th class="num">占比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>酒吧驻场</td><td>3家 × 12个月</td><td>9,000元/家/月</td><td class="num">324,000</td><td class="num">25%</td></tr>
+        <tr><td>付费录音录像</td><td>20单</td><td>均价14,000元</td><td class="num">280,000</td><td class="num">21%</td></tr>
+        <tr><td>单次演出服务</td><td>14单</td><td>均价22,000元</td><td class="num">308,000</td><td class="num">24%</td></tr>
+        <tr><td>30人现场票务</td><td>36场 × 平均22人</td><td>299元/人</td><td class="num">236,000</td><td class="num">18%</td></tr>
+        <tr><td>品牌合作</td><td>8单</td><td>均价12,000元</td><td class="num">96,000</td><td class="num">7%</td></tr>
+        <tr><td>直播+内容+视频号</td><td>全年稳定运营</td><td>—</td><td class="num">70,000</td><td class="num">5%</td></tr>
+        <tr class="total-row"><td colspan="3"><strong>收入合计</strong></td><td class="num"><strong>1,314,000</strong></td><td class="num"><strong>≈131万</strong></td></tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr><th>成本项</th><th>说明</th><th class="num">金额</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cost-row"><td>固定成本</td><td>12个月 × 30,000元</td><td class="num">360,000</td></tr>
+        <tr class="cost-row"><td>现场变动成本</td><td>36场 × 1,200元</td><td class="num">43,200</td></tr>
+        <tr class="cost-row"><td>演出执行成本</td><td>14单 × 5,000元</td><td class="num">70,000</td></tr>
+        <tr class="cost-row"><td>人力（全年）</td><td>8人 × 均薪6,800元 × 12月<br><span style="font-size:11px;color:var(--ink3);">含保底+提成，兼职折算</span></td><td class="num">653,000</td></tr>
+        <tr class="cost-row"><td>设备升级</td><td>—</td><td class="num">30,000</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>成本合计</strong></td><td class="num"><strong>1,156,200</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="padding:14px 16px;background:#fff;border:0.5px solid var(--rule);border-radius:8px;margin-top:16px;display:inline-block;">
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:4px;">第二年净利润</div>
+      <div style="font-size:28px;font-family:'Noto Serif SC',serif;font-weight:300;color:var(--amber);">约15万</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px;">人力成本占收入约50%，是核心压力</div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      第二年的盈利空间很薄。<strong>人力成本是最大变量</strong>——如果团队扩张过快或薪酬给太高，很容易打平甚至亏损。建议第二年严守"收入覆盖成本才给涨薪"的原则，分成比例优先于固定薪资。
+    </div>
+  </div>
+
+  <!-- 第三年 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div class="section-line"></div>
+      <span class="section-label">第三年详细</span>
+    </div>
+    <h2>第三年 · 上规模</h2>
+    <p style="color:var(--ink2);margin-bottom:20px;">演出服务规模化，直播带货上线，全国巡演启动，版权库开始产生收益。这一年是整个模型真正验证的一年。</p>
+
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>量/规模</th><th>单价</th><th class="num">年收入</th><th class="num">占比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>酒吧驻场</td><td>4家 × 12个月</td><td>10,000元/家/月</td><td class="num">480,000</td><td class="num">23%</td></tr>
+        <tr><td>单次演出服务</td><td>20单</td><td>均价25,000元</td><td class="num">500,000</td><td class="num">23%</td></tr>
+        <tr><td>付费录音录像</td><td>28单</td><td>均价15,000元</td><td class="num">420,000</td><td class="num">20%</td></tr>
+        <tr><td>30人现场票务</td><td>42场 × 平均23人</td><td>299元/人</td><td class="num">289,000</td><td class="num">14%</td></tr>
+        <tr><td>品牌合作</td><td>12单</td><td>均价15,000元</td><td class="num">180,000</td><td class="num">8%</td></tr>
+        <tr><td>直播+内容+视频号+带货</td><td>全年+带货下半年</td><td>—</td><td class="num">150,000</td><td class="num">7%</td></tr>
+        <tr><td>全国巡演（下半年启动）</td><td>4城市 × 2场</td><td>票房分成约10,000/场</td><td class="num">80,000</td><td class="num">4%</td></tr>
+        <tr><td>版权授权</td><td>约80首录音版权</td><td>—</td><td class="num">30,000</td><td class="num">1%</td></tr>
+        <tr class="total-row"><td colspan="3"><strong>收入合计</strong></td><td class="num"><strong>2,129,000</strong></td><td class="num"><strong>≈213万</strong></td></tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr><th>成本项</th><th>说明</th><th class="num">金额</th></tr>
+      </thead>
+      <tbody>
+        <tr class="cost-row"><td>固定成本</td><td>12个月 × 30,000元</td><td class="num">360,000</td></tr>
+        <tr class="cost-row"><td>现场变动成本</td><td>42场 × 1,200元</td><td class="num">50,400</td></tr>
+        <tr class="cost-row"><td>演出执行成本</td><td>20单 × 5,000元</td><td class="num">100,000</td></tr>
+        <tr class="cost-row"><td>巡演成本</td><td>差旅+外协</td><td class="num">50,000</td></tr>
+        <tr class="cost-row"><td>人力（全年）</td><td>10人 × 均薪8,500元 × 12月</td><td class="num">1,020,000</td></tr>
+        <tr class="cost-row"><td>设备升级</td><td>—</td><td class="num">50,000</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>成本合计</strong></td><td class="num"><strong>1,630,400</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="padding:14px 16px;background:#fff;border:0.5px solid var(--rule);border-radius:8px;margin-top:16px;display:inline-block;">
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:4px;">第三年净利润</div>
+      <div style="font-size:28px;font-family:'Noto Serif SC',serif;font-weight:300;color:var(--green);">约50万</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px;">利润率约23%，开始真正稳定盈利</div>
+    </div>
+
+    <div class="callout green" style="margin-top:16px;">
+      第三年如果带货和巡演表现超预期，利润存在明显上调空间。反之，如果人力继续扩张而收入增速放缓，50万可能缩水至30万左右。<strong>第三年的核心风险是过早扩张人员规模。</strong>
+    </div>
+  </div>
+
+  <!-- 现金流警示 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div class="section-line"></div>
+      <span class="section-label">现金流预警</span>
+    </div>
+    <h2>最危险的时段</h2>
+
+    <table class="risk-table">
+      <tbody>
+        <tr>
+          <td style="width:70px;"><span class="risk-high">极高风险</span></td>
+          <td style="font-weight:500;">第1-3个月</td>
+          <td>筹备期几乎零收入，固定成本90,000元已支出。初始投入80,000叠加在上。<strong>需要至少准备20万启动资金</strong>，覆盖这3个月的空窗。</td>
+        </tr>
+        <tr>
+          <td><span class="risk-high">高风险</span></td>
+          <td style="font-weight:500;">第10-14个月</td>
+          <td>团队开始领薪，月支出从约30,000骤升至55,000+。若收入未同步增长，每月亏空约25,000元。<strong>启动前需预留3个月薪酬缓冲</strong>。</td>
+        </tr>
+        <tr>
+          <td><span class="risk-mid">中风险</span></td>
+          <td style="font-weight:500;">第二年全年</td>
+          <td>利润薄，抗风险能力弱。一旦单季度出现客户流失或演出服务掉单，可能当季亏损。<strong>建议保留2个月固定成本作为备用金</strong>。</td>
+        </tr>
+        <tr>
+          <td><span class="risk-low">可控</span></td>
+          <td style="font-weight:500;">第三年</td>
+          <td>多条收入线成熟，单条线波动对整体影响减小。主要风险是人员扩张过快导致成本失控。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout red" style="margin-top:20px;">
+      <strong>启动前最少需要准备的现金：</strong><br>
+      初始投入8万 + 前3个月固定成本9万 + 前10个月人力空白期保障5万 = <strong>约22万启动资金</strong>。<br>
+      这是在团队0薪酬、业务正常推进的前提下。如有任何一条线启动慢于预期，建议储备30万。
+    </div>
+  </div>
+
+  <!-- 三年汇总 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <div class="section-line"></div>
+      <span class="section-label">三年汇总</span>
+    </div>
+    <h2>三年财务总览</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>年份</th>
+          <th class="num">总收入</th>
+          <th class="num">总成本</th>
+          <th class="num">净利润</th>
+          <th class="num">利润率</th>
+          <th>关键里程碑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>第一年</strong></td>
+          <td class="num">462,500</td>
+          <td class="num">553,800</td>
+          <td class="num loss">-91,300</td>
+          <td class="num">—</td>
+          <td style="font-size:12px;color:var(--ink3);">建立驻场基本盘，直播上线</td>
+        </tr>
+        <tr>
+          <td><strong>第二年</strong></td>
+          <td class="num">1,314,000</td>
+          <td class="num">1,156,200</td>
+          <td class="num amber">+157,800</td>
+          <td class="num">12%</td>
+          <td style="font-size:12px;color:var(--ink3);">团队全薪，演出服务稳定</td>
+        </tr>
+        <tr>
+          <td><strong>第三年</strong></td>
+          <td class="num">2,129,000</td>
+          <td class="num">1,630,400</td>
+          <td class="num green">+498,600</td>
+          <td class="num">23%</td>
+          <td style="font-size:12px;color:var(--ink3);">巡演启动，带货上线</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>三年合计</strong></td>
+          <td class="num"><strong>3,905,500</strong></td>
+          <td class="num"><strong>3,340,400</strong></td>
+          <td class="num" style="color:var(--green);"><strong>+565,100</strong></td>
+          <td class="num"><strong>约14%</strong></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout green" style="margin-top:20px;">
+      三年累计净利润约56万，整体可行。但这是<strong>保守基线</strong>——任何一条线超预期都会显著推高利润；任何一条线严重低于预期都需要动用储备金。这份财务计划的价值不在于预测准确，而在于<strong>让你提前知道哪些月份会紧张，提前准备</strong>。
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div>听见·看见 · 保守财务规划 · 2026</div>
+    <div>内部文件 · 请勿外传</div>
+  </div>
+
+</div>
+</body>
+</html>

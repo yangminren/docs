@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>听见·看见 — 整体商业方案</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --bg3: #e8e5de;
+    --accent: #c8490a;
+    --accent2: #1a5c3a;
+    --accent3: #1a3d6e;
+    --gold: #b07830;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 80px;
+    background: var(--ink);
+    color: #f5f3ee;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(255,255,255,0.015) 1px,
+      rgba(255,255,255,0.015) 2px
+    );
+  }
+
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover-logo { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 300; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+  .cover-tag { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); border: 0.5px solid rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 2px; }
+
+  .cover-main { padding: 40px 0; }
+  .cover-title { font-family: 'Noto Serif SC', serif; font-size: 64px; font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .cover-title em { color: var(--accent); font-style: normal; }
+  .cover-desc { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 480px; line-height: 1.7; margin-top: 20px; }
+
+  .cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .cover-stats { display: flex; gap: 48px; }
+  .cover-stat-val { font-size: 28px; font-weight: 300; font-family: 'Noto Serif SC', serif; }
+  .cover-stat-label { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .cover-note { font-size: 11px; color: rgba(255,255,255,0.25); text-align: right; }
+
+  /* NAV / TOC */
+  .toc-page {
+    padding: 80px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-title { font-size: 11px; letter-spacing: 0.12em; color: var(--ink3); margin-bottom: 32px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .toc-item { display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 0.5px solid var(--rule); }
+  .toc-num { font-size: 11px; color: var(--ink3); font-variant-numeric: tabular-nums; min-width: 24px; }
+  .toc-name { font-size: 15px; font-weight: 400; }
+  .toc-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+  /* CONTENT */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 80px;
+  }
+
+  .section { margin-bottom: 80px; }
+
+  .section-marker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-size: 11px;
+    color: var(--ink3);
+    letter-spacing: 0.1em;
+  }
+  .section-rule { flex: 1; height: 0.5px; background: var(--rule); }
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border: 0.5px solid currentColor;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 28px 0 10px;
+    color: var(--ink);
+  }
+  h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink3);
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+  }
+  p { color: var(--ink2); margin-bottom: 12px; }
+  .lead { font-size: 16px; line-height: 1.75; color: var(--ink); margin-bottom: 24px; }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    background: rgba(200,73,10,0.04);
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p { color: var(--ink); margin: 0; font-size: 15px; line-height: 1.7; }
+
+  .callout-green {
+    border-left-color: var(--accent2);
+    background: rgba(26,92,58,0.04);
+  }
+  .callout-blue {
+    border-left-color: var(--accent3);
+    background: rgba(26,61,110,0.04);
+  }
+
+  /* MODULE CARDS */
+  .module-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .module-card {
+    padding: 20px;
+    border: 0.5px solid var(--rule);
+    border-radius: 8px;
+    background: #fff;
+  }
+  .module-card .m-num { font-size: 10px; color: var(--ink3); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .module-card .m-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .module-card .m-desc { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+  .module-card.highlight { border-color: var(--accent); background: rgba(200,73,10,0.03); }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+  .data-table th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink3);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--bg3);
+    background: var(--bg2);
+  }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 0.5px solid var(--rule);
+    color: var(--ink2);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .total td { font-weight: 500; color: var(--ink); background: var(--bg2); }
+  .td-accent { color: var(--accent) !important; font-weight: 500; }
+
+  /* TIMELINE */
+  .timeline { margin: 24px 0; }
+  .tl-item { display: flex; gap: 24px; padding-bottom: 28px; position: relative; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: 0;
+    width: 0.5px;
+    background: var(--rule);
+  }
+  .tl-item:last-child::before { display: none; }
+  .tl-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tl-dot-1 { background: var(--bg3); color: var(--ink); }
+  .tl-dot-2 { background: var(--gold); color: #fff; }
+  .tl-dot-3 { background: var(--accent); color: #fff; }
+  .tl-content { flex: 1; }
+  .tl-period { font-size: 11px; color: var(--ink3); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .tl-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+  .tl-body { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+  /* INCOME CARDS */
+  .income-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 0.5px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 20px 0; }
+  .income-cell { background: #fff; padding: 16px; }
+  .income-cell.year { background: var(--bg2); }
+  .income-label { font-size: 11px; color: var(--ink3); margin-bottom: 6px; letter-spacing: 0.04em; }
+  .income-val { font-size: 22px; font-weight: 300; font-family: 'Noto Serif SC', serif; color: var(--ink); }
+  .income-profit { font-size: 13px; color: var(--accent2); margin-top: 4px; }
+
+  /* TEAM */
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .team-card { padding: 16px 20px; border: 0.5px solid var(--rule); border-radius: 8px; background: #fff; display: flex; gap: 14px; }
+  .team-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+  .team-info .t-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .team-info .t-type { font-size: 11px; color: var(--ink3); }
+  .team-info .t-note { font-size: 12px; color: var(--ink2); margin-top: 6px; line-height: 1.5; }
+  .team-card.urgent { border-color: var(--accent); }
+
+  /* RISK */
+  .risk-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 0.5px solid var(--rule); }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-badge { font-size: 10px; padding: 2px 8px; border-radius: 2px; font-weight: 500; height: fit-content; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .risk-high { background: #FCEBEB; color: #A32D2D; }
+  .risk-mid { background: #FAEEDA; color: #854F0B; }
+  .risk-low { background: #E1F5EE; color: #0F6E56; }
+  .risk-content .r-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .risk-content .r-body { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+  /* DIVIDER PAGE */
+  .module-divider {
+    background: var(--ink);
+    color: #f5f3ee;
+    padding: 80px;
+    margin: 60px 0;
+  }
+  .md-num { font-size: 60px; font-family: 'Noto Serif SC', serif; font-weight: 300; color: rgba(255,255,255,0.1); line-height: 1; margin-bottom: 8px; }
+  .md-title { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 300; margin-bottom: 12px; }
+  .md-desc { font-size: 14px; color: rgba(255,255,255,0.45); max-width: 480px; line-height: 1.7; }
+
+  /* FLOW */
+  .flow { display: flex; align-items: center; gap: 0; margin: 20px 0; flex-wrap: wrap; }
+  .flow-step { padding: 10px 16px; background: var(--bg2); border: 0.5px solid var(--rule); border-radius: 4px; font-size: 13px; }
+  .flow-arrow { padding: 0 8px; color: var(--ink3); font-size: 16px; }
+  .flow-step.accent { background: rgba(200,73,10,0.08); border-color: rgba(200,73,10,0.2); color: var(--accent); font-weight: 500; }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.3);
+    padding: 40px 80px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 700px) {
+    .cover { padding: 40px 24px; }
+    .cover-title { font-size: 40px; }
+    .cover-stats { gap: 24px; }
+    .toc-page { padding: 40px 24px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .page { padding: 40px 24px; }
+    .module-grid { grid-template-columns: 1fr; }
+    .income-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .module-divider { padding: 40px 24px; }
+    .doc-footer { padding: 24px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-logo">听见·看见</div>
+    <div class="cover-tag">整体商业方案 2026</div>
+  </div>
+  <div class="cover-main">
+    <div class="cover-title">
+      听见<em>·</em>看见<br>沉浸式现场<br>音乐空间
+    </div>
+    <div class="cover-desc">以30人沉浸现场为展厅，以内容制作为引擎，以演出服务为主轴，以直播和巡演为放大器——构建一个全链路的独立音乐商业生态。</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-stats">
+      <div>
+        <div class="cover-stat-val">394万</div>
+        <div class="cover-stat-label">三年总收入（保守）</div>
+      </div>
+      <div>
+        <div class="cover-stat-val">56万</div>
+        <div class="cover-stat-label">三年净利润（保守）</div>
+      </div>
+      <div>
+        <div class="cover-stat-val">100支</div>
+        <div class="cover-stat-label">累计合作乐队</div>
+      </div>
+    </div>
+    <div class="cover-note">内部文件 · 请勿外传</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc-page">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <div class="toc-title">目录</div>
+    <div class="toc-grid">
+      <div>
+        <div class="toc-item"><span class="toc-num">01</span><div><div class="toc-name">核心商业逻辑</div><div class="toc-sub">赔钱展厅与六条收入线</div></div></div>
+        <div class="toc-item"><span class="toc-num">02</span><div><div class="toc-name">六大业务板块</div><div class="toc-sub">板块概览与协同关系</div></div></div>
+        <div class="toc-item"><span class="toc-num">03</span><div><div class="toc-name">录音制作策略</div><div class="toc-sub">付费制作 + 版权布局</div></div></div>
+        <div class="toc-item"><span class="toc-num">04</span><div><div class="toc-name">内容宣传策略</div><div class="toc-sub">三平台运营 + 传播设计</div></div></div>
+        <div class="toc-item"><span class="toc-num">05</span><div><div class="toc-name">直播节目策略</div><div class="toc-sub">第4个月启动 + 带货延伸</div></div></div>
+      </div>
+      <div>
+        <div class="toc-item"><span class="toc-num">06</span><div><div class="toc-name">演出定制策略</div><div class="toc-sub">内容演出解决方案</div></div></div>
+        <div class="toc-item"><span class="toc-num">07</span><div><div class="toc-name">全国巡演策略</div><div class="toc-sub">第二年启动 + 渠道扩张</div></div></div>
+        <div class="toc-item"><span class="toc-num">08</span><div><div class="toc-name">核心团队配置</div><div class="toc-sub">六大角色 + 激励机制</div></div></div>
+        <div class="toc-item"><span class="toc-num">09</span><div><div class="toc-name">三年财务规划</div><div class="toc-sub">收入预测 + 成本结构</div></div></div>
+        <div class="toc-item"><span class="toc-num">10</span><div><div class="toc-name">风险与应对</div><div class="toc-sub">主要风险识别与预案</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 核心商业逻辑 -->
+<div class="page">
+  <div class="section">
+    <div class="section-marker">
+      <span class="section-num">01</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">核心逻辑</span>
+    </div>
+    <h2>一个赔钱的展厅<br>撬动六条收入线</h2>
+
+    <div class="callout">
+      <p>30人现场不是主营业务，是让全国乐队和全国甲方看见我们制作品质的样板间。看见之后，付费的来了，下单的来了。</p>
+    </div>
+
+    <p class="lead">整个商业模型的核心飞轮只有一个——<strong>制作品质产生信任，信任转化为付费订单</strong>。所有业务板块都在服务这个飞轮。</p>
+
+    <h3>收入线全景</h3>
+    <div class="module-grid">
+      <div class="module-card highlight">
+        <div class="m-num">LINE 01 · 最大</div>
+        <div class="m-title">演出定制服务</div>
+        <div class="m-desc">政府/企业/Live House/酒吧的演出需求，我们供乐队+制作+内容全套方案，毛利率约78%</div>
+      </div>
+      <div class="module-card">
+        <div class="m-num">LINE 02 · 稳定</div>
+        <div class="m-title">录音制作</div>
+        <div class="m-desc">全国乐队看到品质后付费录音录像，均价2万/单，受制于棚的物理产能</div>
+      </div>
+      <div class="module-card">
+        <div class="m-num">LINE 03 · 增长</div>
+        <div class="m-title">直播节目</div>
+        <div class="m-desc">第4个月将30人现场做成网络直播，影响力从30人扩至无限，第一年后延伸带货</div>
+      </div>
+      <div class="module-card">
+        <div class="m-num">LINE 04 · 积累</div>
+        <div class="m-title">品牌合作</div>
+        <div class="m-desc">内容植入、冠名、定制专场，依赖粉丝规模，第二年开始发力</div>
+      </div>
+      <div class="module-card">
+        <div class="m-num">LINE 05 · 扩张</div>
+        <div class="m-title">全国巡演</div>
+        <div class="m-desc">第二年下半年启动，打通全国Live House渠道，乐队资源全国溢价</div>
+      </div>
+      <div class="module-card">
+        <div class="m-num">LINE 06 · 长尾</div>
+        <div class="m-title">版权资产</div>
+        <div class="m-desc">持有录音制作者权（邻接权），积累版权库，静待长尾收益爆发</div>
+      </div>
+    </div>
+
+    <h3>冷启动顺序</h3>
+    <p style="margin-bottom:12px;">不能六条线同时启动。按照获客难度由低到高，分阶段推进：</p>
+    <div class="flow">
+      <div class="flow-step accent">酒吧驻场<br><span style="font-size:11px;opacity:0.7">第1-2月</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">付费录制<br><span style="font-size:11px;color:var(--ink3)">第3-4月</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">直播上线<br><span style="font-size:11px;color:var(--ink3)">第4月</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">企业演出<br><span style="font-size:11px;color:var(--ink3)">第5-6月</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">品牌合作<br><span style="font-size:11px;color:var(--ink3)">第二年</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">巡演扩张<br><span style="font-size:11px;color:var(--ink3)">第二年下半</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 六大板块 -->
+<div class="page" style="padding-top:0;">
+  <div class="section">
+    <div class="section-marker">
+      <span class="section-num">02</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">板块协同</span>
+    </div>
+    <h2>六大业务板块<br>协同关系</h2>
+    <p class="lead">每个板块不是孤立运转的，它们之间存在明确的资源流动和相互赋能关系。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>板块</th>
+          <th>向外输出</th>
+          <th>向内需要</th>
+          <th>核心指标</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>30人现场</strong></td>
+          <td>品质样本、甲方体验机会</td>
+          <td>乐队、场地、设备</td>
+          <td>场次、邀约甲方数</td>
+        </tr>
+        <tr>
+          <td><strong>录音制作</strong></td>
+          <td>版权库、乐队内容素材</td>
+          <td>棚时、工程师</td>
+          <td>月均单数、版权积累量</td>
+        </tr>
+        <tr>
+          <td><strong>内容宣传</strong></td>
+          <td>粉丝基础、品牌势能</td>
+          <td>制作素材、运营人力</td>
+          <td>播放量、粉丝增速</td>
+        </tr>
+        <tr>
+          <td><strong>直播+带货</strong></td>
+          <td>实时曝光、电商收入</td>
+          <td>粉丝规模、选品资源</td>
+          <td>在线人数、GMV</td>
+        </tr>
+        <tr>
+          <td><strong>演出定制</strong></td>
+          <td>现金流、渠道关系</td>
+          <td>乐队资源池、商务人脉</td>
+          <td>月均单数、客单价</td>
+        </tr>
+        <tr>
+          <td><strong>全国巡演</strong></td>
+          <td>全国渠道、乐队溢价</td>
+          <td>内容积累、粉丝基础</td>
+          <td>城市数、合作场地数</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DIVIDER 03 -->
+<div class="module-divider">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="md-num">03</div>
+    <div class="md-title">录音制作策略</div>
+    <div class="md-desc">稳定的现金流来源，积累版权资产的核心渠道，品质信任的生产车间。</div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:40px;">
+  <div class="section">
+    <h3>定价体系</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>服务类型</th><th>报价区间</th><th>目标客群</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>全套（视频+录音+推广）</td><td class="td-accent">25,000–60,000元</td><td>有预算的成熟乐队</td></tr>
+        <tr><td>视频专辑</td><td>15,000–40,000元</td><td>需要内容积累的乐队</td></tr>
+        <tr><td>录音专辑</td><td>8,000–25,000元</td><td>只需录音的乐队</td></tr>
+        <tr><td>单曲制作</td><td>5,000–15,000元</td><td>初次合作试探</td></tr>
+      </tbody>
+    </table>
+
+    <h3>与乐队的合作框架</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>乐队类型</th><th>合作方式</th><th>我们获得什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>有预算</td><td>正常收费</td><td>付费制作收入</td></tr>
+        <tr><td>无预算但有潜力</td><td>免费制作</td><td>演出场次置换</td></tr>
+        <tr><td>无预算</td><td>免费制作</td><td>演出场次 + 录音版权（邻接权）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>版权策略重点</h3>
+    <div class="callout callout-green">
+      <p>每次合作合同里必须明确：<strong>本次录音的录音制作者权（邻接权）归我方所有</strong>。这与歌曲著作权是两回事，乐队保留歌的权利，我们保留录音版本的权利，谈判阻力最小，长期价值最大。</p>
+    </div>
+    <p>版权库积累到100首以上后，主动对接爱音斯坦、音未音乐等版权平台，批量上架授权。一旦合作乐队中出现走红的，早期录音版权价值将爆发式增长。</p>
+  </div>
+</div>
+
+<!-- DIVIDER 04 -->
+<div class="module-divider">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="md-num">04</div>
+    <div class="md-title">内容宣传策略</div>
+    <div class="md-desc">内容不会自己传播。需要平台差异化运营和可传播的话题钩子，而不是等待自然流量。</div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:40px;">
+  <div class="section">
+    <h3>三平台差异化定位</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>平台</th><th>内容定位</th><th>核心目标</th><th>更新频率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>抖音</strong></td><td>现场高光片段、情绪切片、15-60秒</td><td>破圈引流、新用户触达</td><td>每周3-5条</td></tr>
+        <tr><td><strong>B站</strong></td><td>完整演出版、录音花絮、幕后故事</td><td>深度用户沉淀、乐队粉丝</td><td>每周1-2条</td></tr>
+        <tr><td><strong>小红书</strong></td><td>"只有30人的现场"体验向、场地美学</td><td>吸引甲方和品牌方注意</td><td>每周2-3条</td></tr>
+      </tbody>
+    </table>
+
+    <h3>传播钩子设计</h3>
+    <p>每期内容需要一个可传播的切口，不只是"好看的视频"：</p>
+    <ul style="padding-left:20px;color:var(--ink2);font-size:13px;line-height:2;">
+      <li>稀缺性钩子：「全城只有30个人听到了这场演出」</li>
+      <li>对比钩子：「同一首歌，录音棚版 vs 30人现场版」</li>
+      <li>故事钩子：「这支乐队排练了3年，今天第一次录音」</li>
+      <li>巡演钩子：「从录音棚出发，走过10个城市」（第二年）</li>
+    </ul>
+
+    <h3>冷启动加速器</h3>
+    <div class="callout callout-blue">
+      <p>每期邀请1-2位有粉丝基础的音乐博主或乐评人到场。他们的自发传播比你主动推广有效10倍，而且是免费的。这比任何买量投放都划算。</p>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER 05 -->
+<div class="module-divider">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="md-num">05</div>
+    <div class="md-title">直播节目策略</div>
+    <div class="md-desc">第4个月启动，把30人展厅的影响力从线下打到全网。第一年后延伸品牌带货。</div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:40px;">
+  <div class="section">
+    <h3>为什么是第4个月</h3>
+    <p>前3个月是内容冷启动期，需要积累基础素材和平台权重。第4个月已有5-8期内容上线，有了初步的粉丝基础，直播才有人看。过早直播冷场会伤害品牌调性。</p>
+
+    <h3>直播节目定位</h3>
+    <div class="callout">
+      <p>不是"线下演出的直播录像"，而是一档<strong>为直播专门设计的沉浸式音乐节目</strong>。镜头语言、灯光节奏、主持互动都针对屏幕端观众优化。</p>
+    </div>
+
+    <h3>直播运营框架</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>要素</th><th>设计方案</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>播出频率</td><td>每月2-4场，与30人现场同步或错开</td></tr>
+        <tr><td>时长</td><td>90-120分钟，含2-3支乐队</td></tr>
+        <tr><td>平台选择</td><td>抖音主阵地，B站同步，视频号辅助</td></tr>
+        <tr><td>互动设计</td><td>观众实时点歌、投票下一首、弹幕上墙</td></tr>
+        <tr><td>付费设计</td><td>直播间打赏（前期）、付费专场（后期）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>带货延伸策略（第一年后）</h3>
+    <p>触发条件：直播场均在线人数稳定超过5000人，或单场最高峰值超过2万人。</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>品类</th><th>逻辑</th><th>预估客单价</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>乐器/音频设备</td><td>场景天然契合，受众精准</td><td>500-5000元</td></tr>
+        <tr><td>黑胶/实体唱片</td><td>与合作乐队联名出品</td><td>80-200元</td></tr>
+        <tr><td>生活方式品牌</td><td>咖啡、书、服装与音乐场景融合</td><td>100-500元</td></tr>
+        <tr><td>演出周边</td><td>乐队限定周边，稀缺性驱动</td><td>50-300元</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-green">
+      <p>带货不要急于求成。直播间的信任感是最重要的资产，一旦过度商业化会流失音乐受众。建议初期每场直播带货时长不超过总时长的20%，且只选与音乐场景高度契合的品类。</p>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER 06 -->
+<div class="module-divider">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="md-num">06</div>
+    <div class="md-title">演出定制策略</div>
+    <div class="md-desc">整个商业模型里毛利率最高的板块。关键是从"演出供应商"升级为"内容演出解决方案提供商"。</div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:40px;">
+  <div class="section">
+    <h3>核心定位升级</h3>
+    <div class="callout">
+      <p>甲方买的不是"一场演出"，买的是<strong>一个可以传播的内容事件</strong>。我们能给的不只是演出当天，而是演出前预热内容、演出中专业拍摄、演出后传播素材。这个打包方案报价是单纯演出服务的3-5倍。</p>
+    </div>
+
+    <h3>客户分级与定价</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>客户类型</th><th>核心需求</th><th>报价区间</th><th>获客路径</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>酒吧/商业空间</td><td>稳定的驻场演出</td><td class="td-accent">8,000–20,000元/月</td><td>最容易，第1个月主攻</td></tr>
+        <tr><td>企业活动/年会</td><td>有格调的演出体验</td><td>30,000–100,000元/单</td><td>第4-6个月通过活动公司切入</td></tr>
+        <tr><td>品牌方活动</td><td>内容化的演出+传播</td><td>30,000–80,000元/单</td><td>内容影响力起来后主动谈</td></tr>
+        <tr><td>Live House/音乐节</td><td>可靠的乐队资源</td><td>演出费15%-25%佣金</td><td>巡演建立关系后合作</td></tr>
+        <tr><td>政府文化活动</td><td>有品质的文化演出</td><td>50,000–150,000元/单</td><td>第二年，需要案例背书</td></tr>
+      </tbody>
+    </table>
+
+    <h3>30人现场的甲方功能</h3>
+    <p>每场30人现场，<strong>至少5个席位主动邀请目标甲方体验</strong>。不是随便邀请，是针对性的：</p>
+    <ul style="padding-left:20px;color:var(--ink2);font-size:13px;line-height:2;">
+      <li>企业HR或行政负责人（年会演出的决策者）</li>
+      <li>酒吧或餐厅老板（驻场合作潜在客户）</li>
+      <li>品牌市场部人员（内容合作潜在客户）</li>
+    </ul>
+    <p style="margin-top:8px;">让甲方身临其境体验过品质，成单率比任何方案书都高。</p>
+  </div>
+</div>
+
+<!-- DIVIDER 07 -->
+<div class="module-divider">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="md-num">07</div>
+    <div class="md-title">全国巡演策略</div>
+    <div class="md-desc">不只是给乐队做宣传，更是打通全国Live House渠道网络，解决演出服务规模化的根本问题。</div>
+  </div>
+</div>
+
+<div class="page" style="padding-top:40px;">
+  <div class="section">
+    <h3>启动条件</h3>
+    <div class="callout callout-blue">
+      <p>触发标准：某支乐队在平台内容累计播放量超过<strong>500万</strong>，或单条视频超过<strong>100万</strong>，说明当地已经有人认识他，再启动巡演规划。没有内容基础的巡演是花钱演给空气听。</p>
+    </div>
+
+    <h3>轻资产巡演模式</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>角色</th><th>负责内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>我们负责</strong></td><td>内容制作、乐队资源、巡演宣发策划、录音录像</td></tr>
+        <tr><td><strong>当地Live House负责</strong></td><td>场地、票务、本地推广、观众运营</td></tr>
+        <tr><td><strong>分成方式</strong></td><td>票房我方拿20%-30%作为内容制作和宣发费用</td></tr>
+      </tbody>
+    </table>
+
+    <h3>巡演的三重价值</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;">
+      <div style="padding:16px;background:var(--bg2);border-radius:8px;">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">价值一</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:6px;">乐队溢价</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6;">有全国演出经历的乐队，演出服务报价可提升30%-50%</div>
+      </div>
+      <div style="padding:16px;background:var(--bg2);border-radius:8px;">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">价值二</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:6px;">渠道建设</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6;">每到一城就多一个Live House合作方，全国演出服务网络逐步形成</div>
+      </div>
+      <div style="padding:16px;background:var(--bg2);border-radius:8px;">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:6px;">价值三</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:6px;">内容爆发</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6;">巡演纪录片是迄今最强的传播素材，粉丝可能随之翻倍</div>
+      </div>
+    </div>
+
+    <h3>城市选择逻辑</h3>
+    <p>优先选择<strong>有音乐土壤 + 合作Live House已有关系 + 乐队内容播放量有分布</strong>的城市。建议首批巡演城市：成都、武汉、西安、南京，这四个城市独立音乐受众密度高，Live House生态成熟。</p>
+  </div>
+</div>
+
+<!-- 08 团队 -->
+<div class="page">
+  <div class="section">
+    <div class="section-marker">
+      <span class="section-num">08</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">团队配置</span>
+    </div>
+    <h2>核心团队<br>六大角色</h2>
+
+    <h3>立刻需要找的人</h3>
+    <div class="team-grid">
+      <div class="team-card urgent">
+        <div class="team-avatar" style="background:#FCEBEB;color:#A32D2D;">商</div>
+        <div class="team-info">
+          <div class="t-name">商务负责人 <span style="font-size:10px;color:#A32D2D;font-weight:400;">最关键缺口</span></div>
+          <div class="t-type">全职 · 第1个月到位</div>
+          <div class="t-note">手里有现成客户关系，这一条不能妥协。0底薪+10%-15%成单提成，第10个月起保底。</div>
+        </div>
+      </div>
+      <div class="team-card" style="border-color:#EF9F27;">
+        <div class="team-avatar" style="background:#FAEEDA;color:#854F0B;">运</div>
+        <div class="team-info">
+          <div class="t-name">内容运营</div>
+          <div class="t-type">兼职起步 · 第1-2个月到位</div>
+          <div class="t-note">有真实平台数据的运营经验。兼职2000-4000元/月，第二年按量转全职。</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>已有能力（团队覆盖）</h3>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:#E1F5EE;color:#0F6E56;">制</div>
+        <div class="team-info">
+          <div class="t-name">制作总监</div>
+          <div class="t-type">全职 · 已有</div>
+          <div class="t-note">品质天花板，不要让他兼任协调工作。</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#E1F5EE;color:#0F6E56;">视</div>
+        <div class="team-info">
+          <div class="t-name">视频导演</div>
+          <div class="t-type">全职 · 已有</div>
+          <div class="t-note">视觉风格统一由他把控，剪辑执行可外包。</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#E1F5EE;color:#0F6E56;">灯</div>
+        <div class="team-info">
+          <div class="t-name">灯光师</div>
+          <div class="t-type">兼职 · 已有</div>
+          <div class="t-note">风格固定后按场次调用即可。</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#E6F1FB;color:#185FA5;">创</div>
+        <div class="team-info">
+          <div class="t-name">创始人</div>
+          <div class="t-type">全职 · 核心</div>
+          <div class="t-note">战略、关键客户、版权合同。商务找到人后必须放手。</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>激励机制（三层设计）</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-1">短</div>
+        <div class="tl-content">
+          <div class="tl-period">每月</div>
+          <div class="tl-title">积分制动态分成</div>
+          <div class="tl-body">按岗位分+项目贡献分+业绩奖励分三类积分，月底按积分比例分配当月可分配利润。多干多得，公开透明，消灭搭便车。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-2">中</div>
+        <div class="tl-content">
+          <div class="tl-period">里程碑即时兑现</div>
+          <div class="tl-title">里程碑奖金</div>
+          <div class="tl-body">首签酒吧驻场→3000元；首单付费制作→5000元；首单企业演出→8000元；月收入破5万→10000元。提前划定10%收入进奖金池，全团队实时可见。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-3">长</div>
+        <div class="tl-content">
+          <div class="tl-period">第10个月起生效</div>
+          <div class="tl-title">虚拟分红权</div>
+          <div class="tl-body">核心成员按贡献授予虚拟分红权，第10个月起每年按比例分配净利润30%。离职按约定比例回购，写进协议，不是画饼。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09 财务 -->
+<div class="page">
+  <div class="section">
+    <div class="section-marker">
+      <span class="section-num">09</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">财务规划</span>
+    </div>
+    <h2>三年收入<br>与成本结构</h2>
+
+    <div class="income-grid">
+      <div class="income-cell year">
+        <div class="income-label">年份</div>
+        <div class="income-val" style="font-size:15px;font-weight:500;">指标</div>
+      </div>
+      <div class="income-cell year">
+        <div class="income-label">总收入</div>
+        <div class="income-val" style="font-size:15px;font-weight:500;">净利润</div>
+      </div>
+      <div class="income-cell year">
+        <div class="income-label">累计乐队</div>
+        <div class="income-val" style="font-size:15px;font-weight:500;">版权库</div>
+      </div>
+
+      <div class="income-cell"><div class="income-label">第一年</div><div class="income-val">约50万</div></div>
+      <div class="income-cell"><div class="income-label">净利润</div><div class="income-val" style="color:#c8490a;">-9万</div><div class="income-profit" style="color:#c8490a;">冷启动亏损，正常</div></div>
+      <div class="income-cell"><div class="income-label">合作乐队</div><div class="income-val">约25支</div></div>
+
+      <div class="income-cell"><div class="income-label">第二年</div><div class="income-val">约131万</div></div>
+      <div class="income-cell"><div class="income-label">净利润</div><div class="income-val" style="color:#b07830;">约16万</div><div class="income-profit">利润率 12%</div></div>
+      <div class="income-cell"><div class="income-label">合作乐队</div><div class="income-val">约60支</div></div>
+
+      <div class="income-cell"><div class="income-label">第三年</div><div class="income-val">约213万</div></div>
+      <div class="income-cell"><div class="income-label">净利润</div><div class="income-val" style="color:#1a5c3a;">约50万</div><div class="income-profit">利润率 23%</div></div>
+      <div class="income-cell"><div class="income-label">合作乐队</div><div class="income-val">约100支</div></div>
+    </div>
+
+    <h3>第一年收入结构（保守版）</h3>
+    <p style="font-size:12px;color:#8a8880;margin-bottom:8px;">前两个月筹备期几乎无收入，以酒吧驻场为基本盘缓慢启动。</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>收入项</th><th>量/规模</th><th>年收入</th><th>占比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>30人现场票务</td><td>24场 × 平均20人 × 299元</td><td>144,000</td><td>29%</td></tr>
+        <tr><td>酒吧驻场</td><td>平均1.5家 × 9个月 × 8,000元</td><td>108,000</td><td>22%</td></tr>
+        <tr><td>付费录音录像</td><td>8单（下半年启动）× 均价1.2万</td><td>96,000</td><td>19%</td></tr>
+        <tr><td>单次演出服务</td><td>5单（6月后启动）× 均价1.8万</td><td>90,000</td><td>18%</td></tr>
+        <tr><td>品牌合作</td><td>2单（小额试水）× 8,000元</td><td>16,000</td><td>3%</td></tr>
+        <tr><td>直播/内容/视频号</td><td>第4月起，初期极低</td><td>8,000</td><td>2%</td></tr>
+        <tr class="total"><td colspan="2">合计</td><td>462,000</td><td>≈50万</td></tr>
+      </tbody>
+    </table>
+    <div style="padding:12px 16px;background:#fff8f5;border-left:3px solid #c8490a;border-radius:0 6px 6px 0;font-size:13px;color:#4a4844;margin-bottom:16px;">
+      第一年含初始投入8万，经营性净利润约-9万，整体小幅亏损属正常冷启动状态。<strong>需提前准备22-30万启动资金</strong>覆盖空窗期。
+    </div>
+
+    <h3>阶段规划</h3>
+    <div class="timeline" style="margin-top:20px;">
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-1">一</div>
+        <div class="tl-content">
+          <div class="tl-period">第1-6个月 · 建样本</div>
+          <div class="tl-title">签驻场、出内容、拿首单</div>
+          <div class="tl-body">第1个月签下2家酒吧驻场（现金流基本盘）；完成首批5-8期内容；第4个月直播节目上线；第5个月起拿到第一单付费录制；25支乐队完成合作。<strong>目标月收入：3-5万。</strong></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-2">二</div>
+        <div class="tl-content">
+          <div class="tl-period">第7-18个月 · 跑模式</div>
+          <div class="tl-title">演出稳定出单、团队开始领薪</div>
+          <div class="tl-body">酒吧驻场扩至3家；企业演出月均1-2单；付费制作月均1.5单；视频号+直播粉丝稳定增长；团队第10个月起领保底薪酬。<strong>目标月收入：8-12万。</strong></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-3">三</div>
+        <div class="tl-content">
+          <div class="tl-period">第19-36个月 · 上规模</div>
+          <div class="tl-title">巡演扩张、带货启动、全国渠道</div>
+          <div class="tl-body">第二年下半年启动全国巡演（成都/武汉/西安/南京）；直播带货上线（场均在线5000+触发）；演出服务月均2单；版权库80首以上对接授权平台。<strong>目标月收入：15-20万。</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 风险 -->
+<div class="page">
+  <div class="section">
+    <div class="section-marker">
+      <span class="section-num">10</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">风险管理</span>
+    </div>
+    <h2>主要风险<br>与应对预案</h2>
+
+    <div>
+      <div class="risk-item">
+        <span class="risk-badge risk-high">高风险</span>
+        <div class="risk-content">
+          <div class="r-title">演出服务冷启动拿不到单</div>
+          <div class="r-body">最大风险。应对：商务负责人必须有现成客户关系；优先从酒吧驻场切入（决策链最短）；30人现场每场邀请5个目标甲方体验。即使只达预期40%，三年仍有约200万利润。</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-badge risk-high">高风险</span>
+        <div class="risk-content">
+          <div class="r-title">团队前9个月流失</div>
+          <div class="r-body">应对：积分制从第一天执行，里程碑奖金即时兑现，允许兼职保障生计。Q2起就有利润可分，让团队看见真实进展，不只靠情怀。</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-badge risk-mid">中风险</span>
+        <div class="risk-content">
+          <div class="r-title">内容无法起量，付费制作客户不来</div>
+          <div class="r-body">应对：不等自然流量，主动邀请音乐博主到场；有了5-8期内容后主动联系目标乐队，带作品集去谈，首批给折扣换口碑。</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-badge risk-mid">中风险</span>
+        <div class="risk-content">
+          <div class="r-title">直播节目没有观众</div>
+          <div class="r-body">应对：第4个月才上线，届时已有内容积累。上线前通过已有乐队粉丝做首播预热；首场邀请有粉丝的乐队压阵。冷场时先做私域直播，内部流量预热。</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-badge risk-low">低风险</span>
+        <div class="risk-content">
+          <div class="r-title">版权纠纷</div>
+          <div class="r-body">应对：每次合作首次签协议，明确录音版权（邻接权）归属，与歌曲著作权分开处理。一套标准合同模板，律师审核一次，后续套用。</div>
+        </div>
+      </div>
+      <div class="risk-item">
+        <span class="risk-badge risk-low">低风险</span>
+        <div class="risk-content">
+          <div class="r-title">带货影响品牌调性</div>
+          <div class="r-body">应对：初期每场带货时长不超过总时长20%；只选与音乐场景高度契合的品类（乐器、黑胶、生活方式）；设定品牌合作准入标准，拒绝与调性不符的品牌合作。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>听见·看见 沉浸式现场音乐空间 — 整体商业方案</div>
+  <div>内部文件 · 请勿外传 · 2026</div>
+</div>
+
+</body>
+</html>
