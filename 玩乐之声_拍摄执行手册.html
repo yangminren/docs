@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩乐工作室 — 拍摄执行手册</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --bg3: #e8e5de;
+    --red: #c8490a;
+    --amber: #b07830;
+    --green: #1a5c3a;
+    --blue: #1a3d6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC','PingFang SC',sans-serif; background: var(--bg); color: var(--ink); font-size: 13px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .header { background: var(--ink); color: #f5f3ee; padding: 56px 48px 48px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+  .header-brand { font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); }
+  .header-badge { font-size: 10px; padding: 3px 10px; border: 0.5px solid rgba(255,255,255,0.2); border-radius: 2px; color: rgba(255,255,255,0.4); }
+  .header-title { font-family: 'Noto Serif SC',serif; font-size: 38px; font-weight: 300; line-height: 1.15; margin-bottom: 12px; }
+  .header-title em { color: var(--red); font-style: normal; }
+  .header-desc { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.75; margin-bottom: 28px; }
+  .header-stats { display: flex; gap: 0; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; width: fit-content; }
+  .h-stat { padding: 10px 20px; border-right: 0.5px solid rgba(255,255,255,0.1); }
+  .h-stat:last-child { border-right: none; }
+  .h-stat-val { font-size: 16px; font-family: 'Noto Serif SC',serif; font-weight: 300; color: #fff; }
+  .h-stat-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+
+  /* NAV */
+  .nav { background: var(--bg2); border-bottom: 1px solid var(--rule); padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-a { padding: 13px 16px; font-size: 12px; color: var(--ink3); white-space: nowrap; border-bottom: 2px solid transparent; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .15s; }
+  .nav-a:hover { color: var(--ink); }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* BODY */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 48px; }
+
+  /* PHASE SECTION */
+  .phase { margin-bottom: 56px; }
+  .phase-banner { padding: 24px 28px; border-radius: 10px; margin-bottom: 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+  .phase-left { }
+  .phase-label { font-size: 10px; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 5px; }
+  .phase-title { font-family: 'Noto Serif SC',serif; font-size: 24px; font-weight: 300; margin-bottom: 6px; }
+  .phase-desc { font-size: 12px; opacity: 0.7; max-width: 400px; line-height: 1.6; }
+  .phase-time { font-size: 13px; font-weight: 500; opacity: 0.8; white-space: nowrap; }
+
+  /* TASK */
+  .task-group { margin-bottom: 20px; }
+  .task-group-title { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--ink3); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 0.5px solid var(--rule); }
+  .task { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--rule); }
+  .task:last-child { border-bottom: none; }
+  .task-check { width: 18px; height: 18px; border: 1.5px solid var(--rule); border-radius: 4px; flex-shrink: 0; margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+  .task-check.done { background: var(--green); border-color: var(--green); }
+  .task-check.done::after { content:''; width:4px; height:8px; border:2px solid #fff; border-top:none; border-left:none; transform:rotate(45deg) translateY(-1px); display:block; }
+  .task-body { flex: 1; }
+  .task-title { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; margin-bottom: 2px; }
+  .task-title.done { text-decoration: line-through; color: var(--ink3); font-weight: 400; }
+  .task-detail { font-size: 11px; color: var(--ink3); line-height: 1.6; }
+  .task-tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; margin-left: 6px; }
+
+  /* CALLOUT */
+  .callout { border-left: 3px solid var(--amber); padding: 12px 16px; background: rgba(176,120,48,0.05); border-radius: 0 6px 6px 0; margin: 14px 0; font-size: 12px; color: var(--ink2); line-height: 1.7; }
+  .callout.red { border-color: var(--red); background: rgba(200,73,10,0.04); }
+  .callout.green { border-color: var(--green); background: rgba(26,92,58,0.04); }
+  .callout.blue { border-color: var(--blue); background: rgba(26,61,110,0.04); }
+
+  /* CAMERA SETUP */
+  .cam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .cam-card { background: #fff; border: 0.5px solid var(--rule); border-radius: 8px; padding: 14px 16px; }
+  .cam-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .cam-badge { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 400; }
+  .cam-detail { font-size: 11px; color: var(--ink3); line-height: 1.7; }
+
+  /* SHOT LIST */
+  .shot-list { margin: 12px 0; }
+  .shot { display: flex; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--rule); font-size: 12px; }
+  .shot:last-child { border-bottom: none; }
+  .shot-type { width: 60px; font-size: 10px; font-weight: 500; color: var(--ink3); flex-shrink: 0; padding-top: 1px; }
+  .shot-desc { flex: 1; color: var(--ink2); line-height: 1.6; }
+  .shot-note { font-size: 10px; color: var(--ink3); margin-top: 2px; }
+
+  /* TIMELINE */
+  .timeline { margin: 16px 0; }
+  .tl { display: flex; gap: 14px; padding-bottom: 18px; position: relative; }
+  .tl::before { content:''; position:absolute; left:11px; top:26px; bottom:0; width:0.5px; background:var(--rule); }
+  .tl:last-child::before { display:none; }
+  .tl-dot { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:500; flex-shrink:0; margin-top:2px; }
+  .tl-time { font-size:10px; color:var(--ink3); letter-spacing:0.06em; margin-bottom:2px; }
+  .tl-title { font-size:13px; font-weight:500; margin-bottom:3px; }
+  .tl-body { font-size:12px; color:var(--ink2); line-height:1.6; }
+
+  /* EDIT STRUCTURE */
+  .edit-flow { margin: 14px 0; }
+  .ef-item { display: flex; gap: 12px; margin-bottom: 8px; }
+  .ef-time { font-size: 11px; color: var(--ink3); min-width: 80px; flex-shrink: 0; padding-top: 2px; font-variant-numeric: tabular-nums; }
+  .ef-content { flex: 1; background: #fff; border: 0.5px solid var(--rule); border-radius: 6px; padding: 10px 14px; }
+  .ef-title { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .ef-desc { font-size: 11px; color: var(--ink3); line-height: 1.6; }
+  .ef-content.highlight { border-color: var(--red); background: rgba(200,73,10,0.03); }
+
+  /* PROGRESS */
+  .progress-wrap { margin-bottom: 24px; }
+  .progress-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); margin-bottom: 6px; }
+  .progress-bar { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width .3s; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+  thead th { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink3); padding: 7px 10px; background: var(--bg2); border-bottom: 1px solid var(--bg3); text-align: left; }
+  tbody td { padding: 8px 10px; border-bottom: 0.5px solid var(--rule); color: var(--ink2); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* FOOTER */
+  .footer { max-width: 880px; margin: 0 auto; padding: 20px 48px 48px; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); }
+
+  @media(max-width:640px) {
+    .header { padding: 36px 20px; }
+    .nav { padding: 0 20px; }
+    .wrap { padding: 32px 20px; }
+    .cam-grid { grid-template-columns: 1fr; }
+    .footer { padding: 20px; flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-brand">玩乐工作室 · 北京玩乐之声文化传媒有限公司</div>
+    <div class="header-badge">内部执行手册 V1.0</div>
+  </div>
+  <div class="header-title">乐队纪录片<em>拍摄</em><br>执行手册</div>
+  <div class="header-desc">每周一支乐队，从到达到离开，完整的拍摄流程、镜头语言规范和剪辑结构指引。视频导演每场拍摄前必读。</div>
+  <div class="header-stats">
+    <div class="h-stat"><div class="h-stat-val">6个阶段</div><div class="h-stat-label">拍摄流程</div></div>
+    <div class="h-stat"><div class="h-stat-val">3类机位</div><div class="h-stat-label">镜头配置</div></div>
+    <div class="h-stat"><div class="h-stat-val">5层结构</div><div class="h-stat-label">剪辑框架</div></div>
+    <div class="h-stat"><div class="h-stat-val">40个问题</div><div class="h-stat-label">采访题库</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-a" href="#p0"><span class="nav-dot" style="background:#8a8880"></span>拍摄前准备</a>
+  <a class="nav-a" href="#p1"><span class="nav-dot" style="background:#b07830"></span>乐队到场</a>
+  <a class="nav-a" href="#p2"><span class="nav-dot" style="background:#c8490a"></span>调音彩排</a>
+  <a class="nav-a" href="#p3"><span class="nav-dot" style="background:#1a3d6e"></span>正式录制</a>
+  <a class="nav-a" href="#p4"><span class="nav-dot" style="background:#6b2d82"></span>采访环节</a>
+  <a class="nav-a" href="#p5"><span class="nav-dot" style="background:#1a5c3a"></span>收尾与交付</a>
+  <a class="nav-a" href="#edit"><span class="nav-dot" style="background:#1a1814"></span>剪辑规范</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- 进度 -->
+  <div class="progress-wrap">
+    <div class="progress-top"><span>本场拍摄完成进度</span><span id="prog-txt">0 / 0 项</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <!-- 核心原则 -->
+  <div class="callout blue" style="margin-bottom:32px;">
+    <strong>核心原则：不要让乐队意识到自己在被拍。</strong><br>
+    一旦他们感觉到镜头，表情会变，说话会变，整个人进入表演状态。最好看的内容永远是他们忘记镜头的那些瞬间。长焦多用、手持多用、远距离多拍。
+  </div>
+
+  <!-- ── P0 拍摄前一天 ── -->
+  <div id="p0" class="phase">
+    <div class="phase-banner" style="background:rgba(138,136,128,0.08);border:0.5px solid rgba(138,136,128,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--ink3);">PHASE 00</div>
+        <div class="phase-title" style="color:var(--ink);">拍摄前一天</div>
+        <div class="phase-desc" style="color:var(--ink2);">准备工作不到位，拍摄现场会乱。这些事情必须在前一天完成。</div>
+      </div>
+      <div class="phase-time" style="color:var(--ink3);">拍摄日 -1天</div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">设备检查</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">所有摄像机电池充满，备用电池×2</div><div class="task-detail">每台摄像机至少2块电池，1块在机，1块备用，当天不够用是最低级的错误</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">存储卡格式化，确认上次素材已备份</div><div class="task-detail">格式化前必须确认上次素材已经备份到硬盘，否则直接格式化等于删除</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">三脚架、稳定器、独脚架检查</div><div class="task-detail">所有云台螺丝检查是否松动，稳定器重新校准平衡</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">监视器连接测试</div><div class="task-detail">至少一台外接监视器，用于导演实时看画面</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">机位方案确认</div><div class="task-detail">根据本期乐队编制（几人、哪些乐器）提前画好机位图，避免现场临时想</div></div></div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">内容准备</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">了解本期乐队的背景</div><div class="task-detail">听他们的歌、看他们以前的视频、知道他们的风格，采访时才能问到点上</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">从采访题库里选出本期10-15个问题</div><div class="task-detail">根据乐队特点选题，不要现场翻题库。私人问题提前确认乐队是否接受</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">确认本期曲目清单</div><div class="task-detail">提前知道录几首、什么风格，对拍摄节奏和灯光方案有影响</div></div></div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">场地准备</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">灯光预设方案调试完成</div><div class="task-detail">和灯光师确认本期灯光风格，提前存好预设，拍摄当天不做大调整</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">观众席布置确认</div><div class="task-detail">座椅位置不能遮挡机位视角，提前测试每个机位的观众席画面</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── P1 乐队到场 ── -->
+  <div id="p1" class="phase">
+    <div class="phase-banner" style="background:rgba(176,120,48,0.06);border:0.5px solid rgba(176,120,48,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--amber);">PHASE 01</div>
+        <div class="phase-title" style="color:var(--ink);">乐队到场阶段</div>
+        <div class="phase-desc" style="color:var(--ink2);">这是最容易被忽视、但素材最真实的阶段。摄像师必须提前到位，开始拍摄。</div>
+      </div>
+      <div class="phase-time" style="color:var(--amber);">乐队到场起</div>
+    </div>
+
+    <div class="callout">
+      <strong>摄像师必须比乐队早30分钟到场。</strong>乐队进门那一刻就开始拍，不要等他们准备好才拍。进门的瞬间、第一眼看到录音棚的表情、搬设备时的状态——这些是整期内容里最真实的素材。
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">到场阶段必拍镜头</div>
+      <div class="shot-list">
+        <div class="shot"><div class="shot-type">到场</div><div class="shot-desc">乐队推门进来的瞬间，长焦在远处等待<div class="shot-note">不要开口说"来来来看镜头"，直接拍</div></div></div>
+        <div class="shot"><div class="shot-type">第一眼</div><div class="shot-desc">乐队第一眼看到录音棚的表情，特别是新来的乐队<div class="shot-note">这个表情之后再也拍不到</div></div></div>
+        <div class="shot"><div class="shot-type">搬运</div><div class="shot-desc">搬乐器、拉设备箱、布置乐器的过程<div class="shot-note">手持跟拍，保持自然距离</div></div></div>
+        <div class="shot"><div class="shot-type">互动</div><div class="shot-desc">成员之间说话、开玩笑、互相帮忙的瞬间<div class="shot-note">长焦偷拍，他们不知道被拍的状态最好</div></div></div>
+        <div class="shot"><div class="shot-type">细节</div><div class="shot-desc">乐器摆放、贴条纸、翻歌词本、插线<div class="shot-note">这些细节镜头剪辑时非常有用</div></div></div>
+        <div class="shot"><div class="shot-type">环境</div><div class="shot-desc">录音棚全景、灯光状态、设备特写<div class="shot-note">每期开头用，建立场景感</div></div></div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">执行要点</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">摄像师提前30分钟到场，设备就位</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">乐队进门即开始录制，不等待</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">手持摄像跟随乐队移动，不固定机位</div><div class="task-detail">这个阶段不用三脚架，手持的轻微抖动有纪录片质感</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">不主动引导乐队，只记录自然状态</div><div class="task-detail">统筹负责接待，摄像师只拍，不说话不引导</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── P2 调音彩排 ── -->
+  <div id="p2" class="phase">
+    <div class="phase-banner" style="background:rgba(200,73,10,0.05);border:0.5px solid rgba(200,73,10,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--red);">PHASE 02</div>
+        <div class="phase-title" style="color:var(--ink);">调音彩排阶段</div>
+        <div class="phase-desc" style="color:var(--ink2);">调音期间的随意状态往往比演出本身更好看。不要停拍。</div>
+      </div>
+      <div class="phase-time" style="color:var(--red);">约2小时</div>
+    </div>
+
+    <div class="callout red">
+      调音阶段<strong>绝对不能停拍</strong>。乐队在这个阶段最放松——他们在调整声音，注意力不在镜头上。最好笑的、最真实的、最有人情味的内容，往往发生在这里。
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">调音阶段必拍镜头</div>
+      <div class="shot-list">
+        <div class="shot"><div class="shot-type">试音</div><div class="shot-desc">各乐器逐一试音，吉他手试弦、鼓手试踩踏板、人声测话筒<div class="shot-note">每个乐器单独拍一段，后期可用作转场</div></div></div>
+        <div class="shot"><div class="shot-type">沟通</div><div class="shot-desc">乐队和录音师/调音师沟通的过程<div class="shot-note">专业感的体现，观众喜欢看幕后</div></div></div>
+        <div class="shot"><div class="shot-type">反应</div><div class="shot-desc">听到回放时乐队成员的表情——满意的、皱眉的、互相对视的<div class="shot-note">长焦拍表情，不要打扰他们</div></div></div>
+        <div class="shot"><div class="shot-type">闲聊</div><div class="shot-desc">等待调音时成员之间的随意聊天<div class="shot-note">偷拍，距离远一点，不要让他们察觉</div></div></div>
+        <div class="shot"><div class="shot-type">手部</div><div class="shot-desc">调弦、调琴、检查鼓皮、调话筒架<div class="shot-note">特写镜头，焦距拉近，背景虚化</div></div></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>采访穿插技巧：</strong>调音等待的空隙是聊天的好时机。不要正式坐下来"采访"，就站在旁边随口聊——"你们之前在哪录过音？""这首歌是怎么来的？"自然状态下说出来的内容，比坐在镜头前说的真实十倍。
+    </div>
+  </div>
+
+  <!-- ── P3 正式录制 ── -->
+  <div id="p3" class="phase">
+    <div class="phase-banner" style="background:rgba(26,61,110,0.05);border:0.5px solid rgba(26,61,110,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--blue);">PHASE 03</div>
+        <div class="phase-title" style="color:var(--ink);">正式录制阶段</div>
+        <div class="phase-desc" style="color:var(--ink2);">多机位同步，每首歌之间的间隙比演奏本身更重要。</div>
+      </div>
+      <div class="phase-time" style="color:var(--blue);">45-60分钟</div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">机位配置方案</div>
+      <div class="cam-grid">
+        <div class="cam-card">
+          <div class="cam-name"><span class="cam-badge" style="background:rgba(200,73,10,0.1);color:var(--red);">主机位 A</span> 固定全景</div>
+          <div class="cam-detail">
+            三脚架固定，拍乐队全景。<br>
+            位置：观众席后方略高处<br>
+            焦距：广角端，纳入所有乐手<br>
+            职责：全程录制，不移动，不变焦<br>
+            <strong>这是保底机位，任何情况下不能停</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name"><span class="cam-badge" style="background:rgba(26,61,110,0.1);color:var(--blue);">机位 B</span> 长焦特写</div>
+          <div class="cam-detail">
+            三脚架固定，长焦拍表情和手部特写。<br>
+            位置：侧面或斜前方<br>
+            焦距：长焦端，背景虚化<br>
+            职责：主唱表情、吉他手拨弦、鼓手特写<br>
+            <strong>每首歌重点拍不同的人</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name"><span class="cam-badge" style="background:rgba(26,92,58,0.1);color:var(--green);">机位 C</span> 手持游走</div>
+          <div class="cam-detail">
+            手持跟拍，寻找最佳情绪镜头。<br>
+            位置：不固定，随音乐节奏移动<br>
+            职责：观众反应、成员互动、情绪高潮<br>
+            <strong>不要乱晃，移动要有目的</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name"><span class="cam-badge" style="background:rgba(107,45,130,0.1);color:#6b2d82;">机位 D（可选）</span> 观众视角</div>
+          <div class="cam-detail">
+            固定在观众席，拍观众看演出的状态。<br>
+            位置：观众席侧面<br>
+            职责：记录现场氛围、观众表情<br>
+            <strong>人少时可不设，人多时效果很好</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">歌曲之间的间隙——最重要的时刻</div>
+      <div class="callout green">
+        <strong>一首歌录完之后，不要停拍。</strong><br>
+        乐队摘耳机、喝水、互相看眼神、说"这段重来"、鼓手擦汗——这些30秒的瞬间，往往是整期内容里最打动人的画面。提前告知所有摄像师：歌曲结束不等于停拍。
+      </div>
+      <div class="shot-list">
+        <div class="shot"><div class="shot-type">摘耳机</div><div class="shot-desc">录完一首，乐手摘下耳返的瞬间和第一个表情</div></div>
+        <div class="shot"><div class="shot-type">互相看</div><div class="shot-desc">成员之间交换眼神——满意的、质疑的、好笑的</div></div>
+        <div class="shot"><div class="shot-type">回放</div><div class="shot-desc">乐队一起听回放时的表情和肢体反应</div></div>
+        <div class="shot"><div class="shot-type">讨论</div><div class="shot-desc">觉得哪里不对、重来的讨论过程</div></div>
+        <div class="shot"><div class="shot-type">放松</div><div class="shot-desc">喝水、靠着墙、坐地上、随手拨弦</div></div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">拍摄执行要点</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">主机位A全程不停录，哪怕中途出问题</div><div class="task-detail">这是保底素材，停了就没有了</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">每首歌至少保证：一次全景+一次近景切换</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">手持机位移动要配合音乐节奏，不要乱晃</div><div class="task-detail">高潮时可以快，安静段要慢，跟着音乐走</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">灯光师和摄像师提前沟通灯光切换时机</div><div class="task-detail">灯光变化时机要和音乐情绪匹配，不要随机变</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">歌曲间隙继续拍，不停机</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">每首歌结束后30秒内，拍一个"全员状态"的画面</div><div class="task-detail">可以是全景，也可以依次扫过每个成员的脸</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── P4 采访环节 ── -->
+  <div id="p4" class="phase">
+    <div class="phase-banner" style="background:rgba(107,45,130,0.05);border:0.5px solid rgba(107,45,130,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:#6b2d82;">PHASE 04</div>
+        <div class="phase-title" style="color:var(--ink);">采访环节</div>
+        <div class="phase-desc" style="color:var(--ink2);">录完之后进行，不要在调音中途打断。这时候他们最放松，说出来的最真实。</div>
+      </div>
+      <div class="phase-time" style="color:#6b2d82;">30-45分钟</div>
+    </div>
+
+    <div class="callout" style="border-color:#6b2d82;background:rgba(107,45,130,0.04);">
+      <strong>采访的核心原则：聊天，不是采访。</strong><br>
+      不要正式坐下来一问一答。最好的状态是：大家还在收设备，喝着水，随口聊起来。摄像师在旁边默默拍，没有"现在开始采访"的仪式感。
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">采访拍摄设置</div>
+      <div class="cam-grid">
+        <div class="cam-card">
+          <div class="cam-name">采访主机位</div>
+          <div class="cam-detail">
+            固定机位，拍说话的人<br>
+            构图：三分法，脸在画面三分之一处<br>
+            背景：录音棚设备/灯光，不要白墙<br>
+            <strong>不要正面直拍，略微侧角更自然</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name">反应机位</div>
+          <div class="cam-detail">
+            拍其他成员听到回答时的反应<br>
+            这些反应镜头是剪辑的宝贝<br>
+            <strong>笑、点头、皱眉、互相看——都拍</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">采访执行规范</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">等录制完全结束、乐队喝水休息后再开始聊</div><div class="task-detail">不要在还有一首没录完时插入采访</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">问题从轻松的开始，逐渐深入</div><div class="task-detail">先问"谁最能喝"这种，热身后再问感情和梦想</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">不打断，让他们说完</div><div class="task-detail">沉默也没关系，不要急着填满每个空白</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">每人至少有一段面对镜头说话的画面</div><div class="task-detail">不能只拍一个人，每个成员都要有</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">最后必问："今天录完，感觉怎么样？"</div><div class="task-detail">这个问题每期都问，答案拼在一起是很好的系列感内容</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">私人问题（🌶标记）要先确认乐队是否愿意回答</div><div class="task-detail">不强迫，跳过也完全没关系</div></div></div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">采访中容易犯的错误</div>
+      <table>
+        <thead><tr><th>错误</th><th>为什么不对</th><th>正确做法</th></tr></thead>
+        <tbody>
+          <tr><td>让乐队坐在白墙前采访</td><td>像审讯，画面单调</td><td>背景要有录音棚的环境感</td></tr>
+          <tr><td>采访时镜头一直对着说话的人</td><td>剪辑时没有反应镜头可用</td><td>第二台机位专门拍其他人的反应</td></tr>
+          <tr><td>问完一个问题马上问下一个</td><td>节奏太快，像新闻采访</td><td>让他们说完，留几秒沉默再问</td></tr>
+          <tr><td>采访放在调音中间</td><td>打断节奏，乐队不够放松</td><td>必须等录制完成后再进行</td></tr>
+          <tr><td>只问正能量的问题</td><td>内容太假，观众不信</td><td>困难、吵架、想放弃——都可以聊</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── P5 收尾 ── -->
+  <div id="p5" class="phase">
+    <div class="phase-banner" style="background:rgba(26,92,58,0.05);border:0.5px solid rgba(26,92,58,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--green);">PHASE 05</div>
+        <div class="phase-title" style="color:var(--ink);">收尾与素材交付</div>
+        <div class="phase-desc" style="color:var(--ink2);">拍完不等于结束，素材备份和整理必须当天完成。</div>
+      </div>
+      <div class="phase-time" style="color:var(--green);">拍摄结束当晚</div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">拍摄结束前还要拍的</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">乐队收拾设备、道别的过程</div><div class="task-detail">离开时的状态往往很好，有时候会有意外的真实瞬间</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">乐队离开后的录音棚空景</div><div class="task-detail">空的椅子、地上的拨片、没收的话筒——这些空景有意境，剪辑用</div></div></div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">素材备份（当晚必须完成）</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">所有存储卡素材备份至移动硬盘</div><div class="task-detail">命名规则：YYYYMMDD_乐队名_机位（如：20260512_声浪乐队_A机）</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">双盘备份，主盘+备份盘</div><div class="task-detail">只有一块硬盘等于没有备份，素材丢了无法重拍</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">原始存储卡保留至剪辑完成后再格式化</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">填写本场素材清单（机位/时长/关键内容）</div><div class="task-detail">方便剪辑师快速找到需要的素材，不用从头看</div></div></div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">内容发布时间节点</div>
+      <div class="timeline">
+        <div class="tl"><div class="tl-dot" style="background:var(--bg3);color:var(--ink3);">D0</div><div><div class="tl-time">拍摄当晚</div><div class="tl-title">素材备份完成，内容运营发"拍摄中"花絮1条</div><div class="tl-body">从当天现场拍的随手素材里选一条，发抖音和视频号，趁热度发</div></div></div>
+        <div class="tl"><div class="tl-dot" style="background:rgba(200,73,10,0.2);color:var(--red);">D1</div><div><div class="tl-time">次日</div><div class="tl-title">视频导演完成粗剪初稿，内部确认方向</div><div class="tl-body">不需要调色，只看内容是否完整，节奏是否对</div></div></div>
+        <div class="tl"><div class="tl-dot" style="background:rgba(176,120,48,0.2);color:var(--amber);">D3</div><div><div class="tl-time">第3天</div><div class="tl-title">发布第一条正式短视频（抖音/视频号）</div><div class="tl-body">30-60秒高光片段，配文案，发布时间选晚上8-10点</div></div></div>
+        <div class="tl"><div class="tl-dot" style="background:rgba(26,61,110,0.2);color:var(--blue);">D5</div><div><div class="tl-time">第5天</div><div class="tl-title">发布小红书图文+短视频</div><div class="tl-body">体验向内容，强调"只有30人的现场"，配精修图</div></div></div>
+        <div class="tl"><div class="tl-dot" style="background:rgba(26,92,58,0.2);color:var(--green);">D7</div><div><div class="tl-time">第7天</div><div class="tl-title">发布B站完整版（15-30分钟）</div><div class="tl-body">含完整演出+采访，这是最完整的纪录片版本</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 剪辑规范 ── -->
+  <div id="edit" class="phase">
+    <div class="phase-banner" style="background:rgba(26,26,20,0.05);border:0.5px solid rgba(26,26,20,0.2);">
+      <div class="phase-left">
+        <div class="phase-label" style="color:var(--ink3);">EDIT GUIDE</div>
+        <div class="phase-title" style="color:var(--ink);">剪辑规范</div>
+        <div class="phase-desc" style="color:var(--ink2);">内容结构、节奏控制和视觉风格的统一标准，保证每期风格一致。</div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">B站完整版结构（15-30分钟）</div>
+      <div class="edit-flow">
+        <div class="ef-item">
+          <div class="ef-time">0:00-0:30</div>
+          <div class="ef-content highlight">
+            <div class="ef-title">开场钩子（最重要）</div>
+            <div class="ef-desc">从整期素材里找最有冲击力的一个片段放最前面。可以是一句特别真实的采访话、演出高潮的10秒、或者一个好笑的瞬间。<strong>观众在前30秒决定要不要继续看。</strong></div>
+          </div>
+        </div>
+        <div class="ef-item">
+          <div class="ef-time">0:30-2:00</div>
+          <div class="ef-content">
+            <div class="ef-title">乐队登场</div>
+            <div class="ef-desc">到场花絮+乐队简介字幕。让观众知道今天来的是谁，他们是什么风格，从哪里来。用到场阶段的素材。</div>
+          </div>
+        </div>
+        <div class="ef-item">
+          <div class="ef-time">2:00-5:00</div>
+          <div class="ef-content">
+            <div class="ef-title">乐队故事（采访片段一）</div>
+            <div class="ef-desc">剪入2-3个关于乐队起源、故事的采访片段，穿插调音花絮。节奏放慢，让观众开始认识这支乐队。</div>
+          </div>
+        </div>
+        <div class="ef-item">
+          <div class="ef-time">5:00-18:00</div>
+          <div class="ef-content">
+            <div class="ef-title">演出现场（2-3首完整曲目）</div>
+            <div class="ef-desc">多机位剪辑，每首歌之间穿插歌曲间隙的真实瞬间。不要把所有歌都放进去，选最好的2-3首。</div>
+          </div>
+        </div>
+        <div class="ef-item">
+          <div class="ef-time">18:00-25:00</div>
+          <div class="ef-content">
+            <div class="ef-title">深度采访（采访片段二）</div>
+            <div class="ef-desc">更私人、更深入的采访内容。关于音乐、关于人生、关于困难。这段是整期内容情感最深的部分。</div>
+          </div>
+        </div>
+        <div class="ef-item">
+          <div class="ef-time">最后30秒</div>
+          <div class="ef-content highlight">
+            <div class="ef-title">结尾（固定问题）</div>
+            <div class="ef-desc">"今天录完，感觉怎么样？"每期都用这个结尾，积累多了是很好的系列感内容。画面淡出，字幕：下期见。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">抖音/视频号切片规范（30-60秒）</div>
+      <div class="callout">
+        切片不是从完整版里随便截一段，要重新选素材、重新剪。<br>
+        <strong>每条切片必须有一个独立的"钩子"——</strong>开头3秒决定观众是否划走。可以是一句话、一个表情、一段旋律高潮。
+      </div>
+      <table>
+        <thead><tr><th>切片类型</th><th>内容</th><th>适合平台</th><th>发布时机</th></tr></thead>
+        <tbody>
+          <tr><td>演出高潮片段</td><td>最燃的那30秒，不加解释</td><td>抖音</td><td>D3</td></tr>
+          <tr><td>采访金句</td><td>最真实/最好笑的一句话</td><td>抖音/视频号</td><td>D4</td></tr>
+          <tr><td>幕后花絮</td><td>调音/闲聊/搞笑瞬间</td><td>抖音/小红书</td><td>D2</td></tr>
+          <tr><td>体验种草</td><td>"只有30人的现场是什么感受"</td><td>小红书</td><td>D5</td></tr>
+          <tr><td>乐队故事</td><td>1分钟讲完这支乐队</td><td>视频号/B站</td><td>D6</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">视觉风格统一规范</div>
+      <div class="cam-grid">
+        <div class="cam-card">
+          <div class="cam-name">调色风格</div>
+          <div class="cam-detail">
+            整体偏暗、低饱和、暖色<br>
+            不要过度调色，保留现场真实感<br>
+            高光稍微压一点，阴影不要全黑<br>
+            <strong>每期调色要一致，形成品牌识别</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name">字幕规范</div>
+          <div class="cam-detail">
+            字体：黑体或等线，不用花字<br>
+            位置：画面下方三分之一处<br>
+            颜色：白色，带细描边<br>
+            <strong>采访字幕必须打，演出字幕不打</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name">片头规范</div>
+          <div class="cam-detail">
+            不超过5秒，不要片头动画<br>
+            只用文字：「玩乐工作室 × 乐队名」<br>
+            <strong>简洁，不要抢戏</strong>
+          </div>
+        </div>
+        <div class="cam-card">
+          <div class="cam-name">音频规范</div>
+          <div class="cam-detail">
+            演出段落用录音棚音频，不用摄像机收音<br>
+            采访段落用摄像机收音+降噪<br>
+            <strong>音频质量比画面更影响观感</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-title">剪辑完成检查清单</div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">开场30秒有明确的钩子</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">每个成员都有出镜，没有人被完全忽略</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">采访字幕全部打完，无错别字</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">演出音频使用录音棚音轨，非摄像机收音</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">整体调色风格与上期保持一致</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">结尾有"今天录完感觉怎么样"这个固定问题</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">总时长控制在15-30分钟之间（B站版）</div></div></div>
+      <div class="task" onclick="tog(this)"><div class="task-check"></div><div class="task-body"><div class="task-title">音频响度检查，-14 LUFS</div></div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>玩乐工作室 · 乐队纪录片拍摄执行手册 V1.0</div>
+  <div>内部文件 · 视频导演每场必读</div>
+</div>
+
+<script>
+function tog(el){
+  const c=el.querySelector('.task-check');
+  const t=el.querySelector('.task-title');
+  c.classList.toggle('done');
+  t.classList.toggle('done');
+  update();
+}
+function update(){
+  const all=document.querySelectorAll('.task-check');
+  const done=document.querySelectorAll('.task-check.done');
+  const pct=Math.round(done.length/all.length*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-txt').textContent=done.length+' / '+all.length+' 项（'+pct+'%）';
+}
+update();
+</script>
+</body>
+</html>
