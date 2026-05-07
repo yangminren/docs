@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩乐工作室 × 乐队采访题库</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink2: #4a4844;
+    --ink3: #8a8880;
+    --rule: rgba(0,0,0,0.08);
+    --bg: #faf9f6;
+    --bg2: #f2f0ec;
+    --red: #c8490a;
+    --amber: #b07830;
+    --green: #1a5c3a;
+    --blue: #1a3d6e;
+    --purple: #6b2d82;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  .header { background: var(--ink); padding: 56px 48px 48px; color: #f5f3ee; }
+  .header-brand { font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+  .header-title { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 300; line-height: 1.2; margin-bottom: 12px; }
+  .header-title em { color: var(--red); font-style: normal; }
+  .header-desc { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.8; margin-bottom: 28px; }
+  .header-note { display: inline-block; font-size: 12px; color: rgba(255,255,255,0.4); border: 0.5px solid rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 4px; line-height: 1.6; }
+
+  /* BODY */
+  .wrap { max-width: 820px; margin: 0 auto; padding: 48px 40px; }
+
+  /* CATEGORY */
+  .category { margin-bottom: 48px; }
+  .cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid currentColor; }
+  .cat-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .cat-title { font-size: 16px; font-weight: 500; }
+  .cat-subtitle { font-size: 12px; opacity: 0.6; margin-left: auto; }
+
+  /* QUESTION */
+  .question { display: flex; gap: 14px; padding: 14px 0; border-bottom: 0.5px solid var(--rule); }
+  .question:last-child { border-bottom: none; }
+  .q-num { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 300; color: var(--ink3); min-width: 36px; flex-shrink: 0; line-height: 1.5; }
+  .q-body { flex: 1; }
+  .q-text { font-size: 14px; color: var(--ink); line-height: 1.7; font-weight: 500; margin-bottom: 4px; }
+  .q-hint { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+  .q-tag { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 3px; margin-left: 6px; font-weight: 400; vertical-align: middle; }
+
+  /* COLORS */
+  .c-red { color: var(--red); border-color: var(--red); }
+  .c-amber { color: var(--amber); border-color: var(--amber); }
+  .c-green { color: var(--green); border-color: var(--green); }
+  .c-blue { color: var(--blue); border-color: var(--blue); }
+  .c-purple { color: var(--purple); border-color: var(--purple); }
+
+  .ic-red { background: rgba(200,73,10,0.1); }
+  .ic-amber { background: rgba(176,120,48,0.1); }
+  .ic-green { background: rgba(26,92,58,0.1); }
+  .ic-blue { background: rgba(26,61,110,0.1); }
+  .ic-purple { background: rgba(107,45,130,0.1); }
+
+  .tag-fun { background: rgba(176,120,48,0.1); color: var(--amber); }
+  .tag-deep { background: rgba(26,61,110,0.1); color: var(--blue); }
+  .tag-spicy { background: rgba(200,73,10,0.1); color: var(--red); }
+  .tag-warm { background: rgba(26,92,58,0.1); color: var(--green); }
+
+  /* NOTE BOX */
+  .note-box { background: #fff; border: 0.5px solid var(--rule); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 36px; }
+  .note-label { font-size: 10px; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 6px; font-weight: 500; }
+  .note-text { font-size: 13px; color: var(--ink2); line-height: 1.8; }
+
+  /* FOOTER */
+  .footer { background: var(--ink); color: rgba(255,255,255,0.3); padding: 28px 48px; display: flex; justify-content: space-between; font-size: 11px; }
+
+  @media(max-width:640px) {
+    .header { padding: 36px 20px; }
+    .wrap { padding: 32px 16px; }
+    .footer { padding: 20px; flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">玩乐工作室 · 北京玩乐之声文化传媒有限公司</div>
+  <div class="header-title">乐队采访<em>题库</em></div>
+  <div class="header-desc">这份题库是为每期节目的采访环节设计的。我们不做正式访谈，聊天而已——调音的间隙、录完一首歌之后、休息喝水的时候。这些问题你们提前看一看，想聊哪些、不想聊哪些，都可以告诉我们。</div>
+  <div class="header-note">📌 以下问题仅供参考，不强制回答任何一题<br>✦ 带「🌶」标记的问题偏私人，完全可以选择跳过</div>
+</div>
+
+<div class="wrap">
+
+  <div class="note-box">
+    <div class="note-label">给乐队的话</div>
+    <div class="note-text">我们不是来做「标准音乐访谈」的，那种东西太无聊了。<br>我们想知道的是你们真实的故事——好的、坏的、尴尬的、搞笑的都行。<br>越真实，越好看。你们放松就好，我们来负责让画面好看。</div>
+  </div>
+
+  <!-- 第一章：乐队起源 -->
+  <div class="category">
+    <div class="cat-header c-red">
+      <div class="cat-icon ic-red">🎸</div>
+      <div class="cat-title">乐队的故事</div>
+      <div class="cat-subtitle">他们是怎么走到一起的</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">01</div>
+      <div class="q-body">
+        <div class="q-text">你们是怎么认识的？第一次见面的时候，有没有觉得"这个人将来会是我队友"？</div>
+        <div class="q-hint">不用说得多正式，就是当时真实的感受</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">02</div>
+      <div class="q-body">
+        <div class="q-text">乐队叫这个名字，背后有什么故事？还是就随便起的？</div>
+        <div class="q-hint">很多乐队名字都有意思，也有很多真的就是随便起的</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">03</div>
+      <div class="q-body">
+        <div class="q-text">你们乐队历史上最混乱的一段时期是什么时候？发生了什么？</div>
+        <div class="q-hint">比如换了很多人、快解散了、吵得很厉害……</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">04</div>
+      <div class="q-body">
+        <div class="q-text">家里人支持你们做音乐吗？当初是怎么跟父母说的？</div>
+        <div class="q-hint">这个问题几乎每个乐队都有话说</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">05</div>
+      <div class="q-body">
+        <div class="q-text">乐队里谁是"老大"？谁最难搞？谁最懒？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">不用给彼此留面子，说真话</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">06</div>
+      <div class="q-body">
+        <div class="q-text">如果乐队是一种动物，你们觉得是什么？为什么？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">可以每个人说自己，也可以说整个乐队</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二章：音乐与创作 -->
+  <div class="category">
+    <div class="cat-header c-blue">
+      <div class="cat-icon ic-blue">🎵</div>
+      <div class="cat-title">音乐与创作</div>
+      <div class="cat-subtitle">他们的音乐是怎么来的</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">07</div>
+      <div class="q-body">
+        <div class="q-text">你们的音乐想表达什么？用一句话说，不用说得很文艺。</div>
+        <div class="q-hint">如果说不清楚，就说什么情绪或者什么感觉</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">08</div>
+      <div class="q-body">
+        <div class="q-text">你们写过的歌里，哪一首是你们自己最喜欢的？不是最火的，是你们自己最喜欢的。</div>
+        <div class="q-hint">很多时候乐队最喜欢的歌，听众根本不知道</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">09</div>
+      <div class="q-body">
+        <div class="q-text">你们有没有一首歌，写完之后自己都觉得"这首有点太猛了"或者"这首我们自己都唱哭了"？</div>
+        <div class="q-hint">说说这首歌背后的故事</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">10</div>
+      <div class="q-body">
+        <div class="q-text">灵感是怎么来的？有没有过在最奇怪的地方突然有了一个旋律或者歌词的经历？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">比如厕所里、堵车时、梦里……</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">11</div>
+      <div class="q-body">
+        <div class="q-text">你们乐队内部写歌的时候，有没有吵过架？为什么吵？最后怎么解决的？<span class="q-tag tag-spicy">🌶 有点辣</span></div>
+        <div class="q-hint">音乐上的分歧很正常，说说你们的</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">12</div>
+      <div class="q-body">
+        <div class="q-text">如果你们只能留下一首歌，其他的全部消失，留哪首？</div>
+        <div class="q-hint">这个问题可能每个人答案不一样</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">13</div>
+      <div class="q-body">
+        <div class="q-text">有没有特别崇拜的乐队或者音乐人，崇拜到想"我要是能和他们合作就好了"？</div>
+        <div class="q-hint">国内国外都行</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三章：做音乐这件事 -->
+  <div class="category">
+    <div class="cat-header c-green">
+      <div class="cat-icon ic-green">💪</div>
+      <div class="cat-title">做音乐这件事</div>
+      <div class="cat-subtitle">真实的喜悦与艰难</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">14</div>
+      <div class="q-body">
+        <div class="q-text">做独立音乐最难的一件事是什么？不是说"坚持梦想"这种大词，说具体的。</div>
+        <div class="q-hint">比如钱、时间、家庭压力、平台规则……</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">15</div>
+      <div class="q-body">
+        <div class="q-text">有没有想过放弃？是什么让你们没有放弃？</div>
+        <div class="q-hint">不用说得太励志，真实感受就行</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">16</div>
+      <div class="q-body">
+        <div class="q-text">演出过最奇葩的场子是什么样的？有没有特别糟糕或者特别好笑的经历？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">台上台下都行，越具体越好</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">17</div>
+      <div class="q-body">
+        <div class="q-text">你们在台上出过最大的糗是什么？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">断弦、忘词、设备炸了……什么都行</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">18</div>
+      <div class="q-body">
+        <div class="q-text">做音乐到现在，最让你们觉得值得的一个瞬间是什么？</div>
+        <div class="q-hint">可以是一个具体的场景，不用是什么大事</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">19</div>
+      <div class="q-body">
+        <div class="q-text">如果现在给五年前的自己一句话，你们会说什么？<span class="q-tag tag-warm">🌱 走心</span></div>
+        <div class="q-hint">每个人都可以说</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四章：成员之间 -->
+  <div class="category">
+    <div class="cat-header c-amber">
+      <div class="cat-icon ic-amber">👥</div>
+      <div class="cat-title">成员之间的事</div>
+      <div class="cat-subtitle">队友关系，有时比朋友更复杂</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">20</div>
+      <div class="q-body">
+        <div class="q-text">乐队里谁最准时？谁是"永远迟到星人"？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">说实话，现在被说了总比以后被炸好</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">21</div>
+      <div class="q-body">
+        <div class="q-text">你们之间有没有一个"不能碰"的话题或者禁区？<span class="q-tag tag-spicy">🌶 有点辣</span></div>
+        <div class="q-hint">说不说随意，但能说的话很有意思</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">22</div>
+      <div class="q-body">
+        <div class="q-text">乐队里有没有发生过让大家觉得"我们可能完了"的时刻？后来呢？<span class="q-tag tag-spicy">🌶 有点辣</span></div>
+        <div class="q-hint">可以是关系上的，也可以是事业上的</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">23</div>
+      <div class="q-body">
+        <div class="q-text">如果用一句话形容你的每一个队友，你怎么说？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">当着他们的面说，不许改</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">24</div>
+      <div class="q-body">
+        <div class="q-text">你们有没有一起经历过什么很狼狈、很崩溃但是现在回想起来很好笑的事？<span class="q-tag tag-fun">😄 轻松</span></div>
+        <div class="q-hint">这种故事最好听</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第五章：私人话题 -->
+  <div class="category">
+    <div class="cat-header c-purple">
+      <div class="cat-icon ic-purple">🌶</div>
+      <div class="cat-title">稍微私人的问题</div>
+      <div class="cat-subtitle">不想答的直接跳过，没有任何压力</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">25</div>
+      <div class="q-body">
+        <div class="q-text">做音乐对你们的感情生活有什么影响？伴侣或者家人理解你们吗？<span class="q-tag tag-spicy">🌶 私人</span></div>
+        <div class="q-hint">可以说，可以不说，随意</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">26</div>
+      <div class="q-body">
+        <div class="q-text">你现在的状态，用一个天气来形容是什么？<span class="q-tag tag-warm">🌱 走心</span></div>
+        <div class="q-hint">晴天、阴天、大风、雷暴……什么都行</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">27</div>
+      <div class="q-body">
+        <div class="q-text">你有没有一首歌，是写给某个人的，但那个人可能不知道？<span class="q-tag tag-spicy">🌶 私人</span></div>
+        <div class="q-hint">不用说是谁，说说这首歌就好</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">28</div>
+      <div class="q-body">
+        <div class="q-text">如果音乐这条路走不通，你觉得自己会在做什么？<span class="q-tag tag-spicy">🌶 私人</span></div>
+        <div class="q-hint">有没有想过Plan B</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">29</div>
+      <div class="q-body">
+        <div class="q-text">你最近有没有什么让你很烦或者很焦虑的事？不一定跟音乐有关。<span class="q-tag tag-spicy">🌶 私人</span></div>
+        <div class="q-hint">真实的状态比表演出来的好看多了</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">30</div>
+      <div class="q-body">
+        <div class="q-text">你觉得自己是一个什么样的人？你的朋友会怎么形容你？两个答案一样吗？<span class="q-tag tag-spicy">🌶 私人</span></div>
+        <div class="q-hint">这个问题没有标准答案</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第六章：关于未来 -->
+  <div class="category">
+    <div class="cat-header c-red">
+      <div class="cat-icon ic-red">🔭</div>
+      <div class="cat-title">关于未来</div>
+      <div class="cat-subtitle">他们想去哪里</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">31</div>
+      <div class="q-body">
+        <div class="q-text">你们希望五年后的乐队是什么状态？不说梦想，说具体的。</div>
+        <div class="q-hint">在哪里演出、有多少人认识你们、在做什么风格的音乐</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">32</div>
+      <div class="q-body">
+        <div class="q-text">你们有没有一件"这辈子一定要做"的事，跟音乐有关的？</div>
+        <div class="q-hint">可以是一个场地、一个合作、一张专辑</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">33</div>
+      <div class="q-body">
+        <div class="q-text">如果突然爆红了，你们觉得自己会变吗？希望变吗？<span class="q-tag tag-spicy">🌶 有点辣</span></div>
+        <div class="q-hint">说真话，不用说"我们永远不会变"这种</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">34</div>
+      <div class="q-body">
+        <div class="q-text">你们最想在什么地方开一场演出？为什么是那里？</div>
+        <div class="q-hint">可以是国内的，可以是国外的，可以是一个很小的地方</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第七章：随机好玩的 -->
+  <div class="category">
+    <div class="cat-header c-amber">
+      <div class="cat-icon ic-amber">🎲</div>
+      <div class="cat-title">随机好玩的问题</div>
+      <div class="cat-subtitle">不用想太多，第一反应就好</div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">35</div>
+      <div class="q-body">
+        <div class="q-text">乐队里谁最能喝？谁喝两杯就倒？<span class="q-tag tag-fun">😄 轻松</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">36</div>
+      <div class="q-body">
+        <div class="q-text">你们用什么App最多？跟音乐完全没关系的那种。<span class="q-tag tag-fun">😄 轻松</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">37</div>
+      <div class="q-body">
+        <div class="q-text">如果你们的乐队要拍一部电影，类型是什么？谁来演你？<span class="q-tag tag-fun">😄 轻松</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">38</div>
+      <div class="q-body">
+        <div class="q-text">最近让你印象最深的一件事是什么？可以很小，可以很无聊。<span class="q-tag tag-warm">🌱 走心</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">39</div>
+      <div class="q-body">
+        <div class="q-text">你们觉得自己的音乐适合在什么场景听？深夜？开车？失恋？还是别的什么？<span class="q-tag tag-fun">😄 轻松</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-num">40</div>
+      <div class="q-body">
+        <div class="q-text">今天来录音，你们最期待什么？最担心什么？<span class="q-tag tag-warm">🌱 走心</span></div>
+        <div class="q-hint">这个问题放在录制开始前问，很真实</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>玩乐工作室 · 乐队采访题库</div>
+  <div>内部使用 · 可发送给合作乐队</div>
+</div>
+
+</body>
+</html>
