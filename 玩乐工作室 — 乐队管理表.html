@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!-- saved from url=(0120)file:///Users/wanlezaici/Desktop/%E7%8E%A9%E4%B9%90%E4%B9%8B%E5%A3%B0_%E4%B9%90%E9%98%9F%E7%AE%A1%E7%90%86%E8%A1%A8.html -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩乐工作室 — 乐队管理表</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;background:#faf9f6;color:#1a1814;font-size:13px;line-height:1.8}
+.header{background:#1a1814;padding:32px 24px;color:#f5f3ee}
+.header-brand{font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.header-title{font-size:24px;font-weight:300;margin-bottom:6px}
+.header-title em{color:#c8490a;font-style:normal}
+.header-desc{font-size:12px;color:rgba(255,255,255,0.4)}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.stat{background:#fff;border:0.5px solid rgba(0,0,0,0.08);border-radius:8px;padding:12px}
+.stat-val{font-size:22px;font-weight:500;color:#1a1814}
+.stat-label{font-size:11px;color:#8a8880;margin-top:2px}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.toolbar input,.toolbar select{font-size:12px;padding:6px 10px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1814}
+.toolbar input{flex:1;min-width:150px}
+.btn{font-size:12px;padding:6px 14px;cursor:pointer;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1814;white-space:nowrap}
+.btn:hover{background:#f2f0ec}
+.btn.primary{background:#1a1814;color:#fff;border-color:transparent}
+.btn.primary:hover{opacity:0.85}
+.tbl-wrap{overflow-x:auto;border:0.5px solid rgba(0,0,0,0.08);border-radius:10px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:1100px}
+thead th{font-size:11px;font-weight:500;color:#8a8880;padding:8px 10px;background:#f2f0ec;border-bottom:1px solid rgba(0,0,0,0.08);text-align:left;white-space:nowrap;cursor:pointer;user-select:none}
+thead th:hover{color:#1a1814}
+tbody tr{border-bottom:0.5px solid rgba(0,0,0,0.06)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#faf9f6}
+tbody td{padding:8px 10px;vertical-align:middle}
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:500;white-space:nowrap}
+.tag-a{background:#e6f1fb;color:#185fa5}
+.tag-b{background:#eaf3de;color:#3b6d11}
+.tag-c{background:#faeeda;color:#854f0b}
+.tag-done{background:#eaf3de;color:#3b6d11}
+.tag-pending{background:#f1efe8;color:#5f5e5a}
+.tag-late{background:#fcebeb;color:#a32d2d}
+.tag-ing{background:#faeeda;color:#854f0b}
+.ck{width:14px;height:14px;cursor:pointer;accent-color:#1a1814}
+.row-actions{display:flex;gap:4px}
+.row-btn{font-size:11px;padding:3px 8px;cursor:pointer;border-radius:6px;border:0.5px solid rgba(0,0,0,0.1);background:transparent;color:#8a8880}
+.row-btn:hover{background:#f2f0ec;color:#1a1814}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:flex-start;justify-content:center;z-index:100;padding:20px;overflow-y:auto}
+.modal{background:#fff;border-radius:12px;border:0.5px solid rgba(0,0,0,0.1);padding:20px;width:560px;max-width:100%}
+.modal h3{font-size:15px;font-weight:500;margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:11px;color:#8a8880;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{font-size:12px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);padding:6px 8px;background:#fff;color:#1a1814;width:100%}
+.form-group textarea{resize:vertical;min-height:56px}
+.section-title{font-size:11px;font-weight:500;color:#8a8880;letter-spacing:0.06em;margin:14px 0 4px;grid-column:1/-1;padding-bottom:6px;border-bottom:0.5px solid rgba(0,0,0,0.08)}
+.check-row{display:flex;align-items:center;gap:6px;font-size:12px;color:#1a1814}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:14px;border-top:0.5px solid rgba(0,0,0,0.08)}
+.empty{text-align:center;padding:40px;color:#8a8880;font-size:13px}
+@media(max-width:600px){
+  .summary{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .section-title{grid-column:1}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">北京玩乐之声文化传媒有限公司 · 玩乐工作室</div>
+  <div class="header-title">乐队<em>管理表</em></div>
+  <div class="header-desc">录制安排 · 交付跟进 · 内容发布 · 资源开发</div>
+</div>
+
+<div class="wrap">
+  <div class="summary" id="summary">
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">合作乐队总数</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">本月录制场次</div></div>
+    <div class="stat"><div class="stat-val">0</div><div class="stat-label">已完成交付</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">待签合同</div></div></div>
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="搜索乐队名称或联系人..." oninput="render()">
+    <select id="filter-type" onchange="render()">
+      <option value="">全部合作类型</option>
+      <option value="A">A类·付费</option>
+      <option value="B">B类·演出置换</option>
+      <option value="C">C类·版权置换</option>
+    </select>
+    <select id="filter-status" onchange="render()">
+      <option value="">全部状态</option>
+      <option value="待录制">待录制</option>
+      <option value="已录制">已录制</option>
+      <option value="交付中">交付中</option>
+      <option value="已完成">已完成</option>
+    </select>
+    <button class="btn primary" onclick="openAdd()">+ 新增乐队</button>
+    <button class="btn" onclick="exportCSV()">导出CSV</button>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th onclick="sort(&#39;name&#39;)">乐队名称 ↕</th>
+          <th>风格/人数</th>
+          <th>联系人</th>
+          <th onclick="sort(&#39;type&#39;)">合作类型 ↕</th>
+          <th>合同</th>
+          <th onclick="sort(&#39;recordDate&#39;)">录制日期 ↕</th>
+          <th>曲目数</th>
+          <th onclick="sort(&#39;status&#39;)">状态 ↕</th>
+          <th>粗剪截止</th>
+          <th>最终交付</th>
+          <th>D0</th>
+          <th>D3</th>
+          <th>D5</th>
+          <th>D7</th>
+          <th>发行权</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"><tr>
+    <td style="font-weight:500;white-space:nowrap">镜像森林乐队</td>
+    <td style="color:#8a8880">金属核·3人</td>
+    <td>盛志<br><span style="font-size:11px;color:#8a8880">13520124742</span></td>
+    <td><span class="tag tag-a">A类·付费</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="font-size:11px;white-space:nowrap">2026-05-23<br><span style="color:#8a8880">14:00</span></td>
+    <td style="text-align:center">3</td>
+    <td><span class="tag tag-pending">待录制</span></td>
+    <td>—</td>
+    <td>—</td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span class="tag tag-b">自由身</span></td>
+    <td><div class="row-actions">
+      <button class="row-btn" onclick="openEdit(&#39;mirrorforest&#39;)">编辑</button>
+      <button class="row-btn" onclick="del(&#39;mirrorforest&#39;)" style="color:#a32d2d">删除</button>
+    </div></td>
+  </tr><tr>
+    <td style="font-weight:500;white-space:nowrap">迷龙乐队 MILOOONG</td>
+    <td style="color:#8a8880">另类/独立摇滚 英伦摇滚·4人</td>
+    <td>王永<br><span style="font-size:11px;color:#8a8880">13269312421 / 18710808158</span></td>
+    <td><span class="tag tag-a">A类·付费</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="font-size:11px;white-space:nowrap">2026-05-24<br><span style="color:#8a8880"></span></td>
+    <td style="text-align:center">6</td>
+    <td><span class="tag tag-pending">待录制</span></td>
+    <td>—</td>
+    <td>—</td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span class="tag tag-b">自由身</span></td>
+    <td><div class="row-actions">
+      <button class="row-btn" onclick="openEdit(&#39;miloolong&#39;)">编辑</button>
+      <button class="row-btn" onclick="del(&#39;miloolong&#39;)" style="color:#a32d2d">删除</button>
+    </div></td>
+  </tr><tr>
+    <td style="font-weight:500;white-space:nowrap">蕾拉蕾拉</td>
+    <td style="color:#8a8880">流行 电子 citypop·4人</td>
+    <td>辛晓琪<br><span style="font-size:11px;color:#8a8880">13324006414</span></td>
+    <td><span class="tag tag-a">A类·付费</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="font-size:11px;white-space:nowrap">2026-05-25<br><span style="color:#8a8880"></span></td>
+    <td style="text-align:center">4</td>
+    <td><span class="tag tag-pending">待录制</span></td>
+    <td>—</td>
+    <td>—</td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span style="color:#d3d1c7">○</span></td>
+    <td style="text-align:center"><span class="tag tag-b">自由身</span></td>
+    <td><div class="row-actions">
+      <button class="row-btn" onclick="openEdit(&#39;leilaleila&#39;)">编辑</button>
+      <button class="row-btn" onclick="del(&#39;leilaleila&#39;)" style="color:#a32d2d">删除</button>
+    </div></td>
+  </tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="modal-container"></div>
+
+<script>
+let bands = JSON.parse(localStorage.getItem('wl_bands_v2')||'[{"id": "miloolong", "name": "迷龙乐队 MILOOONG", "style": "另类/独立摇滚 英伦摇滚", "members": 4, "contact": "王永", "phone": "13269312421 / 18710808158", "social": "抖音: 62787251304", "type": "A", "freeRights": true, "rightsCo": "", "contract": false, "recordDate": "2026-05-24", "arriveTime": "", "songs": 6, "status": "待录制", "setlist": "《Mexico》《环形岛》《珍珑》《Feeling Me》《他》《热风》", "tech": "自带吉他、贝斯；想在前期调音上多花时间确保最佳声音表现", "roughCut": "", "fineCut": "", "finalDelivery": "", "revisions": "", "deliverySigned": false, "d0": false, "d3": false, "d5": false, "d7": false, "bandPosted": false, "clientFollowed": false, "referral": "", "note": "主唱石时雨，吉他翟宇，贝斯闫铮，鼓手王永"}, {"id": "leilaleila", "name": "蕾拉蕾拉", "style": "流行 电子 citypop", "members": 4, "contact": "辛晓琪", "phone": "13324006414", "social": "抖音: laylalayla2025 / 微博: 蕾拉蕾拉Layla乐队", "type": "A", "freeRights": true, "rightsCo": "", "contract": false, "recordDate": "2026-05-25", "arriveTime": "", "songs": 4, "status": "待录制", "setlist": "DIE IN BEIJING / 梦中的风 / 终于有我的智齿陪着我 / See you", "tech": "自带吉他、贝斯；需全套架子鼓+镲片、2支麦克风、2个麦架；希望多给调试时间；录视频需面光", "roughCut": "", "fineCut": "", "finalDelivery": "", "revisions": "", "deliverySigned": false, "d0": false, "d3": false, "d5": false, "d7": false, "bandPosted": false, "clientFollowed": false, "referral": "SHE HER HER HERS", "note": "想调一杯音轨组成的酒让人若有所思；都可以聊"}, {"id": "mirrorforest", "name": "镜像森林乐队", "style": "金属核", "members": 3, "contact": "盛志", "phone": "13520124742", "social": "抖音: MF_202508 / 视频号: 镜像森林MirrorForest乐队", "type": "A", "freeRights": true, "rightsCo": "", "contract": false, "recordDate": "2026-05-23", "arriveTime": "14:00", "songs": 3, "status": "待录制", "setlist": "《止戈》《闯》《那个小孩》", "tech": "自带吉他、贝斯；需鼓和镲片；播放PGM", "roughCut": "", "fineCut": "", "finalDelivery": "", "revisions": "", "deliverySigned": false, "d0": false, "d3": false, "d5": false, "d7": false, "bandPosted": false, "clientFollowed": false, "referral": "", "note": "成员：盛志、盛颢严等；音乐想表达每个人心里都有一片森林；《止戈》已在网易云、QQ音乐、酷狗、酷我上架"}]');
+let sortKey='recordDate', sortAsc=true;
+let editId=null;
+
+function save(){localStorage.setItem('wl_bands_v2',JSON.stringify(bands))}
+
+function sort(k){if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=true}render()}
+
+function statusTag(s){
+  const m={待录制:'tag-pending',已录制:'tag-a',交付中:'tag-ing',已完成:'tag-done'};
+  return `<span class="tag ${m[s]||'tag-pending'}">${s||'待录制'}</span>`
+}
+function typeTag(t){
+  const m={A:'tag-a',B:'tag-b',C:'tag-c'};
+  const l={A:'A类·付费',B:'B类·演出置换',C:'C类·版权置换'};
+  return t?`<span class="tag ${m[t]}">${l[t]}</span>`:'—'
+}
+function ck(v){return v?'<span style="color:#3b6d11;font-size:14px">✓</span>':'<span style="color:#d3d1c7">○</span>'}
+function dateTag(d){
+  if(!d)return'—';
+  const diff=Math.ceil((new Date(d)-new Date())/(1000*86400));
+  if(diff<0)return`<span class="tag tag-late">逾期${-diff}天</span>`;
+  if(diff<=3)return`<span class="tag tag-ing" title="${d}">${d}</span>`;
+  return`<span style="font-size:11px;color:#8a8880">${d}</span>`
+}
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const ft=document.getElementById('filter-type').value;
+  const fs=document.getElementById('filter-status').value;
+  let list=[...bands];
+  if(q)list=list.filter(b=>(b.name||'').toLowerCase().includes(q)||(b.contact||'').toLowerCase().includes(q));
+  if(ft)list=list.filter(b=>b.type===ft);
+  if(fs)list=list.filter(b=>(b.status||'待录制')===fs);
+  list.sort((a,b)=>{
+    let va=a[sortKey]||'',vb=b[sortKey]||'';
+    return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+  });
+  const tb=document.getElementById('tbody');
+  if(!list.length){
+    tb.innerHTML=`<tr><td colspan="16"><div class="empty">暂无数据，点击「新增乐队」开始记录</div></td></tr>`;
+    updateSummary();return;
+  }
+  tb.innerHTML=list.map(b=>`<tr>
+    <td style="font-weight:500;white-space:nowrap">${b.name}</td>
+    <td style="color:#8a8880">${b.style||'—'}${b.members?'·'+b.members+'人':''}</td>
+    <td>${b.contact||'—'}<br><span style="font-size:11px;color:#8a8880">${b.phone||''}</span></td>
+    <td>${typeTag(b.type)}</td>
+    <td style="text-align:center">${ck(b.contract)}</td>
+    <td style="font-size:11px;white-space:nowrap">${b.recordDate||'—'}<br><span style="color:#8a8880">${b.arriveTime||''}</span></td>
+    <td style="text-align:center">${b.songs||'—'}</td>
+    <td>${statusTag(b.status)}</td>
+    <td>${dateTag(b.roughCut)}</td>
+    <td>${dateTag(b.finalDelivery)}</td>
+    <td style="text-align:center">${ck(b.d0)}</td>
+    <td style="text-align:center">${ck(b.d3)}</td>
+    <td style="text-align:center">${ck(b.d5)}</td>
+    <td style="text-align:center">${ck(b.d7)}</td>
+    <td style="text-align:center"><span class="tag ${b.freeRights?'tag-b':'tag-c'}">${b.freeRights!==undefined?(b.freeRights?'自由身':'已签约'):'—'}</span></td>
+    <td><div class="row-actions">
+      <button class="row-btn" onclick="openEdit('${b.id}')">编辑</button>
+      <button class="row-btn" onclick="del('${b.id}')" style="color:#a32d2d">删除</button>
+    </div></td>
+  </tr>`).join('');
+  updateSummary();
+}
+
+function updateSummary(){
+  const total=bands.length;
+  const done=bands.filter(b=>b.status==='已完成').length;
+  const noCt=bands.filter(b=>!b.contract).length;
+  const n=new Date();
+  const thisM=bands.filter(b=>{
+    if(!b.recordDate)return false;
+    const d=new Date(b.recordDate);
+    return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();
+  }).length;
+  document.getElementById('summary').innerHTML=`
+    <div class="stat"><div class="stat-val">${total}</div><div class="stat-label">合作乐队总数</div></div>
+    <div class="stat"><div class="stat-val">${thisM}</div><div class="stat-label">本月录制场次</div></div>
+    <div class="stat"><div class="stat-val">${done}</div><div class="stat-label">已完成交付</div></div>
+    <div class="stat"><div class="stat-val">${noCt}</div><div class="stat-label">待签合同</div></div>`;
+}
+
+function del(id){
+  if(!confirm('确认删除这支乐队的记录？'))return;
+  bands=bands.filter(b=>b.id!==id);save();render();
+}
+
+function openAdd(){editId=null;showModal({})}
+function openEdit(id){editId=id;showModal(bands.find(b=>b.id===id)||{})}
+
+function showModal(b){
+  document.getElementById('modal-container').innerHTML=`
+  <div class="modal-bg" id="modal-bg" onclick="bgClose(event)">
+  <div class="modal">
+  <h3>${editId?'编辑乐队信息':'新增乐队'}</h3>
+  <div class="form-grid">
+    <div class="section-title">基本信息</div>
+    <div class="form-group"><label>乐队名称 *</label><input id="f-name" value="${b.name||''}"></div>
+    <div class="form-group"><label>音乐风格</label><input id="f-style" value="${b.style||''}"></div>
+    <div class="form-group"><label>联系人</label><input id="f-contact" value="${b.contact||''}"></div>
+    <div class="form-group"><label>联系电话/微信</label><input id="f-phone" value="${b.phone||''}"></div>
+    <div class="form-group"><label>社交媒体账号</label><input id="f-social" value="${b.social||''}" placeholder="抖音/B站/微博等"></div>
+    <div class="form-group"><label>乐队人数</label><input id="f-members" type="number" value="${b.members||''}"></div>
+
+    <div class="section-title">合作信息</div>
+    <div class="form-group"><label>合作类型</label>
+      <select id="f-type">
+        <option value="">请选择</option>
+        <option value="A" ${b.type==='A'?'selected':''}>A类·付费合作</option>
+        <option value="B" ${b.type==='B'?'selected':''}>B类·演出置换</option>
+        <option value="C" ${b.type==='C'?'selected':''}>C类·版权置换</option>
+      </select>
+    </div>
+    <div class="form-group"><label>发行权状态</label>
+      <select id="f-rights">
+        <option value="">未知</option>
+        <option value="1" ${b.freeRights===true?'selected':''}>自由身（无在先协议）</option>
+        <option value="0" ${b.freeRights===false?'selected':''}>已签发行公司</option>
+      </select>
+    </div>
+    <div class="form-group full"><label>已签发行公司名称（如有）</label>
+      <input id="f-rightsco" value="${b.rightsCo||''}" placeholder="如：摩登天空、独立音乐等">
+    </div>
+    <div class="form-group full">
+      <div class="check-row"><input type="checkbox" class="ck" id="f-contract" ${b.contract?'checked':''}><label for="f-contract">合同已签署</label></div>
+    </div>
+
+    <div class="section-title">录制安排</div>
+    <div class="form-group"><label>录制日期</label><input id="f-recordDate" type="date" value="${b.recordDate||''}"></div>
+    <div class="form-group"><label>到场时间</label><input id="f-arriveTime" value="${b.arriveTime||''}" placeholder="如：14:00"></div>
+    <div class="form-group"><label>录制曲目数</label><input id="f-songs" type="number" value="${b.songs||''}"></div>
+    <div class="form-group"><label>当前状态</label>
+      <select id="f-status">
+        <option value="待录制" ${(!b.status||b.status==='待录制')?'selected':''}>待录制</option>
+        <option value="已录制" ${b.status==='已录制'?'selected':''}>已录制</option>
+        <option value="交付中" ${b.status==='交付中'?'selected':''}>交付中</option>
+        <option value="已完成" ${b.status==='已完成'?'selected':''}>已完成</option>
+      </select>
+    </div>
+    <div class="form-group full"><label>曲目清单</label>
+      <textarea id="f-setlist" placeholder="每行一首曲目">${b.setlist||''}</textarea>
+    </div>
+    <div class="form-group full"><label>特殊技术需求</label>
+      <textarea id="f-tech" placeholder="特殊设备、返送要求、Rider等">${b.tech||''}</textarea>
+    </div>
+
+    <div class="section-title">交付时间节点</div>
+    <div class="form-group"><label>粗剪/混音初稿截止</label><input id="f-roughCut" type="date" value="${b.roughCut||''}"></div>
+    <div class="form-group"><label>精剪初稿截止</label><input id="f-fineCut" type="date" value="${b.fineCut||''}"></div>
+    <div class="form-group"><label>最终成品交付日</label><input id="f-finalDelivery" type="date" value="${b.finalDelivery||''}"></div>
+    <div class="form-group"><label>已用修改次数（视频/音频）</label>
+      <input id="f-revisions" value="${b.revisions||''}" placeholder="如：视频1次/音频0次">
+    </div>
+    <div class="form-group full">
+      <div class="check-row"><input type="checkbox" class="ck" id="f-deliverySigned" ${b.deliverySigned?'checked':''}><label for="f-deliverySigned">交付确认单已签署</label></div>
+    </div>
+
+    <div class="section-title">内容发布状态</div>
+    <div class="form-group full" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="check-row"><input type="checkbox" class="ck" id="f-d0" ${b.d0?'checked':''}><label for="f-d0">D0 拍摄花絮已发布</label></div>
+      <div class="check-row"><input type="checkbox" class="ck" id="f-d3" ${b.d3?'checked':''}><label for="f-d3">D3 高光片段已发布</label></div>
+      <div class="check-row"><input type="checkbox" class="ck" id="f-d5" ${b.d5?'checked':''}><label for="f-d5">D5 小红书图文已发布</label></div>
+      <div class="check-row"><input type="checkbox" class="ck" id="f-d7" ${b.d7?'checked':''}><label for="f-d7">D7 B站完整版已发布</label></div>
+      <div class="check-row"><input type="checkbox" class="ck" id="f-bandPosted" ${b.bandPosted?'checked':''}><label for="f-bandPosted">乐队已转发</label></div>
+      <div class="check-row"><input type="checkbox" class="ck" id="f-clientFollowed" ${b.clientFollowed?'checked':''}><label for="f-clientFollowed">甲方已跟进</label></div>
+    </div>
+
+    <div class="section-title">资源开发</div>
+    <div class="form-group full"><label>乐队推荐的新乐队</label>
+      <input id="f-referral" value="${b.referral||''}" placeholder="推荐了哪些乐队">
+    </div>
+    <div class="form-group full"><label>备注</label>
+      <textarea id="f-note" placeholder="其他需要记录的信息">${b.note||''}</textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" onclick="closeModal()">取消</button>
+    <button class="btn primary" onclick="saveModal()">保存</button>
+  </div>
+  </div>
+  </div>`;
+}
+
+function bgClose(e){if(e.target.id==='modal-bg')closeModal()}
+function closeModal(){document.getElementById('modal-container').innerHTML=''}
+
+function saveModal(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){alert('乐队名称不能为空');return}
+  const rv=document.getElementById('f-rights').value;
+  const d={
+    id:editId||Date.now().toString(36)+Math.random().toString(36).slice(2),
+    name,
+    style:document.getElementById('f-style').value,
+    contact:document.getElementById('f-contact').value,
+    phone:document.getElementById('f-phone').value,
+    social:document.getElementById('f-social').value,
+    members:document.getElementById('f-members').value,
+    type:document.getElementById('f-type').value,
+    freeRights:rv===''?undefined:rv==='1',
+    rightsCo:document.getElementById('f-rightsco').value,
+    contract:document.getElementById('f-contract').checked,
+    recordDate:document.getElementById('f-recordDate').value,
+    arriveTime:document.getElementById('f-arriveTime').value,
+    songs:document.getElementById('f-songs').value,
+    status:document.getElementById('f-status').value,
+    setlist:document.getElementById('f-setlist').value,
+    tech:document.getElementById('f-tech').value,
+    roughCut:document.getElementById('f-roughCut').value,
+    fineCut:document.getElementById('f-fineCut').value,
+    finalDelivery:document.getElementById('f-finalDelivery').value,
+    revisions:document.getElementById('f-revisions').value,
+    deliverySigned:document.getElementById('f-deliverySigned').checked,
+    d0:document.getElementById('f-d0').checked,
+    d3:document.getElementById('f-d3').checked,
+    d5:document.getElementById('f-d5').checked,
+    d7:document.getElementById('f-d7').checked,
+    bandPosted:document.getElementById('f-bandPosted').checked,
+    clientFollowed:document.getElementById('f-clientFollowed').checked,
+    referral:document.getElementById('f-referral').value,
+    note:document.getElementById('f-note').value,
+  };
+  if(editId)bands=bands.map(b=>b.id===editId?d:b);
+  else bands.push(d);
+  save();closeModal();render();
+}
+
+function exportCSV(){
+  const headers=['乐队名称','风格','人数','联系人','电话微信','合作类型','合同','录制日期','到场时间','曲目数','状态','粗剪截止','最终交付','D0','D3','D5','D7','乐队转发','发行权','备注'];
+  const rows=bands.map(b=>[
+    b.name,b.style,b.members,b.contact,b.phone,
+    b.type==='A'?'付费':b.type==='B'?'演出置换':b.type==='C'?'版权置换':'',
+    b.contract?'已签':'未签',
+    b.recordDate,b.arriveTime,b.songs,b.status||'待录制',
+    b.roughCut,b.finalDelivery,
+    b.d0?'✓':'',b.d3?'✓':'',b.d5?'✓':'',b.d7?'✓':'',b.bandPosted?'✓':'',
+    b.freeRights===true?'自由身':b.freeRights===false?'已签约':'',
+    b.note
+  ]);
+  const csv='\uFEFF'+[headers,...rows].map(r=>r.map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='玩乐工作室_乐队管理表_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+render();
+</script>
+
+
+</body></html>
